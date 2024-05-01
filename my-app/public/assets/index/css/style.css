@@ -1,0 +1,62 @@
+#start-btn {
+  background-color: #313987;
+}
+
+#start-btn:hover {
+  background-color: #4154bc;
+}
+
+#but-section-1 {
+  background-color: #313987;
+}
+
+#but-section-2 {
+  background-color: #313987;
+}
+
+#but-section-3 {
+  background-color: #313987;
+}
+
+#but-section-4 {
+  background-color: #313987;
+}
+
+#but-section-1:hover {
+  background-color: #3f49b0;
+}
+
+#but-section-2:hover {
+  background-color: #3f49b0;
+}
+
+#but-section-3:hover {
+  background-color: #3f49b0;
+}
+
+#but-section-4:hover {
+  background-color: #3f49b0;
+}
+
+#login-btn {
+  background-color: #313987;
+}
+
+#login-btn:hover {
+  background-color: #424ec6;
+}
+
+#signup-btn {
+  background-color: #313987;
+}
+
+#signup-btn:hover {
+  background-color: #424ec6;
+}
+
+#start-btn:hover {
+  background-color: #424ec6;
+}
+body{
+  overflow-x: hidden;
+}

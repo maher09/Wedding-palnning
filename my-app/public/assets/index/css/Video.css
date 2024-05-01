@@ -1,0 +1,24 @@
+.masthead {
+    position: relative; /* Position the masthead relatively */
+    height: 100vh; /* Set the masthead height to cover the viewport */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Ensure it's behind other content */
+}
+
+.video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 50%; /* Center the video vertically */
+    left: 50%; /* Center the video horizontally */
+    transform: translate(-50%, -50%); /* Center the video */
+}

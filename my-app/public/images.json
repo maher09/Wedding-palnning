@@ -1,0 +1,126 @@
+{
+  "image1": [
+    {
+      "source": "/assets/invitationCards/img/img1.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img1-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img1-back.jpg"
+    }
+  ],
+  "image2": [
+    {
+      "source": "/assets/invitationCards/img/img2.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img2-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img2-back.jpg"
+    }
+  ],
+  "image3": [
+    {
+      "source": "/assets/invitationCards/img/img3.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img3-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img3-back.jpg"
+    }
+  ],"image4": [
+    {
+      "source": "/assets/invitationCards/img/img4.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img4-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img4-back.jpg"
+    }
+  ],"image5": [
+    {
+      "source": "/assets/invitationCards/img/img5.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img5-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img5-back.jpg"
+    }
+  ],"image6": [
+    {
+      "source": "/assets/invitationCards/img/img6.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img6-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img6-back.jpg"
+    }
+  ],"image7": [
+    {
+      "source": "/assets/invitationCards/img/img7.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img7-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img7-back.jpg"
+    }
+  ],"image8": [
+    {
+      "source": "/assets/invitationCards/img/img8.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img8-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img8-back.jpg"
+    }
+  ],"image9": [
+    {
+      "source": "/assets/invitationCards/img/img9.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img9-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img9-back.jpg"
+    }
+  ],"image10": [
+    {
+      "source": "/assets/invitationCards/img/img10.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img10-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img10-back.jpg"
+    }
+  ],"image11": [
+    {
+      "source": "/assets/invitationCards/img/img11.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img11-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img11-back.jpg"
+    }
+  ],"image12": [
+    {
+      "source": "/assets/invitationCards/img/img12.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img12-front.jpg"
+    },
+    {
+      "source": "/assets/invitationCards/img/img12-back.jpg"
+    }
+  ]
+
+}

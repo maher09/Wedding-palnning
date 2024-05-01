@@ -1,0 +1,20 @@
+.btn1-primary:hover, .btn1-primary:focus, .btn1-primary:active {
+  color: #fff;
+  background-color: #4154bc !important;
+  border-color: #007b95 !important;
+}
+
+.btn1 {
+  font-size: 224px;
+  font-weight: 800;
+  padding: 15px 25px;
+  letter-spacing: 1px;
+  text-transform: inherit;
+  border-radius: 0;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color:white
+}
+body{
+  background-color: #f6f8f9;
+}
+

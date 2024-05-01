@@ -1,0 +1,13 @@
+#checkout-btn {
+  background-color: #777dc2;
+}
+
+#checkout-btn:hover {
+  background-color: #252b6a;
+}
+
+body {
+  background: #f6f8f9;
+  font-weight: bold;
+  font-family: Roboto, sans-serif;
+}
