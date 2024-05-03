@@ -80,7 +80,7 @@ function CardCompNoColored() {
 
 
                 {/*  card form 2 */}
-                <form>
+                <form action="/cardCompNoColored" method="post">
                   <div className="input-group" style={{ marginBottom: "5px" }}>
                     
                     
@@ -306,7 +306,7 @@ function CardCompNoColored() {
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
                       }}
-                      defaultValue="Add to cart"
+                      value="Add to cart"
                     />
                   </div>
 

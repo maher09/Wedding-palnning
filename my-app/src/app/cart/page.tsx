@@ -80,8 +80,10 @@ function Cart() {
         </p>
       </section>
 
-
-      <form>
+            
+            
+            {/* cart form */}
+      <form action="/cart" method="post">
         <section className="container" style={{ height: "161px" }}>
           <h1
             style={{
@@ -297,7 +299,7 @@ function Cart() {
                       borderRadius: "10px",
                       height: "50px"
                     }}
-                    defaultValue="Checkout"
+                    value="Checkout"
                   />
 
 
@@ -400,7 +402,7 @@ function Cart() {
                        
                     <tbody>
         {/*COMPONENT for NoReservations (to replace with cart component)*/}
-                    <><NoReservations/></>
+                    <><Bookreservation/></>
                     
                     
                     

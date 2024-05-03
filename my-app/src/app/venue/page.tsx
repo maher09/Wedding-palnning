@@ -274,7 +274,7 @@ useEffect(() => {
       
       
       
-      <form>
+    
       <div
         className="d-flex justify-content-center"
         style={{ marginBottom: "25px", height: "38.2px", marginLeft: "22px" }}
@@ -352,7 +352,7 @@ useEffect(() => {
 
 
       </div>
-    </form>
+   
 
 
 
@@ -622,7 +622,7 @@ useEffect(() => {
         
         
         {/* select the date for  venue reserviration*/}
-       <form></form>
+       
         <select className="display-inline-block">
        
           <option value={2024}>2024</option>

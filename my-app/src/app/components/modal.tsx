@@ -90,8 +90,8 @@ function Modal1() {
                               </div>
                               
                               
-                              
-                              <form className="user">
+                              {/* login form */}
+                              <form className="user" >
                                 <div className="mb-3">
                                   
                                   {/* input for email address  */}
@@ -237,7 +237,11 @@ function Modal1() {
                               Create an Account!
                             </h4>
                           </div>
-                          <form className="user">
+                          
+                          
+
+                          {/* sign up modal */}
+                          <form action="/" method="post"  className="user">
                             <div className="row mb-3">
                               <div className="col-sm-6 mb-3 mb-sm-0">
                                 

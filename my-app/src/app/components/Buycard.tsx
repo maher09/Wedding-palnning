@@ -53,7 +53,7 @@ function Buycard() {
                         
                         {/* input hidden card name */}
                         <input type="hidden" id="card-name" required 
-                        defaultValue=""/>
+                        value=""/>
                       
                       
                       
@@ -83,7 +83,7 @@ function Buycard() {
                         
                          {/* input hidden card Quantity&Price */}     
                         <input type="hidden" id="card-price" required 
-                        defaultValue=""/>
+                        value=""/>
                         
                         
                       </td>
