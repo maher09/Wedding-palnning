@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import "../../../public/assets/cardCompNoColored/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import Footer from "../components/Footer";
@@ -15,7 +16,45 @@ function CardCompNoColored() {
     }
   }, []);
   /////////////////
+ 
 
+  
+  //using axios to fetch api
+  const [theBride, setTheBride] = useState('');
+  const [theGroom, setTheGroom] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [location, setLocation] = useState('');
+  const [notes, setNotes] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Check if all fields are filled
+   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+    alert("Please fill in all required fields");
+  }
+  else 
+  alert("Your CARD has been added ,Explore your choice in the cart");
+
+  try {
+    const response = await axios.post('http://localhost:3000/cardCompNoColored', {
+      theBride: theBride,
+      theGroom: theGroom,
+      date: date,
+      time: time,
+      location: location,
+      notes: notes,
+      
+    });
+
+    console.log(response.data);
+    // Handle successful submission here
+  } catch (error) {
+    console.error(error);
+    // Handle error here
+  }
+};
   return (
     <div>
              <> <NavbarRegistered/></>  
@@ -80,7 +119,7 @@ function CardCompNoColored() {
 
 
                 {/*  card form 2 */}
-                <form action="/cardCompNoColored" method="post">
+                <form action="/cardCompNoColored" method="post"  onSubmit={handleSubmit}>
                   <div className="input-group" style={{ marginBottom: "5px" }}>
                     
                     
@@ -97,6 +136,9 @@ function CardCompNoColored() {
                       The bride:&nbsp;
                     </label>
                     <input
+                    name="theBride"
+                    value={theBride}
+                    onChange={(e) => setTheBride(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="husband-name"
@@ -127,6 +169,9 @@ function CardCompNoColored() {
                       The groom :&nbsp; &nbsp; &nbsp;&nbsp;
                     </label>
                     <input
+                    name="theGroom"
+                    value={theGroom}
+                    onChange={(e) => setTheGroom(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="wife-name"
@@ -154,6 +199,9 @@ function CardCompNoColored() {
                       Date :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                    name="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="date"
@@ -180,6 +228,9 @@ function CardCompNoColored() {
                       Time :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                     </label>
                     <input
+                      name="time"
+                      value={time}
+                      onChange={(e) => setTime(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="time"
@@ -206,6 +257,9 @@ function CardCompNoColored() {
                       Location :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                    name="location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="location"
@@ -233,6 +287,9 @@ function CardCompNoColored() {
                       Notes :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                    name="notes"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="notes"
@@ -305,7 +362,10 @@ function CardCompNoColored() {
                         marginBottom: "20px",
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
+                        
+
                       }}
+                    
                       value="Add to cart"
                     />
                   </div>

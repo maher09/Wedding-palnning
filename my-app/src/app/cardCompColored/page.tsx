@@ -15,7 +15,8 @@ function CardCompColored() {
       require("../../../public/assets/cardCompColored/bootstrap/js/bootstrap.min.js");
     }
   }, []);
-  /////////////////
+
+
 
   //using axios to fetch api
   const [theBride, setTheBride] = useState('');
@@ -28,19 +29,13 @@ function CardCompColored() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({
-      theBride: theBride,
-      theGroom: theGroom,
-      date: date,
-      time: time,
-      location: location,
-      notes: notes,
-      designColor: designColor,}, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-    });
-  
+
+   // Check if all fields are filled
+   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+    alert("Please fill in all required fields");
+  }
+  else 
+  alert("Your CARD has been added ,Explore your choice in the cart");
     try {
       const response = await axios.post('http://localhost:3000/cardCompColored', {
         theBride: theBride,
@@ -334,7 +329,8 @@ function CardCompColored() {
                       className="form-control form-control"
                       type="hidden"
                       id="design"
-                    
+                      
+
                     />
                   </div>
 
@@ -438,6 +434,8 @@ function CardCompColored() {
                         fontSize: "22px",
                       }}
                       value="Add to cart"
+                     
+
                     />
                   </div>
 
