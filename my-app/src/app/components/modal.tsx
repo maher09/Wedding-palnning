@@ -9,9 +9,10 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Modal1() {
   ///////////////////////////////
-  // create a state variable to control whether the modal is shown WHEN USER SIGN IN
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+ // create a state variable to control whether the modal is shown WHEN USER SIGN IN
+ const [showModal, setShowModal] = useState(false);
+ const [modalMessage, setModalMessage] = useState("");
+ 
   ///////////////////////////////
 
 
@@ -37,32 +38,87 @@ const handleCloseAllOtherModals = () => {
   const [LastName, setLastName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-
+  
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!FirstName || !LastName || !Email || !Password) {
-      setModalMessage("Please fill all the fields");
-      setShowModal(true);
-    } else setModalMessage("Account Created Successfully");
+    // Email validation regex pattern
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+     // Password validation regex patterns
+  const lowerCaseLetters = /[a-z]/g;
+  const upperCaseLetters = /[A-Z]/g;
+  const numbers = /[0-9]/g;
+  const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+  if (!FirstName || !LastName || !Email || !Password) {
+    setModalMessage("Please fill all the fields");
     setShowModal(true);
-
-    try {
-      const response = await axios.post("http://localhost:3000/", {
-        FirstName: FirstName,
-        LastName: LastName,
-        Email: Email,
-        Password: Password,
-      });
-      console.log(response.data);
-      // Handle successful submission here
-    } catch (error) {
-      console.error(error);
-      // Handle error here
     }
-  };
+    else if (!emailPattern.test(Email)) {
+      setEmailError("Please enter a valid email address");
+    }
+    else {
+    setEmailError(""); // Reset email error message
+  }
+  if (Password.length < 8) {
+    setPasswordError("Password must be at least 8 characters long");
+  } else {
+    setPasswordError(""); // Reset password error message
+  }
+
+  if (emailPattern.test(Email) && Password.length >= 8) {
+    // Check if both email and password are valid
+    if (!lowerCaseLetters.test(Password)) {
+      setPasswordError("Password must contain at least one lowercase letter");
+    } else if (!upperCaseLetters.test(Password)) {
+      setPasswordError("Password must contain at least one uppercase letter");
+    } else if (!numbers.test(Password)) {
+      setPasswordError("Password must contain at least one number");
+    } else if (!specialCharacters.test(Password)) {
+      setPasswordError("Password must contain at least one special character");
+    } else {
+      try {
+        const response = await axios.post("http://localhost:3000/signup", {
+          FirstName: FirstName,
+          LastName: LastName,
+          Email: Email,
+          Password: Password,
+        });
+
+        if (response.data.error) {
+          setEmailError("Email is already in use");
+        } else {
+          console.log(response.data);
+          // Handle successful submission here
+          setModalMessage("Account Created Successfully");
+          setShowModal(true);
+
+          // Clear form fields
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPassword("");
+          setEmailError("");
+          setPasswordError("");
+        }
+      } catch (error: any) {
+        if (error.response && error.response.status === 400) {
+          console.log("Email is already in use");
+          setEmailError("Email is already in use");
+        } else {
+          console.error(error);
+          // Handle error here
+        }
+      }
+    }
+  }
+};
 
   return (
     <>
@@ -306,7 +362,13 @@ const handleCloseAllOtherModals = () => {
                         aria-describedby="emailHelp"
                         placeholder="Email Address"
                         required
+                        
                       />
+                       {emailError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {emailError} 
+          </div>
+           )}
                     </div>
                     <div className="mb-3">
                       {/* password sing up */}
@@ -315,17 +377,44 @@ const handleCloseAllOtherModals = () => {
                         style={{ display: "none" }}
                       />
                       <input
-                        name="Password"
+                       type={showPassword? "text" : "password"}
+                       name="Password"
                         value={Password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="form-control form-control form-control form-control-user"
-                        type="password"
                         id="PasswordInput"
                         placeholder="Password"
                         required
                         style={{ marginTop: "15px" }}
                       />
+                                        {passwordError && (
+    <div className="text-danger" style={{ fontSize: "12px" }}>
+      {passwordError}
+    </div>
+     )}
                     </div>
+                    <div className="mb-3">
+                          <div className="custom-control custom-checkbox small">
+                            <div className="form-check">
+                              {/* input for checkbox  */}
+                              {/* don't add name attribute due not submitting to data base   */}
+                              <input
+                                type="checkbox"
+                                className="form-check-input custom-control-input"
+                                onChange={() => setShowPassword(!showPassword)} // Toggle showPassword state on checkbox change
+
+                                id="formCheck-1"
+                              />
+                              <label
+                                className="form-label form-label form-check-label custom-control-label"
+                                htmlFor="formCheck-1"
+                              >
+                                Show password
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+
                     <button
                       className="btn btn-primary d-block btn-user w-100"
                       type="submit"

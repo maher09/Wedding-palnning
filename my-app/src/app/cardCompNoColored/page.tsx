@@ -49,6 +49,12 @@ function CardCompNoColored() {
     });
 
     console.log(response.data);
+    setTheBride('');
+    setTheGroom('');
+    setDate('');
+    setTime('');
+    setLocation('');
+    setNotes('');
     // Handle successful submission here
   } catch (error) {
     console.error(error);
