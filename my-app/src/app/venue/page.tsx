@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,ChangeEvent } from 'react';
 import '../../../public/assets/venue/bootstrap/css/bootstrap.min.css';
 import Link from "next/link";
 import Footer from "../components/Footer";
@@ -7,6 +7,33 @@ import NavbarRegistered from "../components/NavbarRegistered";
 
 
  function Venue() {
+  const [year, setYear] = useState("2024");
+  const [month, setMonth] = useState("1");
+  const [day, setDay] = useState("1");
+  const [time, setTime] = useState("5:00-8:00");
+  const name1="lujain Wedding Venue"
+  const price="Price : 3000"
+  const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setYear(event.target.value);
+  };
+
+  const handleMonthChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setMonth(event.target.value);
+  };
+
+  const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTime(event.target.value);
+  };
+  const handleDayChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setDay(event.target.value);
+  };
+
+  const handelClick = () => {
+    console.log(`Selected date and time: ${year}-${month}-${day} ${time}`);
+  };
+
+
+
 
     //funtion for alert 
     function myFunction() {
@@ -208,9 +235,11 @@ useEffect(() => {
         </div>
       </div>
     </div>
+   
+   <form >
     <div style={{ textAlign: "center", marginTop: "17px" }}>
       <h1 style={{ fontFamily: '"Abhaya Libre", serif', fontSize: "67px" }}>
-        Lujain Wedding Venue
+        {name1}
       </h1>
       <div>
         <p style={{ fontSize: "17px" }}>
@@ -248,7 +277,7 @@ useEffect(() => {
             fontFamily: '"Abhaya Libre", serif',
           }}
         >
-          &nbsp;Price : 3000
+          &nbsp;{price}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
@@ -285,12 +314,12 @@ useEffect(() => {
        
        
 {/* select the date for  venue reserviration*/}
-        <select className="display-inline-block">
+        <select className="display-inline-block" value={year} onChange={handleYearChange}>
           <option value={2024}>2024</option>
           <option value={2025}>2025</option>
           <option value={2026}>2025</option>
         </select>
-        <select className="display-inline-block">
+        <select className="display-inline-block" value={month} onChange={handleMonthChange} >
           <option value={1} >
             January
           </option>
@@ -306,7 +335,7 @@ useEffect(() => {
           <option value={11}>November</option>
           <option value={12}>December</option>
         </select>
-        <select className="display-inline-block">
+        <select className="display-inline-block"  value={day} onChange={handleDayChange}>
           <option value={1} >
             1
           </option>
@@ -369,6 +398,9 @@ useEffect(() => {
             id="radio-1"
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-1"
+            value="5:00-8:00"
+            checked={time === "5:00-8:00"}
+            onChange={handleTimeChange}
           />
           <label
             className="form-label"
@@ -389,6 +421,9 @@ useEffect(() => {
             id="radio-2"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-1"
+            value=" 9:00-12:00"
+            
+            onChange={handleTimeChange}
           />
           <label
             className="form-label"
@@ -424,22 +459,22 @@ useEffect(() => {
               fontFamily: '"Source Sans Pro", sans-serif',
               fontSize: "15px",
           }}
-          onClick={myFunction}
+          onClick={()=>{
+            handelClick();
+            myFunction();
+           
+
+          }}
       >
         {" "}
         Book venue
       </button>
+</div>
+</form>
 
 
 
 
-
-
-
-
-
-
-    </div>
     <div className="container">
       <hr style={{ marginTop: "68px" }} />
     </div>

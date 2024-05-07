@@ -33,7 +33,8 @@ const handleCloseAllOtherModals = () => {
   // Add more lines here if you have more modals
 };
 ///////////////////
-  //using axios to fetch api
+  //using axios to fetch api (sign up)
+///////////////////////////////////
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Email, setEmail] = useState("");
@@ -41,84 +42,156 @@ const handleCloseAllOtherModals = () => {
   
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   
+//SIGN UP CLEANER FIELDS
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setEmailError("");
+    setPasswordError("");
+    setShowPassword(false);
+  };
+//log in useState and handler
+const [loginEmail, setLoginEmail] = useState("");
+const [loginPassword, setLoginPassword] = useState("");
+
+  const handleCloseModal2 = () => {
+    setShowModal(false);
+    setLoginEmail("");
+    setLoginPassword("");
+    setShowPassword(false);
+    setLoginError('');
+  };
+  //////////////////////////////
+ 
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-
-    // Email validation regex pattern
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-     // Password validation regex patterns
-  const lowerCaseLetters = /[a-z]/g;
-  const upperCaseLetters = /[A-Z]/g;
-  const numbers = /[0-9]/g;
-  const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-
-  if (!FirstName || !LastName || !Email || !Password) {
-    setModalMessage("Please fill all the fields");
-    setShowModal(true);
+    e.preventDefault();
+  
+      // Email validation regex pattern
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+       // Password validation regex patterns
+    const lowerCaseLetters = /[a-z]/g;
+    const upperCaseLetters = /[A-Z]/g;
+    const numbers = /[0-9]/g;
+    const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  
+    if (!FirstName || !LastName || !Email || !Password) {
+      setModalMessage("Please fill all the fields");
+      setShowModal(true);
+      }
+      else if (!emailPattern.test(Email)) {
+        setEmailError("Please enter a valid email address");
+      }
+      else {
+      setEmailError(""); // Reset email error message
     }
-    else if (!emailPattern.test(Email)) {
-      setEmailError("Please enter a valid email address");
-    }
-    else {
-    setEmailError(""); // Reset email error message
-  }
-  if (Password.length < 8) {
-    setPasswordError("Password must be at least 8 characters long");
-  } else {
-    setPasswordError(""); // Reset password error message
-  }
-
-  if (emailPattern.test(Email) && Password.length >= 8) {
-    // Check if both email and password are valid
-    if (!lowerCaseLetters.test(Password)) {
-      setPasswordError("Password must contain at least one lowercase letter");
-    } else if (!upperCaseLetters.test(Password)) {
-      setPasswordError("Password must contain at least one uppercase letter");
-    } else if (!numbers.test(Password)) {
-      setPasswordError("Password must contain at least one number");
-    } else if (!specialCharacters.test(Password)) {
-      setPasswordError("Password must contain at least one special character");
+    if (Password.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
     } else {
-      try {
-        const response = await axios.post("http://localhost:3000/signup", {
-          FirstName: FirstName,
-          LastName: LastName,
-          Email: Email,
-          Password: Password,
-        });
-
-        if (response.data.error) {
-          setEmailError("Email is already in use");
-        } else {
-          console.log(response.data);
-          // Handle successful submission here
-          setModalMessage("Account Created Successfully");
-          setShowModal(true);
-
-          // Clear form fields
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPassword("");
-          setEmailError("");
-          setPasswordError("");
-        }
-      } catch (error: any) {
-        if (error.response && error.response.status === 400) {
-          console.log("Email is already in use");
-          setEmailError("Email is already in use");
-        } else {
-          console.error(error);
-          // Handle error here
+      setPasswordError(""); // Reset password error message
+    }
+  
+    if (emailPattern.test(Email) && Password.length >= 8) {
+      // Check if both email and password are valid
+      if (!lowerCaseLetters.test(Password)) {
+        setPasswordError("Password must contain at least one lowercase letter");
+      } else if (!upperCaseLetters.test(Password)) {
+        setPasswordError("Password must contain at least one uppercase letter");
+      } else if (!numbers.test(Password)) {
+        setPasswordError("Password must contain at least one number");
+      } else if (!specialCharacters.test(Password)) {
+        setPasswordError("Password must contain at least one special character");
+      } else {
+        try {
+          const response = await axios.post("http://localhost:3000/signup", {
+            FirstName: FirstName,
+            LastName: LastName,
+            Email: Email,
+            Password: Password,
+          });
+  
+          if (response.data.error) {
+            setEmailError("Email is already in use");
+          } else {
+            console.log(response.data);
+            // Handle successful submission here
+            setModalMessage("Account Created Successfully");
+            setShowModal(true);
+  
+            // Clear form fields
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPassword("");
+            setEmailError("");
+            setPasswordError("");
+            setShowPassword(false);
+          }
+        } catch (error: any) {
+          if (error.response && error.response.status === 400) {
+            console.log("Email is already in use");
+            setEmailError("Email is already in use");
+          } else {
+            console.error(error);
+            // Handle error here
+          }
         }
       }
     }
+  };
+///////////////////////////////////
+
+
+    //using axios to fetch api (login)
+  
+    const loginHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      // Make a POST request to your login endpoint
+      try {
+        const response = await axios.post("http://localhost:3000/login", {
+            Email: loginEmail,
+            Password: loginPassword
+        });
+
+        console.log(response.data); // Output success message 
+
+
+        
+        // Clear any previous login error
+        setLoginError('');
+
+        if (response.status === 200 && response.data === 'Login successful') {
+          handleCloseAllOtherModals(); // Close all other modals
+          setShow(false);
+          setLoginEmail("");
+          setLoginPassword("");
+          setShowPassword(false);
+          
+          // Close the login modal
+          // You can add any other actions you want here after successful login
+        }
+
+
+    }catch (error:any) {
+      console.error(error.response.data); // Output error message or perform any other action
+  
+      // If there is an error response, set the LoginError state
+      if (error.response && error.response.data) {
+          setLoginError(error.response.data);
+      }
   }
 };
+    
+    ////////////////////////////////////////////////////////
+
 
   return (
     <>
@@ -156,7 +229,11 @@ const handleCloseAllOtherModals = () => {
       {/* login modal */}
       <Modal
         show={show}
-        onHide={handleClose}
+        onHide={() => {
+          handleClose();
+          handleCloseModal2();
+
+        }}
         size="lg"
         centered
         aria-labelledby="contained-modal-title-vcenter"
@@ -190,7 +267,7 @@ const handleCloseAllOtherModals = () => {
                       </div>
 
                       {/* login form */}
-                      <form className="user">
+                      <form className="user" onSubmit={loginHandleSubmit} action="/" method="post">
                         <div className="mb-3">
                           {/* input for email address  */}
                           <label
@@ -201,11 +278,13 @@ const handleCloseAllOtherModals = () => {
                             Email :
                           </label>
                           <input
+                            name="loginEmail"
+                            value={loginEmail}
+                            onChange={(e) => setLoginEmail(e.target.value)}
                             className="form-control form-control form-control form-control-user"
                             type="email"
                             id="exampleInputEmail"
                             aria-describedby="emailHelp"
-                            name="email"
                             placeholder="Enter Email Address..."
                             required
                           />
@@ -220,20 +299,29 @@ const handleCloseAllOtherModals = () => {
                             Password :
                           </label>
                           <input
+                            type={showPassword? "text" : "password"}
+                            name="loginPassword"
+                            value={loginPassword}
+                            onChange={(e) => setLoginPassword(e.target.value)}
                             className="form-control form-control form-control form-control-user"
-                            type="password"
                             id="exampleInputPassword"
-                            name="password"
                             placeholder="Password"
                             required
                           />
-                        </div>
+                    {loginError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {loginError} 
+          </div>
+           )}
+                      </div>
+                   
                         <div className="mb-3">
                           <div className="custom-control custom-checkbox small">
                             <div className="form-check">
                               {/* input for checkbox  */}
                               {/* don't add name attribute due not submitting to data base   */}
                               <input
+                               onChange={() => setShowPassword(!showPassword)} // Toggle showPassword state on checkbox change
                                 type="checkbox"
                                 className="form-check-input custom-control-input"
                                 id="formCheck-1"
@@ -283,7 +371,11 @@ const handleCloseAllOtherModals = () => {
       {/* sighnup model */}
       <Modal
         show={show2}
-        onHide={handleClose2}
+        onHide={() => {
+          handleClose2();
+          handleCloseModal();
+
+        }}
         size="lg"
         centered
         aria-labelledby="contained-modal-title-vcenter"

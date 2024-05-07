@@ -28,8 +28,7 @@ app.use(express.json());
 //connect to database server
 mongoose
     .connect(
-        "mongodb+srv://zaid:ErsdfBuw77mgwUCD@cluster0.iy2nasf.mongodb.net/all-data?retryWrites=true&w=majority&appName=Cluster0"
-    )
+        "mongodb+srv://zaid:ErsdfBuw77mgwUCD@cluster0.iy2nasf.mongodb.net/all-data?retryWrites=true&w=majority&appName=Cluster0")
 
     .then(() => {
 
@@ -39,7 +38,10 @@ mongoose
 
         })
     })
-    .catch(() => { console.log("not connected") });
+    .catch((error) => { console.log("not connected") 
+                console.log(error);
+    });
+    
 
 //form post send data for CardColored
 
@@ -146,4 +148,41 @@ app.post("/signup", (req, res) => {
                                 res.status(500).send('Error checking email');
             });
     });
+});
+
+//cart form post 
+/////////////////
+/////////////////
+
+
+//login authentication 
+
+
+//first lets check if user exist in database
+app.post("/login", (req, res) => {
+    const { Email, Password } = req.body;
+
+    // Find the user by email
+    Signup.findOne({ Email })
+        .then((user) => {
+            if (!user) {
+                // If user not found, send an error response
+                return res.status(404).send('Incorrect email or password');
+            }
+
+            // Compare the provided password with the hashed password stored in the database
+            bcrypt.compare(Password, user.Password, function(err, result) {
+                if (err || !result) {
+                    // If passwords don't match, send an error response
+                    return res.status(401).send('Incorrect email or password');
+                }
+
+                // Passwords match, authentication successful
+                res.status(200).send('Login successful');
+            });
+        })
+        .catch(() => {
+            // Error occurred while finding user
+            res.status(500).send('Incorrect email or password');
+        });
 });
