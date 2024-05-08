@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../../../public/assets/navbarRegistered/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
+import { useAppContext } from '@/contextApi';
 
 function NavbarRegistered() {
   //import bootstrap javascript
@@ -10,6 +11,7 @@ function NavbarRegistered() {
       require("../../../public/assets/navbarRegistered/bootstrap/js/bootstrap.min.js");
     }
   }, []);
+  const { conterApp, setconterApp } = useAppContext();
   /////////////////
 
   return (
@@ -271,7 +273,7 @@ function NavbarRegistered() {
               
               
               {/* the span that show the number of items in cart */}
-              <span className="badge" id="cart-counter-2"></span>
+              <span className="badge" id="cart-counter-2">{conterApp}</span>
               
               
               <i

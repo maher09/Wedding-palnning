@@ -2,10 +2,17 @@
 import React, { useEffect, useState } from "react";
 import "../../../public/assets/Bookreservation/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
-
+import { useAppContext } from '@/contextApi';
 
 function Bookreservation() {
   //import bootstrap javascript
+  const {name,setname} = useAppContext();
+  const {price,setprice} = useAppContext();
+  const {day,setday} = useAppContext();
+  const {month,setmonth} = useAppContext();
+  const {year,setyear} = useAppContext();
+  const {timee,settimee} = useAppContext();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/Bookreservation/bootstrap/js/bootstrap.min.js");
@@ -41,6 +48,7 @@ function Bookreservation() {
                         fontWeight: "bold",
                         fontSize: "18px"
                         }} id="reservations-span" >
+                          {name}
                         </span>
 
 
@@ -54,7 +62,7 @@ function Bookreservation() {
                          
                          
                            {/* span for price of venue  */}                         
-                          <span id="price-span-2"></span>
+                          <span id="price-span-2">{price}</span>
                           
                           
                           
@@ -88,7 +96,7 @@ function Bookreservation() {
 
 
                            {/* span for date of venue  */}
-                          <span id="date-span" ></span>
+                          <span id="date-span" >{`${day}-${month}-${year}`}</span>
                         
                         
                         </td>
@@ -103,7 +111,7 @@ function Bookreservation() {
                           defaultValue=""/>
                         
                          {/* span for time of venue  */}
-                          <span  id="time-span" ></span>
+                          <span  id="time-span" >{timee}</span>
                         
                         
                         
