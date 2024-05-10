@@ -345,7 +345,7 @@ useEffect(() => {
         <select className="display-inline-block" value={selectedYear} onChange={handleYearChange}>
           <option value={2024}>2024</option>
           <option value={2025}>2025</option>
-          <option value={2026}>2025</option>
+          <option value={2026}>2026</option>
         </select>
         <select className="display-inline-block" value={selectedMonth} onChange={handleMonthChange}>
           <option value={1} >
@@ -1093,7 +1093,7 @@ useEffect(() => {
             id="radio-5"
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-3"
-            checked={time === "5:00-8:00"}
+           
             onChange={handleTimeChange}
           />
           <label
@@ -1449,7 +1449,6 @@ useEffect(() => {
             id="radio-8"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-4"
-           
             onChange={handleTimeChange}
           />
           <label
