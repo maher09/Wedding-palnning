@@ -12,9 +12,12 @@ function Checked({ index, isChecked, onChange }: { index: number, isChecked: boo
   }, []);
 
   return (
+    
     <div style={{display:"inline-block"}} onClick={() => onChange(index)}>
+ 
       {!isChecked && (
         <div className="checkbox unchecked">
+          
           <svg
             color="black"
             xmlns="http://www.w3.org/2000/svg"

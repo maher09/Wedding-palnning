@@ -149,7 +149,7 @@ function CheckList() {
             aria-valuemin={0}
             aria-valuemax={100}
             // width of progress bar to change
-            style={{ width: counterr*4.54545454545455 + "%"  }  }
+            style={{ width: counterr*4.54545454545455 + "%"}}
           >
             {(counterr*4.5)+1}%          
 
