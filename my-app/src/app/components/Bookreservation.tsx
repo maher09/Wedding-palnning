@@ -100,11 +100,12 @@ function Bookreservation() {
                         
                         
                         </td>
-                        <td style={{ width: "150.953px", 
+                        <td style={{
+                      width: "150.953px", 
                         textAlign: "center" ,
                         fontWeight: "bold",
                         fontSize: "18px",
-                         verticalAlign: 'middle'}}>
+                        verticalAlign: 'middle'}}>
                         
                            {/* input hidden time of venue */}
                           <input type="hidden" id="time-label" required 

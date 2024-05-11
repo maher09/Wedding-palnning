@@ -80,8 +80,10 @@ function Cart() {
         </p>
       </section>
 
-
-      <form>
+            
+            
+            {/* cart form */}
+      <form action="/cart" method="post">
         <section className="container" style={{ height: "161px" }}>
           <h1
             style={{
