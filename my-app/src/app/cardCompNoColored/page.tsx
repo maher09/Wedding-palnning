@@ -306,7 +306,7 @@ function CardCompNoColored() {
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
                       }}
-                      defaultValue="Add to cart"
+                      value="Add to cart"
                     />
                   </div>
 

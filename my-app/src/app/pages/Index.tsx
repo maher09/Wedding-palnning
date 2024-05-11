@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../../../public/assets/index/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import Modal1 from '../components/modal';
 import Footer from '../components/Footer';
 import MainRegistered from '../components/MainRegistered';
+
+
 
 
 
@@ -42,25 +44,32 @@ function Index() {
 
   return (
     <div>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant:ital,wght@0,300..700;1,300..700&family=Great+Vibes&family=Pinyon+Script&display=swap"
+          rel="stylesheet"
+        />
+
        <><MainRegistered/></>
 
       <div>
         <header className="d-flex masthead">
           <div className="video-background">
           <video autoPlay muted loop>
-      <source src="assets/index/videos/introVideo.mp4" type="video/mp4" />
+      <source src="assets/index/videos/Video.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
           </div>
           <div
             className="container text-center"
-            style={{ marginTop: "-135px", marginBottom: "85px" }}
+            style={{   backgroundColor: "rgba(0, 0, 0, 0.5)", alignContent: "center" , height: "100%",width: "100%",borderRadius:'20px'}}
           >
-            <h1 data-aos="fade-down" data-aos-duration={600} className="mb-1">
+            <h1 data-aos="fade-down" data-aos-duration={600} className="mb-1" style={{color:'ButtonShadow', fontFamily:"Cinzel Decorative",fontSize:'120px'}}>
               JUAR&nbsp;Wedding
             </h1>
             <h3 data-aos="fade-up" data-aos-duration={600} className="mb-5">
-              <em data-aos="fade-up" data-aos-duration={650}>
+              <em data-aos="fade-up" data-aos-duration={650} style={{color:'ButtonShadow',fontSize:'40px'}} >
                 Plan your dream wedding for free..
               </em>
             </h3>

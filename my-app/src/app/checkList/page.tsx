@@ -5,11 +5,13 @@ import Link from "next/link";
 import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
 import Checked from "../components/Checked";
+import { text } from "stream/consumers";
 
 function CheckList() {
   
   const [counters, setCounters] = useState([0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0]); // One counter for each SVG
   const [isChecked, setIsChecked] = useState([false, false, false,]);
+  const [width, setWidth] = useState("0%");
   var counterr=0;
 
   const handleToggle = (index: number) => {
@@ -25,8 +27,12 @@ function CheckList() {
   for(let i=0;i<counters.length;i++){
     if(counters[i]===1){
       counterr++;
+     
+      
+
     }
   }
+
   console.log(counterr);
   
     //import bootstrap javascript
@@ -137,14 +143,15 @@ function CheckList() {
          
          {/* width of progress bar to change */}
           <div
+
             className="progress-bar bg-success progress-bar-striped progress-bar-animated"
             aria-valuenow={0}
             aria-valuemin={0}
             aria-valuemax={100}
             // width of progress bar to change
-            style={{ width: "" }}
+            style={{ width: counterr*4.54545454545455 + "%"  }  }
           >
-            
+            {(counterr*4.5)+1}%          
 
 
 

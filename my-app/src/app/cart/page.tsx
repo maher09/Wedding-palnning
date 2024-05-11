@@ -297,7 +297,7 @@ function Cart() {
                       borderRadius: "10px",
                       height: "50px"
                     }}
-                    defaultValue="Checkout"
+                    value="Checkout"
                   />
 
 

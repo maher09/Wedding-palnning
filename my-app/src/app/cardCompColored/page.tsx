@@ -268,7 +268,7 @@ function CardCompColored() {
                       className="form-control form-control"
                       type="hidden"
                       id="design"
-                      defaultValue=""
+                      value=""
                     />
                   </div>
 
@@ -371,7 +371,7 @@ function CardCompColored() {
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
                       }}
-                      defaultValue="Add to cart"
+                      value="Add to cart"
                     />
                   </div>
 

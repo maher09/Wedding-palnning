@@ -34,7 +34,7 @@ function Bookreservation() {
                             type="hidden"
                             id="reservations-label"
                             required
-                            defaultValue=""
+                            value=""
                           />
 
                            {/* span for name of venue */}
@@ -75,7 +75,7 @@ function Bookreservation() {
                           
                            {/* input hidden venue price */}
                           <input type="hidden" id="price-res-label" required 
-                          defaultValue=""/>
+                          value=""/>
                         
                         
                         
@@ -92,7 +92,7 @@ function Bookreservation() {
                           
                            {/* input hidden date of venue */}
                           <input type="hidden" id="date-label" required 
-                          defaultValue=""/>
+                          value=""/>
 
 
                            {/* span for date of venue  */}
@@ -108,7 +108,7 @@ function Bookreservation() {
                         
                            {/* input hidden time of venue */}
                           <input type="hidden" id="time-label" required 
-                          defaultValue=""/>
+                          value=""/>
                         
                          {/* span for time of venue  */}
                           <span  id="time-span" >{timee}</span>
