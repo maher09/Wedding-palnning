@@ -3,7 +3,14 @@ import React, { useEffect, useState } from "react";
 import "../../../public/assets/cardCompColored/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/cardCompColored/css/styles.css";
 import Link from "next/link";
-function CardCompColoredHeadar() {
+
+interface CardCompColoredHeadarProps {
+  imageNames: string[];
+}
+
+
+
+function CardCompColoredHeadar({ imageNames }:CardCompColoredHeadarProps) {
   
  //import bootstrap javascript
  useEffect(() => {
@@ -18,22 +25,25 @@ function CardCompColoredHeadar() {
     return (
         <>
         {/* the header for three images preview  */}
-        <div id="compo-card-name">
-                  <h1
-                    id="card-name"
-                    className="card-title"
-                    style={{
-                      fontFamily: '"Abhaya Libre", serif',
-                      fontSize: "30px",
-                      textAlign: "center",
-                      fontWeight: "bold",
-                
-                      marginBottom: "10px",
-                    }}
->
-
-                  </h1>
-                </div>
+    
+      <div id="compo-card-name">
+        {imageNames.map((name, index) => (
+          <h1
+            key={index}
+            id="card-name"
+            className="card-title"
+            style={{
+              fontFamily: '"Abhaya Libre", serif',
+              fontSize: "30px",
+              textAlign: "center",
+              fontWeight: "bold",
+              marginBottom: "10px",
+            }}
+          >
+            {name}
+          </h1>
+        ))}
+      </div>
                 </>
   )
 }

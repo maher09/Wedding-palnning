@@ -11,8 +11,8 @@ import NavbarRegistered from "../components/NavbarRegistered";
   const [month, setMonth] = useState("1");
   const [day, setDay] = useState("1");
   const [time, setTime] = useState("5:00-8:00");
-  const name1="lujain Wedding Venue"
-  const price="Price : 3000"
+  const [name, setName] = useState("lujain Wedding Venue");
+  const [price, setPrice] = useState("Price : 3000");
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setYear(event.target.value);
   };
@@ -29,7 +29,7 @@ import NavbarRegistered from "../components/NavbarRegistered";
   };
 
   const handelClick = () => {
-    console.log(`Selected date and time: ${year}-${month}-${day} ${time}`);
+    console.log(`Selected date and time: ${year}-${month}-${day} ${time}-${name}-${price}`);
   };
 
 
@@ -239,7 +239,7 @@ useEffect(() => {
    <form >
     <div style={{ textAlign: "center", marginTop: "17px" }}>
       <h1 style={{ fontFamily: '"Abhaya Libre", serif', fontSize: "67px" }}>
-        {name1}
+        {name}
       </h1>
       <div>
         <p style={{ fontSize: "17px" }}>

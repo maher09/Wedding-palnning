@@ -17,7 +17,7 @@ function CheckList() {
   /////////////////
 
  
-
+const z=22;
   
     const [items, setItems] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState<string>('');
@@ -110,10 +110,12 @@ function CheckList() {
             fontFamily: '"Abhaya Libre", serif',
             fontSize: "19px",
             fontWeight: "bold",
+            
+            
           }}
         >
-         
-         
+            
+        
          {/* width of progress bar to change */}
           <div
             className="progress-bar bg-success progress-bar-striped progress-bar-animated"
@@ -121,9 +123,9 @@ function CheckList() {
             aria-valuemin={0}
             aria-valuemax={100}
             // width of progress bar to change
-            style={{ width: "" }}
+            style={{ width: 10*4.54545454545455 + "%"}}
           >
-            
+            11
 
 
 

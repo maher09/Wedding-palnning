@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import "../../../public/assets/cardCompColored/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/cardCompColored/css/styles.css";
@@ -8,7 +8,19 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import CardCompColoredHeadar from "../components/cardCompColoredHeadar";
 import Threeimages from "../components/Threeimages";
+import { useSearchParams } from "next/navigation";
 function CardCompColored() {
+
+   
+  //searchparems
+  ////////
+  const searchParams = useSearchParams();
+const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
+  //////////
+  //searchparems
+  const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
+  
+  //////////
   //import bootstrap javascript
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -106,7 +118,7 @@ function CardCompColored() {
         
             {/*Three images component*/}
          
-            <>  <Threeimages/></>
+            <><Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []}/></>
          
 
 
@@ -122,8 +134,7 @@ function CardCompColored() {
            
               
               {/* import headear name component  */}
-              <>  <CardCompColoredHeadar/></>
-
+              <CardCompColoredHeadar imageNames={imageNames} />
 
 
                     {/* card form 1  */}
@@ -357,7 +368,7 @@ function CardCompColored() {
                       style={{
                         borderRadius: "14px",
                         marginLeft: "26px",
-                        background: "rgb(255,255,255)",
+                        background: "rgb(230,227,211)",
                       }}
                     />
 
@@ -365,12 +376,16 @@ function CardCompColored() {
 
                     {/* BUTTON 2 (red)*/}
                     <button
-                      className="btn btn-primary btn-color"
+                      role="radio"
+                      aria-checked="true"
+                      data-state="checked"
+                      className="btn  btn-color active"
                       type="button"
                       style={{
                         borderRadius: "14px",
                         marginLeft: "17px",
                         background: "#872c21",
+
                       }}
                     />
 

@@ -30,6 +30,7 @@ function Modal1() {
 const handleCloseAllOtherModals = () => {
   setShow(false);
   setShow2(false);
+  
   // Add more lines here if you have more modals
 };
 ///////////////////
@@ -56,9 +57,16 @@ const handleCloseAllOtherModals = () => {
     setPasswordError("");
     setShowPassword(false);
   };
-//log in useState and handler
-const [loginEmail, setLoginEmail] = useState("");
-const [loginPassword, setLoginPassword] = useState("");
+  const handleShowModal = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setEmailError("");
+    setPasswordError("");
+    setShowPassword(false);
+  };
+  //login UP CLEANER FIELDS
 
   const handleCloseModal2 = () => {
     setShowModal(false);
@@ -67,6 +75,18 @@ const [loginPassword, setLoginPassword] = useState("");
     setShowPassword(false);
     setLoginError('');
   };
+  const handleShowModal2 = () => {
+    setLoginEmail("");
+    setLoginPassword("");
+    setShowPassword(false);
+    setLoginError('');
+  };
+
+
+  //log in useState and handler
+const [loginEmail, setLoginEmail] = useState("");
+const [loginPassword, setLoginPassword] = useState("");
+
   //////////////////////////////
  
 
@@ -232,6 +252,7 @@ const [loginPassword, setLoginPassword] = useState("");
         onHide={() => {
           handleClose();
           handleCloseModal2();
+         
 
         }}
         size="lg"
@@ -354,6 +375,7 @@ const [loginPassword, setLoginPassword] = useState("");
                           onClick={() => {
                             handleShow2();
                             handleClose();
+                            handleShowModal2();
                           }}
                         >
                           Create an account
@@ -374,7 +396,7 @@ const [loginPassword, setLoginPassword] = useState("");
         onHide={() => {
           handleClose2();
           handleCloseModal();
-
+          
         }}
         size="lg"
         centered
@@ -522,6 +544,7 @@ const [loginPassword, setLoginPassword] = useState("");
                       onClick={() => {
                         handleShow();
                         handleClose2();
+                        handleShowModal();
                       }}
                     >
                       Already have account? Login

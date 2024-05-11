@@ -7,8 +7,16 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import CardCompColoredHeadar from "../components/cardCompColoredHeadar";
 import Threeimages from "../components/Threeimages";
+import { useSearchParams } from "next/navigation";
 
 function CardCompNoColored() {
+    //searchparems
+  ////////
+  const searchParams = useSearchParams();
+const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
+const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
+
+  //////////
   //import bootstrap javascript
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -103,7 +111,7 @@ function CardCompNoColored() {
           
           {/*Three images component*/}
          
-          <>  <Threeimages/></>
+          <><Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []}/></>
          
          
          
@@ -119,7 +127,7 @@ function CardCompNoColored() {
                
                
                   {/* import headear name component  */}
-              <>  <CardCompColoredHeadar/></>
+                  <CardCompColoredHeadar imageNames={imageNames} />
               
 
 

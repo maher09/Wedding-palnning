@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "../../../public/assets/index/bootstrap/css/bootstrap.min.css"
-import "../../../public/assets/invitationCards/css/Flip-Card.css"
-import "../../../public/assets/invitationCards/css/untitled.css"
-
+import "../../../public/assets/index/bootstrap/css/bootstrap.min.css";
+import "../../../public/assets/invitationCards/css/Flip-Card.css";
+import "../../../public/assets/invitationCards/css/untitled.css";
 
 import Link from "next/link";
+
 import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 function InvitationCards() {
@@ -17,11 +17,184 @@ function InvitationCards() {
   }, []);
   /////////////////
 
+  //ARRAY OF IMG
+  ///////////////////////////////////////////////////////////////////////
+  const [imageUrls1, setImageUrls1] = useState<string[]>([]);
+  const [imageUrls2, setImageUrls2] = useState<string[]>([]);
+  const [imageUrls3, setImageUrls3] = useState<string[]>([]);
+  const [imageUrls4, setImageUrls4] = useState<string[]>([]);
+  const [imageUrls5, setImageUrls5] = useState<string[]>([]);
+  const [imageUrls6, setImageUrls6] = useState<string[]>([]);
+  const [imageUrls7, setImageUrls7] = useState<string[]>([]);
+  const [imageUrls8, setImageUrls8] = useState<string[]>([]);
+  const [imageUrls9, setImageUrls9] = useState<string[]>([]);
+  const [imageUrls10, setImageUrls10] = useState<string[]>([]);
+  const [imageUrls11, setImageUrls11] = useState<string[]>([]);
+  const [imageUrls12, setImageUrls12] = useState<string[]>([]);
+  
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/images.json");
+        const data = await response.json();
+
+        setImageUrls1([
+          data.image1[0].source,
+          data.image1[1].source,
+          data.image1[2].source,
+        ]);
+
+        setImageUrls2([
+          data.image2[0].source,
+          data.image2[1].source,
+          data.image2[2].source,
+        ]);
+
+        setImageUrls3([
+          data.image3[0].source,
+          data.image3[1].source,
+          data.image3[2].source,
+        ]);
+        setImageUrls4([
+          data.image4[0].source,
+          data.image4[1].source,
+          data.image4[2].source,
+        ]);
+        setImageUrls5([
+          data.image5[0].source,
+          data.image5[1].source,
+          data.image5[2].source,
+        ]);
+        setImageUrls6([
+          data.image6[0].source,
+          data.image6[1].source,
+          data.image6[2].source,
+        ]);
+        setImageUrls7([
+          data.image7[0].source,
+          data.image7[1].source,
+          data.image7[2].source,
+        ]);
+        setImageUrls8([
+          data.image8[0].source,
+          data.image8[1].source,
+          data.image8[2].source,
+        ]);
+        setImageUrls9([
+          data.image9[0].source,
+          data.image9[1].source,
+          data.image9[2].source,
+        ]);
+        setImageUrls10([
+          data.image10[0].source,
+          data.image10[1].source,
+          data.image10[2].source,
+        ]);
+        setImageUrls11([
+          data.image11[0].source,
+          data.image11[1].source,
+          data.image11[2].source,
+        ]);
+        setImageUrls12([
+          data.image12[0].source,
+          data.image12[1].source,
+          data.image12[2].source,
+        ]);
+      } catch (error) {
+        console.error("Error fetching image URLs:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+    
+  const [name1, setname1] = useState<string[]>([]);
+  const [name2, setname2] = useState<string[]>([]);
+  const [name3, setname3] = useState<string[]>([]);
+  const [name4, setname4] = useState<string[]>([]);
+  const [name5, setname5] = useState<string[]>([]);
+  const [name6, setname6] = useState<string[]>([]);
+  const [name7, setname7] = useState<string[]>([]);
+  const [name8, setname8] = useState<string[]>([]);
+  const [name9, setname9] = useState<string[]>([]);
+  const [name10, setname10] = useState<string[]>([]);
+  const [name11, setname11] = useState<string[]>([]);
+  const [name12, setname12] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/cardsName.json");
+        const data = await response.json();
+
+        setname1([
+          data.image1[0].name,
+        
+        ]);
+
+        setname2([
+          data.image2[0].name,
+         
+        ]);
+
+        setname3([
+          data.image3[0].name,
+          
+        ]);
+        setname4([
+          data.image4[0].name,
+         
+        ]);
+        setname5([
+          data.image5[0].name,
+        
+        ]);
+        setname6([
+          data.image6[0].name,
+        
+        ]);
+        setname7([
+          data.image7[0].name,
+         
+        ]);
+        setname8([
+          data.image8[0].name,
+         
+        ]);
+        setname9([
+          data.image9[0].name,
+        
+        ]);
+        setname10([
+          data.image10[0].name,
+        
+        ]);
+        setname11([
+          data.image11[0].name,
+      
+        ]);
+        setname12([
+          data.image12[0].name,
+         
+        ]);
+      } catch (error) {
+        console.error("Error fetching image URLs:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  /////////////////////////////////////////////////////////////////////////
   return (
     <div>
-                <> <NavbarRegistered/></>  
+      <>
+        {" "}
+        <NavbarRegistered />
+      </>
 
-     
       <meta charSet="utf-8" />
       <meta
         name="viewport"
@@ -34,7 +207,7 @@ function InvitationCards() {
         sizes="202x153"
         href="assets/invitationCards/img/Favicon.png"
       />
-    
+
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&display=swap"
@@ -51,10 +224,7 @@ function InvitationCards() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap"
       />
-    
-     
-     
-  
+
       <header
         className="masthead"
         style={{
@@ -63,19 +233,42 @@ function InvitationCards() {
           height: "647.4px",
         }}
       >
-            <div className="position-absolute" style={{
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          backgroundColor: "#212529",
-          opacity: 0.5,}} />
+        <div
+          className="position-absolute"
+          style={{
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "100%",
+            backgroundColor: "#212529",
+            opacity: 0.5,
+          }}
+        />
         <div className="container">
           <div className="row ">
             <div className="col-md-10 col-lg-8 position-relative mx-auto ">
-              <div className="site-heading" style={{ textAlign:'center', padding:'53px'}}>
-                <h1 style={{ color: 'white', fontSize: '95px', fontFamily:'Open Sans, sans-serif', fontWeight:'bold'}} >Invitation cards</h1>
-                <span className="subheading" style={{ color: 'white', fontSize: '25px', fontFamily:'Open Sans, sans-serif' }}>
+              <div
+                className="site-heading"
+                style={{ textAlign: "center", padding: "53px" }}
+              >
+                <h1
+                  style={{
+                    color: "white",
+                    fontSize: "95px",
+                    fontFamily: "Open Sans, sans-serif",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Invitation cards
+                </h1>
+                <span
+                  className="subheading"
+                  style={{
+                    color: "white",
+                    fontSize: "25px",
+                    fontFamily: "Open Sans, sans-serif",
+                  }}
+                >
                   Select Your Perfect Invitation Card
                 </span>
               </div>
@@ -132,32 +325,40 @@ function InvitationCards() {
                 A brilliant arrangement of bright blooms and greenery <br />
                 decorates these eye-catching wedding invitations.
               </p>
-             
-             
-            
-            
-             {/* button for image 1  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
+
+              
+              
+              
+              <Link
+        href={{
+          pathname: "/cardCompColored",
+          query: { 
+            imageUrls: imageUrls1.join(","),
+            imageNames: name1.join(","),
+          },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
 
 
 
 
 
 
-
-            
+              
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -202,30 +403,42 @@ function InvitationCards() {
                 <br />
                 &nbsp;features a versatile blend of styles.
               </p>
-             
-             
-             
-             
-             
-             
-             {/* button for image 2  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
-
-
-
+              
+              
+              
+              
+              <Link
+        href={{
+          pathname: "/cardCompColored",
+          query: { imageUrls: imageUrls2.join(",") ,
+                    imageNames: name2.join(","),
+          },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -269,25 +482,28 @@ function InvitationCards() {
                 A painted branch motif frames <br />
                 the top of this wedding invitation.
               </p>
-             
-             
-             
-             
-             {/* button for image 3  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                Take a look
-              </button>
-
+              
+              
+              <Link
+        href={{
+          pathname: "/cardCompColored",
+          query: { imageUrls: imageUrls3.join(","),imageNames: name3.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link> 
 
 
 
@@ -339,24 +555,36 @@ function InvitationCards() {
              
              
              
-             {/* button for image 4  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
+             
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls4.join(","),imageNames: name4.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
 
-
-
-
+            
+            
+            
+            
+            
+            
+            
+            
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -401,25 +629,28 @@ function InvitationCards() {
                 <br />
                 &nbsp;set the right expectations for the magical day ahead
               </p>
-              
-              
-              
-              
-             {/* button for image 5  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
+      
+      
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls5.join(","),imageNames: name5.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
 
 
 
@@ -466,29 +697,26 @@ function InvitationCards() {
                 These simple yet elegant wedding invitations <br />
                 should be just what you are looking for
               </p>
-              
-              
-              
-              
-             {/* button for image 6  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls6.join(","),imageNames: name6.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -532,29 +760,26 @@ function InvitationCards() {
                 Rustic branches frame your wedding details <br />
                 on this winter-inspired wedding invitation
               </p>
-              
-              
-              
-              
-             {/* button for image 7  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                Take a look
-              </button>
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls7.join(","),imageNames: name7.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -598,30 +823,26 @@ function InvitationCards() {
                 This elegant wedding invitation design <br />
                 features painted peonies decorating the card.
               </p>
-              
-              
-              
-              
-             {/* button for image 8  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls8.join(","),imageNames: name8.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -665,30 +886,26 @@ function InvitationCards() {
                 his wedding invitation features the words <br />
                 “we do” in modern calligraphy
               </p>
-              
-              
-              
-              
-             {/* button for image 9  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls9.join(","),imageNames: name9.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -734,30 +951,26 @@ function InvitationCards() {
                 &nbsp;this wedding invitation is ideal for those who appreciate
                 classic style.
               </p>
-             
-             
-             
-             
-             
-             {/* button for image 10  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls10.join(","),imageNames: name10.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -801,31 +1014,26 @@ function InvitationCards() {
                 This traditional wedding invitation is decorated with <br />a
                 stylish venue illustration and showcases your details{" "}
               </p>
-              
-              
-              
-              
-              
-             {/* button for image 11  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                <strong>Take a look</strong>
-              </button>
-
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls11.join(","),imageNames: name11.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -870,35 +1078,33 @@ function InvitationCards() {
                 Your initials, names, and wedding details are displayed in a
                 classic font{" "}
               </p>
-              
-              
-              
-              
-             {/* button for image 12  */}
-              <button
-                className="btn1 btn1-primary"
-                type="button"
-                style={{
-                  background: "#313987",
-                  width: "145.406px",
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                Take a look
-              </button>
-
-
-
-
-
-
+              <Link
+        href={{
+          pathname: "/cardCompNoColored",
+          query: { imageUrls: imageUrls12.join(","),imageNames: name12.join(","), },
+        }}
+      >
+        <button
+          className="btn1 btn1-primary"
+          type="button"
+          style={{
+            background: "#313987",
+            width: "145.406px",
+            borderRadius: "10px",
+            fontSize: "13px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          <strong>Take a look </strong>
+        </button>
+      </Link>
             </div>
           </div>
         </div>
       </div>
-      <><Footer/></>
+      <>
+        <Footer />
+      </>
     </div>
   );
 }

@@ -28,15 +28,7 @@ import NavbarRegistered from './components/NavbarRegistered';
  function Home() {
   return (
     <main>
-        
-      
         <Index/>
-    
-        
-        
-       
-        
-
     </main>
   );
 }
