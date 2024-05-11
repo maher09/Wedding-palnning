@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import axios from 'axios';
 import "../../../public/assets/cardCompColored/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/cardCompColored/css/styles.css";
 import Link from "next/link";
@@ -7,14 +8,71 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import CardCompColoredHeadar from "../components/cardCompColoredHeadar";
 import Threeimages from "../components/Threeimages";
+import { useSearchParams } from "next/navigation";
 function CardCompColored() {
+
+   
+  //searchparems
+  ////////
+  const searchParams = useSearchParams();
+const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
+  //////////
+  //searchparems
+  const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
+  
+  //////////
   //import bootstrap javascript
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/cardCompColored/bootstrap/js/bootstrap.min.js");
     }
   }, []);
-  /////////////////
+
+
+
+  //using axios to fetch api
+  const [theBride, setTheBride] = useState('');
+  const [theGroom, setTheGroom] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [location, setLocation] = useState('');
+  const [notes, setNotes] = useState('');
+  const [designColor, setDesignColor] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+   // Check if all fields are filled
+   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+    alert("Please fill in all required fields");
+  }
+  else 
+  alert("Your CARD has been added ,Explore your choice in the cart");
+    try {
+      const response = await axios.post('http://localhost:3000/cardCompColored', {
+        theBride: theBride,
+        theGroom: theGroom,
+        date: date,
+        time: time,
+        location: location,
+        notes: notes,
+        designColor: designColor,
+      });
+  
+      console.log(response.data);
+      setTheBride('');
+      setTheGroom('');
+      setDate('');
+      setTime('');
+      setLocation('');
+      setNotes('');
+      setDesignColor('');
+      // Handle successful submission here
+    } catch (error) {
+      console.error(error);
+      // Handle error here
+    }
+  };
 
   return (
     <div>
@@ -60,7 +118,7 @@ function CardCompColored() {
         
             {/*Three images component*/}
          
-            <>  <Threeimages/></>
+            <><Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []}/></>
          
 
 
@@ -76,12 +134,11 @@ function CardCompColored() {
            
               
               {/* import headear name component  */}
-              <>  <CardCompColoredHeadar/></>
-
+              <CardCompColoredHeadar imageNames={imageNames} />
 
 
                     {/* card form 1  */}
-                <form>
+                <form action="/cardCompColored" method="post" onSubmit={handleSubmit}>
                   <div className="input-group" style={{ marginBottom: "5px" }}>
                     
                     
@@ -97,6 +154,9 @@ function CardCompColored() {
                       The bride:&nbsp;
                     </label>
                     <input
+                      name="theBride"
+                      value={theBride}
+                      onChange={(e) => setTheBride(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="husband-name"
@@ -127,7 +187,10 @@ function CardCompColored() {
                       The groom :&nbsp; &nbsp; &nbsp;&nbsp;
                     </label>
                     <input
-                      className="form-control form-control"
+                     name="theGroom"
+                     value={theGroom}
+                     onChange={(e) => setTheGroom(e.target.value)}
+                     className="form-control form-control"
                       type="text"
                       id="wife-name"
                       required
@@ -154,6 +217,9 @@ function CardCompColored() {
                       Date :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                       name="date"
+                       value={date}
+                       onChange={(e) => setDate(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="date"
@@ -180,6 +246,9 @@ function CardCompColored() {
                       Time :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                     </label>
                     <input
+                     name="time"
+                     value={time}
+                     onChange={(e) => setTime(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="time"
@@ -208,6 +277,9 @@ function CardCompColored() {
                       Location :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                     name="location"
+                     value={location}
+                     onChange={(e) => setLocation(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="location"
@@ -235,6 +307,10 @@ function CardCompColored() {
                       Notes :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                    
+                      name="notes"
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="notes"
@@ -265,10 +341,14 @@ function CardCompColored() {
                     
                     {/* input hidden for color input name */}
                     <input
+                      name="designColor"
+                      value={designColor} 
+                      onChange={(e) => setDesignColor(e.target.value)}
                       className="form-control form-control"
                       type="hidden"
                       id="design"
-                      defaultValue=""
+                      
+
                     />
                   </div>
 
@@ -288,7 +368,7 @@ function CardCompColored() {
                       style={{
                         borderRadius: "14px",
                         marginLeft: "26px",
-                        background: "rgb(255,255,255)",
+                        background: "rgb(230,227,211)",
                       }}
                     />
 
@@ -296,12 +376,16 @@ function CardCompColored() {
 
                     {/* BUTTON 2 (red)*/}
                     <button
-                      className="btn btn-primary btn-color"
+                      role="radio"
+                      aria-checked="true"
+                      data-state="checked"
+                      className="btn  btn-color active"
                       type="button"
                       style={{
                         borderRadius: "14px",
                         marginLeft: "17px",
                         background: "#872c21",
+
                       }}
                     />
 
@@ -371,7 +455,9 @@ function CardCompColored() {
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
                       }}
-                      defaultValue="Add to cart"
+                      value="Add to cart"
+                     
+
                     />
                   </div>
 
