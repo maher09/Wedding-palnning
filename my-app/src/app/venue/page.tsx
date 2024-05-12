@@ -455,7 +455,7 @@ useEffect(() => {
           />
           <label
             className="form-label"
-            htmlFor="radio-2"
+            htmlFor="radio-4"
             style={{
               fontFamily: '"Abhaya Libre", serif',
               fontSize: "37px",
@@ -661,7 +661,7 @@ useEffect(() => {
             fontFamily: '"Abhaya Libre", serif',
           }}
         >
-          &nbsp;Price : 1000
+          &nbsp;Price : 2500
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
@@ -786,7 +786,7 @@ useEffect(() => {
         <div>
           <input
             type="radio"
-            id="radio-4"
+            id="radio-44"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-2"
             value="9:00-12:00"
@@ -794,7 +794,7 @@ useEffect(() => {
           />
           <label
             className="form-label"
-            htmlFor="radio-4"
+            htmlFor="radio-44"
             style={{
               fontFamily: '"Abhaya Libre", serif',
               fontSize: "37px",
@@ -829,8 +829,8 @@ useEffect(() => {
           onClick={()=>{
             myFunction()
             handleClick()
-            setname("naurouz Wedding Venue")
-            setprice("2000$")
+            setname("Nayrouz  Wedding Venue")
+            setprice("2500$")
           }}
       >
         {" "}
@@ -1160,7 +1160,7 @@ useEffect(() => {
           onClick={()=>{
             myFunction()
             handleClick()
-            setname("lotus Wedding Venue")
+            setname("Lotus Wedding Venue")
             setprice("2000$")
           }}
       >
@@ -1497,7 +1497,7 @@ useEffect(() => {
           onClick={()=>{
             myFunction()
             handleClick()
-            setname("royal Wedding Venue")
+            setname("Royal Wedding Venue")
             setprice("3000$")
           }}
       >
@@ -1843,7 +1843,7 @@ useEffect(() => {
           onClick={()=>{
             myFunction()
             handleClick()
-            setname("kebpinski Wedding Venue")
+            setname("Kebpinski Wedding Venue")
             setprice("2600$")
           }}
       >

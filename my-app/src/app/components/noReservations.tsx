@@ -23,7 +23,7 @@ function NoReservations() {
                             colSpan={5}
                           >
                             <span style={{ fontWeight: "normal !important" }}>
-                              no reservation yet
+                              No Reservation Yet
                             </span>
                           </td>
                         </tr>

@@ -402,7 +402,7 @@ function Cart() {
                        
                     <tbody>
         {/*COMPONENT for NoReservations (to replace with cart component)*/}
-                    <><Bookreservation/></>
+                    <><NoReservations/></>
                     
                     
                     

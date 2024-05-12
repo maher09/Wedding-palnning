@@ -30,7 +30,7 @@ function NoItemsYet() {
                           >
                             <br />
                             <span style={{ fontWeight: "normal !important" }}>
-                              &nbsp; &nbsp;No items yet&nbsp;
+                              &nbsp; &nbsp;No Items Yet&nbsp;
                             </span>
                             <br />
                             <br />

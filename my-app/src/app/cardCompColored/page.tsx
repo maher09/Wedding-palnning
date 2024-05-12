@@ -117,9 +117,10 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
         <div className="row">
         
             {/*Three images component*/}
-         
-            <><Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []}/></>
-         
+      
+  
+          <><Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []}/></>
+  
 
 
 

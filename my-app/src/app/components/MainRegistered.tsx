@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../../../public/assets/index/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
-import Modal1 from '../components/modal';
+import Modal1 from './modal';
 import AboutUs from "../about/page";
 
 import CardCompColored from '../cardCompColored/page';
