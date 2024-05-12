@@ -4,9 +4,36 @@ import "../../../public/assets/checkList/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
+import Checked from "../components/Checked";
+import { text } from "stream/consumers";
 
 function CheckList() {
   
+  const [counters, setCounters] = useState([0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0,0]); // One counter for each SVG
+  const [isChecked, setIsChecked] = useState([false, false, false,]);
+  const [width, setWidth] = useState("0%");
+  var counterr=0;
+
+  const handleToggle = (index: number) => {
+    const newChecked = [...isChecked];
+    newChecked[index] = !newChecked[index];
+    setIsChecked(newChecked);
+    setCounters((prevCounters) => {
+      const newCounters = [...prevCounters];
+      newCounters[index] = newChecked[index] ? prevCounters[index] + 1 : prevCounters[index] - 1;
+      return newCounters;
+    });
+  };
+  for(let i=0;i<counters.length;i++){
+    if(counters[i]===1){
+      counterr++;
+     
+      
+
+    }
+  }
+
+  console.log(counterr);
   
     //import bootstrap javascript
   useEffect(() => {
@@ -86,12 +113,12 @@ function CheckList() {
           fontWeight: "bold",
         }}
       >
-        &nbsp;You have completed&nbsp;
+        &nbsp;You have completed &nbsp;
 
         {/* span for number of tasks completed*/}
-        <span id="zero-span"></span> 
+        <span id="zero-span">{counterr} </span> 
         
-        of 22 tasks
+         of 22 tasks
       </h1>
       <div
         className="d-flex justify-content-center container"
@@ -116,14 +143,15 @@ function CheckList() {
          
          {/* width of progress bar to change */}
           <div
+
             className="progress-bar bg-success progress-bar-striped progress-bar-animated"
             aria-valuenow={0}
             aria-valuemin={0}
             aria-valuemax={100}
             // width of progress bar to change
-            style={{ width: "" }}
+            style={{ width: counterr*4.54545454545455 + "%"}}
           >
-            
+            {(counterr*4.5)+1}%          
 
 
 
@@ -160,22 +188,8 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{
-                      fontSize: "34px",
-                      marginRight: "10px",
-                      background: "#f4f0f8",
-                    }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                <Checked index={0} isChecked={isChecked[0]} onChange={handleToggle} />
+      
                   Announce your wedding.
                 </td>
               </tr>
@@ -186,18 +200,11 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+
+                <Checked index={1} isChecked={isChecked[1]} onChange={handleToggle} />
+     
+
+                  
                   Set a wedding budget.
                 </td>
               </tr>
@@ -206,20 +213,11 @@ function CheckList() {
                   style={{
                     fontFamily: "Roboto, sans-serif",
                     background: "#f4f0f8",
+                   
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+              
+                  <Checked index={2} isChecked={isChecked[2]} onChange={handleToggle} />
                   Find and hire your wedding planner.
                 </td>
               </tr>
@@ -230,18 +228,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={3} isChecked={isChecked[3]} onChange={handleToggle} />
                   Choose your wedding date.
                 </td>
               </tr>
@@ -264,18 +251,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                 <Checked index={4} isChecked={isChecked[4]} onChange={handleToggle} />
                   Start creating your guest list.
                 </td>
               </tr>
@@ -286,18 +262,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={5} isChecked={isChecked[5]} onChange={handleToggle} />
                   Decide on your color scheme.
                 </td>
               </tr>
@@ -308,18 +273,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={6} isChecked={isChecked[6]} onChange={handleToggle} />
                   Choose wedding rings.
                 </td>
               </tr>
@@ -330,18 +284,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={7} isChecked={isChecked[7]} onChange={handleToggle} />
                   Order free invitation card samples.
                 </td>
               </tr>
@@ -364,18 +307,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={8} isChecked={isChecked[8]} onChange={handleToggle} />
                   Find and order your wedding look.
                 </td>
               </tr>
@@ -386,18 +318,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>{" "}
+                  <Checked index={9} isChecked={isChecked[9]} onChange={handleToggle} />
                   Find and hire your DJ.
                 </td>
               </tr>
@@ -408,18 +329,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>{" "}
+                  <Checked index={10} isChecked={isChecked[10]} onChange={handleToggle} />
                   Finalize your guest list.
                 </td>
               </tr>
@@ -430,18 +340,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={11} isChecked={isChecked[11]} onChange={handleToggle} />
                   Order your wedding invitations.
                 </td>
               </tr>
@@ -452,18 +351,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={12} isChecked={isChecked[12]} onChange={handleToggle} />
                   Book your wedding venue.
                 </td>
               </tr>
@@ -486,18 +374,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={13} isChecked={isChecked[13]} onChange={handleToggle} />
                   Start planning your honeymoon.
                 </td>
               </tr>
@@ -508,18 +385,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={14} isChecked={isChecked[14]} onChange={handleToggle} />
                   Hire your videographer.
                 </td>
               </tr>
@@ -530,18 +396,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+               <Checked index={15} isChecked={isChecked[15]} onChange={handleToggle} />
                   Hire a hair and makeup stylist.
                 </td>
               </tr>
@@ -552,18 +407,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={16} isChecked={isChecked[16]} onChange={handleToggle} />
                   Get your marriage license.
                 </td>
               </tr>
@@ -574,18 +418,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={17} isChecked={isChecked[17]} onChange={handleToggle} />
                   Book your wedding cake.
                 </td>
               </tr>
@@ -608,18 +441,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={18} isChecked={isChecked[18]} onChange={handleToggle} />
                   Book your wedding flowers.
                 </td>
               </tr>
@@ -630,18 +452,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={19} isChecked={isChecked[19]} onChange={handleToggle} />
                   Confirm final details with your vendors.
                 </td>
               </tr>
@@ -652,18 +463,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={20} isChecked={isChecked[20]} onChange={handleToggle} />
                   Purchase gifts for your wedding party.
                 </td>
               </tr>
@@ -674,18 +474,7 @@ function CheckList() {
                     background: "#f4f0f8",
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="icon-hov"
-                    style={{ fontSize: "34px", marginRight: "10px" }}
-                  >
-                    {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                  </svg>
+                  <Checked index={21} isChecked={isChecked[21]} onChange={handleToggle} />
                   Order outfits for your wedding party.
                 </td>
               </tr>

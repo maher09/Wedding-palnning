@@ -379,7 +379,7 @@ const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
                         
 
                       }}
-                    
+
                       value="Add to cart"
                     />
                   </div>

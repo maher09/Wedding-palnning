@@ -347,7 +347,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                       className="form-control form-control"
                       type="hidden"
                       id="design"
-                      
+
 
                     />
                   </div>
@@ -456,7 +456,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                         fontSize: "22px",
                       }}
                       value="Add to cart"
-                     
+
 
                     />
                   </div>
