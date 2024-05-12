@@ -491,7 +491,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("Lujain Wedding Venue")
-            setprice("1000")
+            setprice("1000$")
           }}
       >
         {" "}
@@ -694,7 +694,7 @@ useEffect(() => {
        <select className="display-inline-block" value={selectedYear} onChange={handleYearChange}>
           <option value={2024}>2024</option>
           <option value={2025}>2025</option>
-          <option value={2026}>2025</option>
+          <option value={2026}>2026</option>
         </select>
         <select className="display-inline-block" value={selectedMonth} onChange={handleMonthChange}>
           <option value={1} >
@@ -764,6 +764,7 @@ useEffect(() => {
             id="radio-3"
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-2"
+            value="5:00-8:00"
             checked={time === "5:00-8:00"}
             onChange={handleTimeChange}
           />
@@ -771,6 +772,7 @@ useEffect(() => {
           <label
             className="form-label"
             htmlFor="radio-3"
+            
             style={{
               fontFamily: '"Abhaya Libre", serif',
               fontSize: "37px",
@@ -787,6 +789,7 @@ useEffect(() => {
             id="radio-4"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-2"
+            value="9:00-12:00"
             onChange={handleTimeChange}
           />
           <label
@@ -827,7 +830,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("naurouz Wedding Venue")
-            setprice("2000")
+            setprice("2000$")
           }}
       >
         {" "}
@@ -1025,7 +1028,7 @@ useEffect(() => {
         <select className="display-inline-block" value={selectedYear} onChange={handleYearChange}>
           <option value={2024}>2024</option>
           <option value={2025}>2025</option>
-          <option value={2026}>2025</option>
+          <option value={2026}>2026</option>
         </select>
         <select className="display-inline-block" value={selectedMonth} onChange={handleMonthChange}>
           <option value={1} >
@@ -1093,7 +1096,8 @@ useEffect(() => {
             id="radio-5"
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-3"
-           
+            value="5:00-8:00"
+            checked={time === "5:00-8:00"}
             onChange={handleTimeChange}
           />
           <label
@@ -1116,7 +1120,7 @@ useEffect(() => {
             id="radio-6"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-3"
-            
+            value="9:00-12:00" 
             onChange={handleTimeChange}
           />
           <label
@@ -1157,7 +1161,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("lotus Wedding Venue")
-            setprice("2000")
+            setprice("2000$")
           }}
       >
         {" "}
@@ -1357,7 +1361,7 @@ useEffect(() => {
         <select className="display-inline-block" value={selectedYear} onChange={handleYearChange}>
           <option value={2024}>2024</option>
           <option value={2025}>2025</option>
-          <option value={2026}>2025</option>
+          <option value={2026}>2026</option>
         </select>
         <select className="display-inline-block" value={selectedMonth} onChange={handleMonthChange}>
           <option value={1} >
@@ -1427,6 +1431,7 @@ useEffect(() => {
             id="radio-7"
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-4"
+            value="5:00-8:00"
             checked={time === "5:00-8:00"}
             onChange={handleTimeChange}
           />
@@ -1449,6 +1454,7 @@ useEffect(() => {
             id="radio-8"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-4"
+            value="9:00-12:00"
             onChange={handleTimeChange}
           />
           <label
@@ -1492,7 +1498,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("royal Wedding Venue")
-            setprice("3000")
+            setprice("3000$")
           }}
       >
         {" "}
@@ -1697,7 +1703,7 @@ useEffect(() => {
         <select className="display-inline-block" value={selectedYear} onChange={handleYearChange}>
           <option value={2024}>2024</option>
           <option value={2025}>2025</option>
-          <option value={2026}>2025</option>
+          <option value={2026}>2026</option>
         </select>
         <select className="display-inline-block" value={selectedMonth} onChange={handleMonthChange}>
           <option value={1} >
@@ -1770,6 +1776,7 @@ useEffect(() => {
             id="radio-9"
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-5"
+            value="5:00-8:00"
             checked={time === "5:00-8:00"}
             onChange={handleTimeChange}
           />
@@ -1792,7 +1799,7 @@ useEffect(() => {
             id="radio-10"
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-5"
-            
+            value="9:00-12:00"
             onChange={handleTimeChange}
           />
           <label
@@ -1837,7 +1844,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("kebpinski Wedding Venue")
-            setprice("2600")
+            setprice("2600$")
           }}
       >
         {" "}
