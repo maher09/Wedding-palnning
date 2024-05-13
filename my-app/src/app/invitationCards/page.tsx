@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import "../../../public/assets/index/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/invitationCards/css/Flip-Card.css";
 import "../../../public/assets/invitationCards/css/untitled.css";
-
+import { useAppContext } from '@/contextApi';
 import Link from "next/link";
 
 import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
+import { Console } from "console";
 function InvitationCards() {
   //import bootstrap javascript
   useEffect(() => {
@@ -110,6 +111,19 @@ function InvitationCards() {
     fetchData();
   }, []);
 
+  const {RedImgCounter,setRedImgCounter} = useAppContext();
+
+  const handelClick1 = () => {
+    setRedImgCounter(1);
+  }
+  const handelClick2 = () => {
+    setRedImgCounter(2);
+  }
+  const handelClick3 = () => {
+    setRedImgCounter(3);
+  }
+  console.log(RedImgCounter);
+
     
   const [name1, setname1] = useState<string[]>([]);
   const [name2, setname2] = useState<string[]>([]);
@@ -187,6 +201,7 @@ function InvitationCards() {
 
     fetchData();
   }, []);
+
   /////////////////////////////////////////////////////////////////////////
   return (
     <div>
@@ -341,12 +356,14 @@ function InvitationCards() {
         <button
           className="btn1 btn1-primary"
           type="button"
+          onClick={handelClick1}
           style={{
             background: "#313987",
             width: "145.406px",
             borderRadius: "10px",
             fontSize: "13px",
             fontFamily: "Roboto, sans-serif",
+            
           }}
         >
           <strong>Take a look </strong>
@@ -418,6 +435,7 @@ function InvitationCards() {
         <button
           className="btn1 btn1-primary"
           type="button"
+          onClick={handelClick2}
           style={{
             background: "#313987",
             width: "145.406px",
@@ -493,6 +511,7 @@ function InvitationCards() {
         <button
           className="btn1 btn1-primary"
           type="button"
+          onClick={handelClick3}
           style={{
             background: "#313987",
             width: "145.406px",

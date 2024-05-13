@@ -16,7 +16,7 @@ function Checked({ index, isChecked, onChange }: { index: number, isChecked: boo
     <div style={{display:"inline-block"}} onClick={() => onChange(index)}>
  
       {!isChecked && (
-        <div className="checkbox unchecked">
+        <div className="checked1" >
           
           <svg
             color="black"
@@ -34,7 +34,10 @@ function Checked({ index, isChecked, onChange }: { index: number, isChecked: boo
       )}
       {isChecked && (
        
-     
+     <div className="checked1"
+         style={{textDecoration:'line-through'}} 
+         
+         >
           <svg
             
             
@@ -48,6 +51,7 @@ function Checked({ index, isChecked, onChange }: { index: number, isChecked: boo
           >
           <FontAwesomeIcon icon={faCheckCircle} style={{ color: '#00a976', height: '112px', width:'115px'}}/>
           </svg>
+          </div>
           
       )}
     </div>

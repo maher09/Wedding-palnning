@@ -5,7 +5,7 @@ import Link from "next/link";
 import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
 import Checked from "../components/Checked";
-import { text } from "stream/consumers";
+
 
 function CheckList() {
   
@@ -168,12 +168,13 @@ function CheckList() {
           <table className="table">
             <thead>
               <tr>
-                <th
+                <th className="checked1"
                   style={{
                     textAlign: "center",
                     fontFamily: '"Abhaya Libre", serif',
                     fontSize: "42px",
                     color: "#313987",
+                    
                   }}
                 >
                   &nbsp;12 months to go
@@ -181,11 +182,12 @@ function CheckList() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td
+              <tr >
+                <td className="checked1"
                   style={{
                     fontFamily: "Roboto, sans-serif",
                     background: "#f4f0f8",
+                   
                   }}
                 >
                 <Checked index={0} isChecked={isChecked[0]} onChange={handleToggle} />

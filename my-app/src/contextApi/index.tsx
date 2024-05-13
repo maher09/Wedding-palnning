@@ -15,8 +15,12 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     const [timee, settimee] = useState("");
     const [conterApp, setconterApp] = useState("");
 
+    {/*componanetColor*/}
+
+   const [RedImgCounter, setRedImgCounter] = useState(1);
+
     return (
-        <AppContext.Provider value={{name,setname,timee,settimee,price,setprice,day,setday,month,setmonth,year,setyear,conterApp,setconterApp}}>
+        <AppContext.Provider value={{name,setname,timee,settimee,price,setprice,day,setday,month,setmonth,year,setyear,conterApp,setconterApp,RedImgCounter,setRedImgCounter}}>
             {children}
         </AppContext.Provider>
     );
