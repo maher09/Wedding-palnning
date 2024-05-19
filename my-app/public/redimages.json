@@ -1,5 +1,5 @@
 {
-    "image1": [
+    "imageRed1": [
       {
         "source": "/assets/invitationCards/img/red-img1.jpg"
       },
@@ -10,26 +10,26 @@
         "source": "/assets/invitationCards/img/red-img1-back.jpg"
       }
     ],
-    "image2": [
+    "imageRed2": [
         {
-          "source": "/assets/invitationCards/img/red-img1.jpg"
+          "source": "/assets/invitationCards/img/red-img2.jpg"
         },
         {
-          "source": "/assets/invitationCards/img/red-img1-front.jpg"
+          "source": "/assets/invitationCards/img/red-img2-front.jpg"
         },
         {
-          "source": "/assets/invitationCards/img/red-img1-back.jpg"
+          "source": "/assets/invitationCards/img/red-img2-back.jpg"
         }
       ],
-      "image3": [
+      "imageRed3": [
         {
-          "source": "/assets/invitationCards/img/red-img1.jpg"
+          "source": "/assets/invitationCards/img/red-img3.jpg"
         },
         {
-          "source": "/assets/invitationCards/img/red-img1-front.jpg"
+          "source": "/assets/invitationCards/img/red-img3-front.jpg"
         },
         {
-          "source": "/assets/invitationCards/img/red-img1-back.jpg"
+          "source": "/assets/invitationCards/img/red-img3-back.jpg"
         }
       ]
 

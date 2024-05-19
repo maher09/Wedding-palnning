@@ -6,20 +6,25 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
 import Cookies from 'js-cookie';
+
+
+import { useAppContext } from '@/contextApi';
 
 
 function Modal1() {
   ///////////////////////////////
  // create a state variable to control whether the modal is shown WHEN USER SIGN IN
  const [showModal, setShowModal] = useState(false);
+
  const [modalMessage, setModalMessage] = useState("");
  
   ///////////////////////////////
+  const {show, setShow} = useAppContext();
 
 
-
-  const [show, setShow] = useState(false);
+ 
   const [show2, setShow2] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

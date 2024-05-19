@@ -14,9 +14,32 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     const [year, setyear] = useState("");
     const [timee, settimee] = useState("");
     const [conterApp, setconterApp] = useState("");
+    const [show, setShow] = useState(false);
+
+    {/*componanetColor*/}
+
+   const [RedImgCounter, setRedImgCounter] = useState(1);
+
+   {/*CART*/}
+    const [imgCart, setimgCart] = useState([]);
+    const [nameCart, setnameCart] = useState([]);
+    const [priceCart, setpriceCart] = useState([]);
+
 
     return (
-        <AppContext.Provider value={{name,setname,timee,settimee,price,setprice,day,setday,month,setmonth,year,setyear,conterApp,setconterApp}}>
+        <AppContext.Provider value={{name,setname,
+        timee,settimee,
+        price,setprice,
+        day,setday,
+        month,setmonth,
+        year,setyear,
+        conterApp,setconterApp,
+        RedImgCounter,setRedImgCounter,
+        imgCart,setimgCart,
+        nameCart,setnameCart,
+        priceCart,setpriceCart,
+        show,setShow
+        }}>
             {children}
         </AppContext.Provider>
     );

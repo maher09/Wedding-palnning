@@ -397,9 +397,10 @@ useEffect(() => {
                     C)PRICE AND QUANTITY    
                     
                     2)SUBMIT DATA TO DATABASE)*/}
-                    <input
+                    <button
                       className="btn btn-primary btn-submit"
                       type="submit"
+                     
                       style={{
                         width: "127.0469px",
                         height: "47px",
@@ -411,8 +412,8 @@ useEffect(() => {
 
                       }}
 
-                      value="Add to cart"
-                    />
+                     
+                    >Add to Cart</button>
                   </div>
 
                   

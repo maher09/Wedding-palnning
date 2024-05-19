@@ -3,11 +3,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../../public/assets/index/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
-import Modal1 from '../components/modal';
+import { NavigateAction } from "next/dist/client/components/router-reducer/router-reducer-types";
 import Footer from '../components/Footer';
 import MainRegistered from '../components/MainRegistered';
+
 import Cookies from 'js-cookie';
 import NavbarRegistered from "../components/NavbarRegistered";
+
+import Modal1 from "../components/modal";
+import { useAppContext } from '@/contextApi';
+
 
 
 
@@ -40,6 +45,7 @@ function Index() {
       video.play();
     }
   }, []);
+ 
 
   ///////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -491,9 +497,12 @@ function Index() {
               
              
              {/* Explore more for Invitation Card */}
+             
+
               <button
                 className="btn btn-primary"
                 data-bss-hover-animate="pulse"
+               // Replace 'Navigator' with the actual name of the Navigator class
                 id="but-section-1"
                 type="button"
                 style={{

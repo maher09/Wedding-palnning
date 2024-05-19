@@ -8,8 +8,11 @@ import Buycard from "../components/Buycard";
 import Bookreservation from "../components/Bookreservation";
 import NoItemsYet from "../components/noItemsYet";
 import NoReservations from "../components/noReservations";
+
 import MainRegistered from "../components/MainRegistered";
 import Cookies from 'js-cookie';
+
+import { useAppContext } from '@/contextApi';
 
 
 function Cart() {
@@ -214,7 +217,7 @@ function Cart() {
                     
                     
                     {/*COMPONENT for NoItemsYet (to replace with cart component)*/}
-                    <><NoItemsYet /></>
+                    <><Buycard /></>
                  
                             
                     

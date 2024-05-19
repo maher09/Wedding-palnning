@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,ChangeEvent } from "react";
 import axios from 'axios';
 import "../../../public/assets/cardCompColored/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/cardCompColored/css/styles.css";
@@ -8,9 +8,13 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import CardCompColoredHeadar from "../components/cardCompColoredHeadar";
 import Threeimages from "../components/Threeimages";
+import ThreeimagesColor from "../components/TreeimagesColor";
 import { useSearchParams } from "next/navigation";
 import Cookies from 'js-cookie';
 import MainRegistered from "../components/MainRegistered";
+
+
+import { useAppContext } from '@/contextApi';
 
 function CardCompColored() {
 
@@ -19,6 +23,7 @@ function CardCompColored() {
   ////////
   const searchParams = useSearchParams();
 const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
+
   //////////
   //searchparems
   const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
@@ -48,9 +53,16 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
    // Check if all fields are filled
    if (!theBride || !theGroom || !date || !time || !location || !notes) {
     alert("Please fill in all required fields");
+    
+    
   }
-  else 
+
+  else {
   alert("Your CARD has been added ,Explore your choice in the cart");
+  handelClick3();
+  }
+
+
     try {
       const response = await axios.post('http://localhost:3000/cardCompColored', {
         theBride: theBride,
@@ -87,6 +99,120 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
       // Handle error here
     }
   };
+///////////////////////////imagesNotColor////////////////////////
+
+
+  const [imageUrlsRed1, setImageUrlsRed1] = useState<string[]>([]);
+  const [imageUrlsRed2, setImageUrlsRed2] = useState<string[]>([]);
+  const [imageUrlsRed3, setImageUrlsRed3] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/redimages.json");
+        const data = await response.json();
+
+        setImageUrlsRed1([
+          data.imageRed1[0].source,
+          data.imageRed1[1].source,
+          data.imageRed1[2].source,
+        ]);
+
+        setImageUrlsRed2([
+          data.imageRed2[0].source,
+          data.imageRed2[1].source,
+          data.imageRed2[2].source,
+        ]);
+
+        setImageUrlsRed3([
+          data.imageRed3[0].source,
+          data.imageRed3[1].source,
+          data.imageRed3[2].source,
+        ]);
+        
+      } catch (error) {
+        console.error("Error fetching image URLs:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  const [showFirstComponent, setShowFirstComponent] = useState(true);
+  const [showSecondComponent, setshowSecondComponent] = useState(false);
+  const [font, setfont] = useState('darkgrey');
+  const [ Designcolor , setDesigncolor] = useState("white");
+  const handelClick = () => {
+
+    setDesigncolor("White");
+    setfont("#713737")
+    setShowFirstComponent(true);
+
+  }
+  
+  const handelClick2 = () => {
+    setDesigncolor("Red");
+    setShowFirstComponent(false); 
+  }
+
+
+  
+  ////////////////////////////////////////////////
+
+  const {RedImgCounter,setRedImgCounter} = useAppContext();
+  let img;
+  if(RedImgCounter === 1){
+    img = imageUrlsRed1;
+  }
+  else if(RedImgCounter === 2){
+    img = imageUrlsRed2;
+  }
+  else{
+    img = imageUrlsRed3;
+  }
+
+    ////////////////////////////////////////////
+  const [selectedPrice, setSelectedPrice] = useState("25 items - 5.99$");
+  const handlePriceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPrice(event.target.value);
+  };
+
+  const {imgCart,setimgCart} = useAppContext(); 
+  const {nameCart,setnameCart} = useAppContext();
+  const {priceCart,setpriceCart} = useAppContext();
+  
+ 
+
+  const handelClick3 = () => {
+      
+
+    if (showFirstComponent)  {
+    setimgCart(imageUrls[1]);
+    setnameCart(imageNames[0]);
+    setpriceCart(selectedPrice);
+  } else {
+    setimgCart(img[1]);
+    setnameCart(imageNames[0]);
+    setpriceCart(selectedPrice);
+  }
+}
+
+
+
+    
+  ////////////////////////////////////////////////
+
+  // const {imgCart,setimgCart} = useAppContext();
+  // const {nameCart,setnameCart} = useAppContext();
+  // const {priceCart,setpriceCart} = useAppContext();
+  
+
+ 
+
+
+
+  
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
@@ -150,11 +276,27 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
       >
         <div className="row">
         
+
             {/*Three images component*/}
       
   
-          <><Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []}/></>
-  
+        
+
+       
+
+        {showFirstComponent ? (
+          <Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []} />
+          
+          
+        ) : (
+          <ThreeimagesColor imageUrlsRed={Array.isArray(img) ? img : []} />
+        )}
+
+                
+
+
+
+
 
 
 
@@ -360,18 +502,18 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                     {/* Design color input*/}
                     <label
                       className="form-label form-label"
-                      style={{ fontWeight: "bold", fontSize: "28px" }}
+                      style={{  fontSize: "28px" }}
                       htmlFor="design"
                     >
-                      Design color :
+                      Design color : 
                     
                     
                     
                     {/* COLOR NAME empty span*/}
                       <span
                         id="compo-color"
-                        style={{ fontSize: "23px" }}
-                      ></span>
+                        style={{fontSize:"21px", color:'darkgrey'}}
+                      >{Designcolor}</span>
                     </label>
                     
                     {/* input hidden for color input name */}
@@ -396,26 +538,36 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                 
                 
                 {/* BUTTON 1 (white)*/}
+             
+             
                     <button
                       className="btn btn-primary btn-color"
                       id="btn5"
                       type="button"
+                      onClick={handelClick}
                       style={{
                         borderRadius: "14px",
                         marginLeft: "26px",
                         background: "rgb(230,227,211)",
+                        
                       }}
                     />
+                   
+                    
+                    
 
 
 
                     {/* BUTTON 2 (red)*/}
+                            
+               
                     <button
                       role="radio"
                       aria-checked="true"
                       data-state="checked"
                       className="btn  btn-color active"
                       type="button"
+                      onClick={handelClick2}
                       style={{
                         borderRadius: "14px",
                         marginLeft: "17px",
@@ -423,7 +575,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
 
                       }}
                     />
-
+                    
 
                   </div>
                   
@@ -439,21 +591,21 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                     
                     
                     {/* SELECT QUANTITY and PRICE  input*/}
-                    <select className="form-select form-select form-select" id="floatinginput">
-                      <option value={21}>25 items - 5.99$ </option>
-                      <option value={21}>50 items - 10.99$ </option>
-                      <option value={21}>75 items - 15.99$ </option>
-                      <option value={21}>100 items -20.99$ </option>
-                      <option value={21}>150 items - 25.99$ </option>
-                      <option value={19}>200 items - 29.99$ </option>
-                      <option value={91}>250 items - 34.99$ </option>
-                      <option value={81}>300 items - 38.99$ </option>
-                      <option value={71}>350 items - 42.99$ </option>
-                      <option value={61}>400 items - 47.99$ </option>
-                      <option value={15}>450 items - 52.99$</option>
-                      <option value={14}>500 items - 57.99$</option>
-                      <option value={13}>550 items - 60.99$</option>
-                      <option value={12}>600 items - 62.99$</option>
+                    <select className="form-select form-select form-select" id="floatinginput"value={selectedPrice} onChange={handlePriceChange}>
+                      <option value={"25 items - 5.99"}>25 items - 5.99$ </option>
+                      <option value={"50 items - 10.99"}>50 items - 10.99$ </option>
+                      <option value={"75 items - 15.99"}>75 items - 15.99$ </option>
+                      <option value={"100 items -20.99"}>100 items -20.99$ </option>
+                      <option value={"150 items - 25.99$"}>150 items - 25.99$ </option>
+                      <option value={"200 items - 29.99$"}>200 items - 29.99$ </option>
+                      <option value={"250 items - 34.99$"}>250 items - 34.99$ </option>
+                      <option value={"300 items - 38.99$"}>300 items - 38.99$ </option>
+                      <option value={"350 items - 42.99$"}>350 items - 42.99$ </option>
+                      <option value={"400 items - 47.99$"}>400 items - 47.99$ </option>
+                      <option value={"450 items - 52.99$"}>450 items - 52.99$</option>
+                      <option value={"500 items - 57.99$"}>500 items - 57.99$</option>
+                      <option value={"550 items - 60.99$"}>550 items - 60.99$</option>
+                      <option value={"600 items - 62.99$"}>600 items - 62.99$</option>
                     </select>
                     
                     <label
@@ -482,6 +634,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                     <input
                       className="btn btn-primary btn-submit"
                       type="submit"
+                      onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) => handleSubmit}
                       style={{
                         width: "127.0469px",
                         height: "47px",
@@ -490,10 +643,10 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
                       }}
-                      value="Add to cart"
+                      
+                        value="Add to cart"
 
-
-                    />
+                    /> 
                   </div>
 
                   

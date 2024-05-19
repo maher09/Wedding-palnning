@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../../../public/assets/cart/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
-
+import { useAppContext } from '@/contextApi';
 
 function NoItemsYet() {
   //import bootstrap javascript
