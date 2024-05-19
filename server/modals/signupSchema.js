@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 
 // define the Schema (the structure of the article)
 const signupSchema = new Schema({
-    FirstName: String,
-    LastName: String,
+    TheGroom: String,
+    TheBride: String,
     Email: String,
     Password: String,
     });

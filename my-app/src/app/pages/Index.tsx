@@ -68,6 +68,11 @@ function Index() {
       clearInterval(intervalId);
     };
   }, [isLoggedIn]);
+
+  // Get the JWT token from cookies
+  const token = Cookies.get('token');
+  // Extract the user's TheGroom and TheBride name from the JWT token
+  const { TheGroom = '', TheBride = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
   return (
     <div>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -102,6 +107,18 @@ function Index() {
             <div className="overlay" />
           </div>
         </header>
+        {isLoggedIn && (
+        <section id="about" className="bg-light">
+          <h1
+            style={{
+              fontSize: "73.295px",
+              fontFamily: '"Abhaya Libre", serif',
+            }}
+          >
+            WELCOME {`${TheGroom} & ${TheBride}`}
+          </h1>
+        </section>
+      )}
         <section id="about" className="content-section bg-light">
           <h1
             style={{

@@ -18,8 +18,9 @@ import { useAppContext } from '@/contextApi';
 
 function CardCompColored() {
 
+
    
-  //searchparems
+  //searchparams
   ////////
   const searchParams = useSearchParams();
 const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
@@ -47,58 +48,95 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
   const [notes, setNotes] = useState('');
   const [designColor, setDesignColor] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-   // Check if all fields are filled
-   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+  //date and time and bride and groom  error message  
+const [theBrideError, setTheBrideError] = useState('');
+const [theGroomError, setTheGroomError] = useState('');
+const [DateError, setDateError] = useState('');
+const [TimeError, setTimeError] = useState('');
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
+  const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  const theBridePattern = /[a-zA-Z]/;
+  const theGroomPattern = /[a-zA-Z]/;
+
+  // Check if all fields are filled
+  if (!theBride || !theGroom || !date || !time || !location || !notes) {
     alert("Please fill in all required fields");
-    
-    
-  }
-
+  } else if (!theBridePattern.test(theBride)) {
+    setTheBrideError("Bride's name should only contain letters");
+  } 
   else {
-  alert("Your CARD has been added ,Explore your choice in the cart");
-  handelClick3();
+    setTheBrideError(''); 
   }
+  
+  if (!theGroomPattern.test(theGroom)) {
+      setTheGroomError("Groom's name should only contain letters");
+  }
+  else {
+    setTheGroomError('');  }
 
-
-    try {
-      const response = await axios.post('http://localhost:3000/cardCompColored', {
-        theBride: theBride,
-        theGroom: theGroom,
-        date: date,
-        time: time,
-        location: location,
-        notes: notes,
-        designColor: designColor,
-      },
-      {
-      
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
-      }
+    if (!DatePattern.test(date)) {
+      setDateError("Date format is wrong");
+  } else {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Set time to midnight
+    const formattedDate = date.replace(/\//g, '-');
+    const [day, month, year] = formattedDate.split('-');
     
-    
-    );
-      console.log('Headers:', response.config.headers);// Log the headers
-      console.log(response.data);
-
-
-      setTheBride('');
-      setTheGroom('');
-      setDate('');
-      setTime('');
-      setLocation('');
-      setNotes('');
-      setDesignColor('');
-      // Handle successful submission here
-    } catch (error) {
-      console.error(error);
-      // Handle error here
+    const inputDate = new Date(`${year}-${month}-${day}`);
+  
+    if (inputDate < currentDate) {
+      setDateError("Date is in the past");
+    } 
+    else {
+      setDateError(""); // Reset date error message
     }
-  };
+  }
+    if (!TimePattern.test(time)) {
+      setTimeError("Time is wrong");
+    }else {
+      setTimeError('');
+      
+
+      try {
+        const response = await axios.post('http://localhost:3000/cardCompColored', {
+          theBride: theBride,
+          theGroom: theGroom,
+          date: date,
+          time: time,
+          location: location,
+          notes: notes,
+          designColor: designColor,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('token')}`
+          }
+        });
+
+        console.log('Headers:', response.config.headers);// Log the headers
+        console.log(response.data);
+
+        alert("Your CARD has been added, Explore your choice in the cart");
+        handelClick3();
+
+        setTheBride('');
+        setTheGroom('');
+        setDate('');
+        setTime('');
+        setLocation('');
+        setNotes('');
+        setDesignColor('');
+        // Handle successful submission here
+      } catch (error) {
+        console.error(error);
+        // Handle error here
+      }
+    }
+  
+};
 ///////////////////////////imagesNotColor////////////////////////
 
 
@@ -341,7 +379,11 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                       style={{ height: "36.6px" }}
                     />
                   </div>
-                  
+                  {theBrideError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {theBrideError} 
+          </div>
+           )}
                   
                   
                   <div
@@ -364,19 +406,24 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                       The groom :&nbsp; &nbsp; &nbsp;&nbsp;
                     </label>
                     <input
-                     name="theGroom"
-                     value={theGroom}
-                     onChange={(e) => setTheGroom(e.target.value)}
-                     className="form-control form-control"
+                      name="theGroom"
+                      value={theGroom}
+                      onChange={(e) => setTheGroom(e.target.value)}
+                      className="form-control form-control"
                       type="text"
                       id="wife-name"
                       required
                       style={{ height: "36.6px" }}
                     />
                   </div>
+                  {theGroomError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {theGroomError} 
+          </div>
+           )}
                   <div
                     className="input-group"
-                    style={{ marginBottom: "5px" }}
+                 
                   >
 
 
@@ -402,11 +449,23 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                       id="date"
                       required
                       style={{ height: "36.6px" }}
-                    />
+                      / >
+                      
+               
                   </div>
+                  {DateError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {DateError} 
+          </div>
+           )}
+                 
+
+
+
+
                   <div
                     className="input-group"
-                    style={{ marginBottom: "5px" }}
+                  
                   >
 
 
@@ -433,6 +492,11 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
                       style={{ height: "36.6px" }}
                     />
                   </div>
+                  {TimeError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {TimeError} 
+          </div>
+           )}
 
 
                   <div

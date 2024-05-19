@@ -13,8 +13,8 @@ function NavbarRegistered() {
   
   // Get the JWT token from cookies
    const token = Cookies.get('token');
-    // Extract the user's first and last name from the JWT token
-    const { FirstName = '', LastName = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
+    // Extract the user's TheGroom and TheBride name from the JWT token
+    const { TheGroom = '', TheBride = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
   
 
    //import bootstrap javascript
@@ -302,7 +302,7 @@ function NavbarRegistered() {
 
           
           
-          {/* span for user name from data base  */}
+          {/* span for user TheGroom & TheBride from data base  */}
           <span
             id="uesrName-span"
             style={{
@@ -313,7 +313,7 @@ function NavbarRegistered() {
 
             }}
           >
-            {`${FirstName} ${LastName}`}
+            {`${TheGroom} & ${TheBride}`}
           </span>
 
 

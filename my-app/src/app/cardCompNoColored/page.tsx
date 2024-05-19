@@ -38,15 +38,54 @@ const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
   const [location, setLocation] = useState('');
   const [notes, setNotes] = useState('');
 
+
+   //date and time and bride and groom  error message  
+const [theBrideError, setTheBrideError] = useState('');
+const [theGroomError, setTheGroomError] = useState('');
+const [DateError, setDateError] = useState('');
+const [TimeError, setTimeError] = useState('');
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Check if all fields are filled
-   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+    const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
+    const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;    const theBridePattern = /[a-zA-Z]/;
+    const theGroomPattern = /[a-zA-Z]/;
+      // Check if all fields are filled
+  if (!theBride || !theGroom || !date || !time || !location || !notes) {
     alert("Please fill in all required fields");
+  } else if (!theBridePattern.test(theBride)) {
+    setTheBrideError("Bride's name should only contain letters");
+  } 
+  else {
+    setTheBrideError(''); 
   }
-  else 
-  alert("Your CARD has been added ,Explore your choice in the cart");
+  
+  if (!theGroomPattern.test(theGroom)) {
+      setTheGroomError("Groom's name should only contain letters");
+  }
+  else {
+    setTheGroomError('');  }
+
+    if (!DatePattern.test(date)) {
+      setDateError("Date format is wrong");
+  } else {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Set time to midnight
+    const formattedDate = date.replace(/\//g, '-');
+    const [day, month, year] = formattedDate.split('-');
+    
+    const inputDate = new Date(`${year}-${month}-${day}`);
+    if (inputDate < currentDate) {
+      setDateError("Date is in the past");
+    } 
+    else {
+      setDateError(""); // Reset date error message
+    }
+  }
+      if (!TimePattern.test(time)) {
+      setTimeError("Time is wrong");
+    }else {
+      setTimeError('');
 
   try {
     const response = await axios.post('http://localhost:3000/cardCompNoColored', {
@@ -67,6 +106,7 @@ const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
   );
   console.log('Headers:', response.config.headers); // Log the headers
     console.log(response.data);
+    alert("Your CARD has been added, Explore your choice in the cart");
 
     setTheBride('');
     setTheGroom('');
@@ -79,7 +119,13 @@ const imageNames = searchParams.get("imageNames")?.split(",") || [];  ////////
     console.error(error);
     // Handle error here
   }
+}
+  
 };
+
+
+
+////////////////////////////////////////////////////
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 useEffect(() => {
   // Update isLoggedIn after the component has mounted
@@ -191,6 +237,11 @@ useEffect(() => {
                       style={{ height: "36.6px" }}
                     />
                   </div>
+                  {theBrideError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {theBrideError} 
+          </div>
+           )}
                   
                   
                   
@@ -224,9 +275,14 @@ useEffect(() => {
                       style={{ height: "36.6px" }}
                     />
                   </div>
+                  {theGroomError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {theGroomError} 
+          </div>
+           )}
                   <div
                     className="input-group"
-                    style={{ marginBottom: "5px" }}
+                   
                   >
 
 
@@ -254,9 +310,16 @@ useEffect(() => {
                       style={{ height: "36.6px" }}
                     />
                   </div>
+                  {DateError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {DateError} 
+          </div>
+           )}
+
+
                   <div
                     className="input-group"
-                    style={{ marginBottom: "5px" }}
+                    
                   >
 
 
@@ -283,6 +346,13 @@ useEffect(() => {
                       style={{ height: "36.6px" }}
                     />
                   </div>
+
+                  {TimeError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {TimeError} 
+          </div>
+           )}
+
                   <div
                     className="input-group"
                     style={{  marginBottom: "5px" }}
@@ -397,7 +467,7 @@ useEffect(() => {
                     C)PRICE AND QUANTITY    
                     
                     2)SUBMIT DATA TO DATABASE)*/}
-                    <button
+                    <input
                       className="btn btn-primary btn-submit"
                       type="submit"
                      
@@ -411,9 +481,10 @@ useEffect(() => {
                         
 
                       }}
+                      value="Add to cart"
 
                      
-                    >Add to Cart</button>
+                    />
                   </div>
 
                   

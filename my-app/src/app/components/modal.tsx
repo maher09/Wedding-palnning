@@ -43,8 +43,8 @@ const handleCloseAllOtherModals = () => {
 ///////////////////
   //using axios to fetch api (sign up)
 ///////////////////////////////////
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
+  const [TheGroom, setTheGroom] = useState("");
+  const [TheBride, setTheBride] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   
@@ -56,21 +56,25 @@ const handleCloseAllOtherModals = () => {
 //SIGN UP CLEANER FIELDS
   const handleCloseModal = () => {
     setShowModal(false);
-    setFirstName("");
-    setLastName("");
+    setTheGroom("");
+    setTheBride("");
     setEmail("");
     setPassword("");
     setEmailError("");
     setPasswordError("");
+    setTheGroomError('');
+    setTheBrideError('');
     setShowPassword(false);
   };
   const handleShowModal = () => {
-    setFirstName("");
-    setLastName("");
+    setTheGroom("");
+    setTheBride("");
     setEmail("");
     setPassword("");
     setEmailError("");
     setPasswordError("");
+    setTheGroomError('');
+    setTheBrideError('');
     setShowPassword(false);
   };
   //login UP CLEANER FIELDS
@@ -94,8 +98,12 @@ const handleCloseAllOtherModals = () => {
 const [loginEmail, setLoginEmail] = useState("");
 const [loginPassword, setLoginPassword] = useState("");
 
+
+  //bride and groom  error message  
+  const [theBrideError, setTheBrideError] = useState('');
+  const [theGroomError, setTheGroomError] = useState('');
   //////////////////////////////
- 
+
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -103,18 +111,35 @@ const [loginPassword, setLoginPassword] = useState("");
   
       // Email validation regex pattern
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  
+
+      
+      // theBridePattern AND theGroomPattern validation regex pattern
+      const theBridePattern = /[a-zA-Z]/;
+      const theGroomPattern = /[a-zA-Z]/;
        // Password validation regex patterns
-    const lowerCaseLetters = /[a-z]/g;
+   
+       const lowerCaseLetters = /[a-z]/g;
     const upperCaseLetters = /[A-Z]/g;
     const numbers = /[0-9]/g;
     const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   
-    if (!FirstName || !LastName || !Email || !Password) {
+    if (!TheGroom || !TheBride || !Email || !Password) {
       setModalMessage("Please fill all the fields");
       setShowModal(true);
       }
-      else if (!emailPattern.test(Email)) {
+      else if (!theGroomPattern.test(TheGroom)) {
+        setTheGroomError("Please enter a valid name for the groom");
+      }
+      else {
+        setTheGroomError(""); // Reset groom error message
+      }
+       if (!theBridePattern.test(TheBride)) {
+        setTheBrideError("Please enter a valid name for the bride");
+      }
+      else {
+        setTheBrideError(""); // Reset bride error message
+      }
+       if (!emailPattern.test(Email)) {
         setEmailError("Please enter a valid email address");
       }
       else {
@@ -139,8 +164,8 @@ const [loginPassword, setLoginPassword] = useState("");
       } else {
         try {
           const response = await axios.post("http://localhost:3000/signup", {
-            FirstName: FirstName,
-            LastName: LastName,
+            TheGroom: TheGroom,
+            TheBride: TheBride,
             Email: Email,
             Password: Password,
           });
@@ -154,12 +179,14 @@ const [loginPassword, setLoginPassword] = useState("");
             setShowModal(true);
   
             // Clear form fields
-            setFirstName("");
-            setLastName("");
+            setTheGroom("");
+            setTheBride("");
             setEmail("");
             setPassword("");
             setEmailError("");
             setPasswordError("");
+            setTheGroomError('');
+            setTheBrideError('');
             setShowPassword(false);
           }
         } catch (error: any) {
@@ -444,35 +471,46 @@ const [loginPassword, setLoginPassword] = useState("");
                   >
                     <div className="row mb-3">
                       <div className="col-sm-6 mb-3 mb-sm-0">
-                        {/* first name sing up */}
+                        {/* TheGroom name sing up */}
                         <label
-                          htmlFor="FirstName"
+                          htmlFor="TheGroom"
                           style={{ display: "none" }}
                         />
                         <input
-                          name="FirstName"
-                          value={FirstName}
-                          onChange={(e) => setFirstName(e.target.value)}
+                          name="TheGroom"
+                          value={TheGroom}
+                          onChange={(e) => setTheGroom(e.target.value)}
                           className="form-control form-control form-control form-control-user"
                           type="text"
-                          id="FirstName"
-                          placeholder="First Name"
+                          id="TheGroom"
+                          placeholder="TheGroom Name"
                           required
                         />
+                         {theGroomError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {theGroomError} 
+          </div>
+           )}
                       </div>
                       <div className="col-sm-6">
-                        {/* last name sing up*/}
-                        <label htmlFor="LastName" style={{ display: "none" }} />
+                        {/* TheBride name sing up*/}
+                        <label htmlFor="TheBride" style={{ display: "none" }} />
                         <input
-                          name="LastName"
-                          value={LastName}
-                          onChange={(e) => setLastName(e.target.value)}
+                          name="TheBride"
+                          value={TheBride}
+                          onChange={(e) => setTheBride(e.target.value)}
                           className="form-control form-control form-control form-control-user"
                           type="text"
-                          id="LastName"
-                          placeholder="Last Name"
+                          id="TheBride"
+                          placeholder="TheBride Name"
                           required
                         />
+                   {theBrideError && (
+        <div className="text-danger" style={{ fontSize: "12px" }}>
+          {theBrideError} 
+          </div>
+           )}
+
                       </div>
                     </div>
                     <div className="mb-3">
@@ -512,6 +550,7 @@ const [loginPassword, setLoginPassword] = useState("");
                         placeholder="Password"
                         required
                         style={{ marginTop: "15px" }}
+                        autoComplete="off"
                       />
                                         {passwordError && (
     <div className="text-danger" style={{ fontSize: "12px" }}>

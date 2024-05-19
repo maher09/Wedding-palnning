@@ -152,8 +152,8 @@ app.post("/signup", (req, res) => {
                 } else {
                     // The email is not used, create a new user
                     const signup = new Signup({
-                        FirstName: req.body.FirstName,
-                        LastName: req.body.LastName,
+                        TheGroom: req.body.TheGroom,
+                        TheBride: req.body.TheBride,
                         Email: req.body.Email,
                         Password: hash,
                     });
@@ -205,8 +205,8 @@ app.post("/login", (req, res) => {
                 
                 // Generate JWT token
                 const token = jwt.sign({ userId: user._id ,
-                                        FirstName:user.FirstName,
-                                        LastName:user.LastName,
+                                        TheGroom:user.TheGroom,
+                                        TheBride:user.TheBride,
                                         Email:user.Email
                                         },process.env.JWT_SECRET,{ expiresIn: process.env.JWT_EXPIRES_IN });
 
