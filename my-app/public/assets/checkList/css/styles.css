@@ -8,7 +8,6 @@
 body {
   margin: 0;
   min-width: 250px;
-  font-size: 24px;
   background: url("/assets/checkList/img/checkimg.jpg") center / cover repeat, #f6f8f9;
 }
 ul.style-1 {
@@ -130,4 +129,8 @@ ul.style-6 li.checked::before {
 .addBtn:hover {
  
   background-color: #a9accceb;
+}
+td{
+  font-size: 24px;
+
 }

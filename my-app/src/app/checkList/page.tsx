@@ -6,6 +6,8 @@ import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
 import Checked from "../components/Checked";
 import { text } from "stream/consumers";
+import MainRegistered from "../components/MainRegistered";
+import Cookies from 'js-cookie';
 
 function CheckList() {
   
@@ -67,16 +69,35 @@ function CheckList() {
       setItems(updatedItems);
     };
   
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+      // Update isLoggedIn after the component has mounted
+      setIsLoggedIn(!!Cookies.get('token'));
+    
+      // Check for token change every 100ms
+      const intervalId = setInterval(() => {
+        const newToken = Cookies.get('token');
+        if (newToken && !isLoggedIn) {
+          setIsLoggedIn(true);
+        } else if (!newToken && isLoggedIn) {
+          setIsLoggedIn(false);
+        }
+      }, 100);
+    
+      // Clean up the interval when the component unmounts
+      return () => {
+        clearInterval(intervalId);
+      };
+    }, [isLoggedIn]);
   
   return (
     <div>
     
     
     
-    <> <NavbarRegistered/></>  
+    <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
 
    
-
 
       <meta charSet="utf-8" />
       <meta
@@ -84,12 +105,7 @@ function CheckList() {
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       />
       <title>checkList</title>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/checkList/img/Favicon.png"
-      />
+    
       <link
         rel="stylesheet"
         href="assets/checkList/bootstrap/css/bootstrap.min.css"
@@ -103,7 +119,19 @@ function CheckList() {
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
 
+
+
+ 
       <link rel="stylesheet" href="assets/checkList/css/styles.css" />
+      <link
+    rel="stylesheet"
+    href="assets/index/bootstrap/css/bootstrap.min.css"
+  />
+
+
+
+
+      
       <h1
         style={{
           textAlign: "center",

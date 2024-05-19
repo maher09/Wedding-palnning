@@ -4,6 +4,9 @@ import "../../../public/assets/honeyMoon/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
+import MainRegistered from "../components/MainRegistered";
+import Cookies from 'js-cookie';
+
 function HoneyMoon() {
   //import bootstrap javascript
   useEffect(() => {
@@ -43,11 +46,31 @@ function HoneyMoon() {
       AOS.init();
     }
   }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
 
   return (
     <>
        
-       <> <NavbarRegistered/></>  
+       <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
 
       <meta charSet="utf-8" />
       <meta
@@ -55,12 +78,7 @@ function HoneyMoon() {
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       />
       <title>honeyMoon</title>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/honeyMoon/img/Favicon.png"
-      />
+     
       <link
         rel="stylesheet"
         href="assets/honeyMoon/bootstrap/css/bootstrap.min.css"

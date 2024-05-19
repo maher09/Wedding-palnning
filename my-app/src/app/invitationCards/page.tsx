@@ -7,7 +7,11 @@ import "../../../public/assets/invitationCards/css/untitled.css";
 import Link from "next/link";
 
 import Footer from "../components/Footer";
+import MainRegistered from "../components/MainRegistered";
+
 import NavbarRegistered from "../components/NavbarRegistered";
+import Cookies from 'js-cookie';
+
 function InvitationCards() {
   //import bootstrap javascript
   useEffect(() => {
@@ -188,11 +192,31 @@ function InvitationCards() {
     fetchData();
   }, []);
   /////////////////////////////////////////////////////////////////////////
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
   return (
     <div>
       <>
         {" "}
-        <NavbarRegistered />
+        <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
       </>
 
       <meta charSet="utf-8" />

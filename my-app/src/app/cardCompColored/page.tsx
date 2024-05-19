@@ -9,6 +9,9 @@ import NavbarRegistered from "../components/NavbarRegistered";
 import CardCompColoredHeadar from "../components/cardCompColoredHeadar";
 import Threeimages from "../components/Threeimages";
 import { useSearchParams } from "next/navigation";
+import Cookies from 'js-cookie';
+import MainRegistered from "../components/MainRegistered";
+
 function CardCompColored() {
 
    
@@ -57,9 +60,20 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
         location: location,
         notes: notes,
         designColor: designColor,
-      });
-  
+      },
+      {
+      
+        headers: {
+          Authorization: `Bearer ${Cookies.get('token')}`
+        }
+      }
+    
+    
+    );
+      console.log('Headers:', response.config.headers);// Log the headers
       console.log(response.data);
+
+
       setTheBride('');
       setTheGroom('');
       setDate('');
@@ -74,9 +88,29 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
     }
   };
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
   return (
     <div>
-        <> <NavbarRegistered/></>  
+      <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
       
       <meta charSet="utf-8" />
       <meta

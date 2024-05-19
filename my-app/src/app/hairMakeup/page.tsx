@@ -4,6 +4,9 @@ import "../../../public/assets/HairMakeup/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
+import MainRegistered from "../components/MainRegistered";
+import Cookies from 'js-cookie';
+
 function HairMakeup() {
   //import bootstrap javascript
   useEffect(() => {
@@ -33,28 +36,40 @@ function HairMakeup() {
       });
     }
   }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
 
   return (
    
     <div>
        
-        <> <NavbarRegistered/></>  
+       <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
       <meta charSet="utf-8" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       />
       <title>HairMakeup</title>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/HairMakeup/img/Favicon.png"
-      />
-      <link
-        rel="stylesheet"
-        href="assets/HairMakeup/bootstrap/css/bootstrap.min.css"
-      />
+     
+      
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,700&display=swap"
@@ -68,9 +83,11 @@ function HairMakeup() {
         href="assets/HairMakeup/fonts/font-awesome.min.css"
       />
       
-      
+   
  
       <link rel="stylesheet" href="/assets/HairMakeup/css/styles.css" />
+ 
+
       <div id="header">
         <div className="row">
           <div className="col-md-12 col-lg-6 d-flex justify-content-center align-items-center">

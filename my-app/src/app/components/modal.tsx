@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Cookies from 'js-cookie';
 
 
 function Modal1() {
@@ -181,15 +182,20 @@ const [loginPassword, setLoginPassword] = useState("");
             Email: loginEmail,
             Password: loginPassword
         });
-
+    
         console.log(response.data); // Output success message 
-
-
-        
+    
+        // Set the token in the cookie
+        if (response.data.token) {
+          Cookies.set('token', response.data.token);
+          console.log(Cookies.get('token')); // Log the token to the console
+          
+        }
+    
         // Clear any previous login error
         setLoginError('');
-
-        if (response.status === 200 && response.data === 'Login successful') {
+    
+        if (response.status === 200 && response.data.message === 'Login successful') {
           handleCloseAllOtherModals(); // Close all other modals
           setShow(false);
           setLoginEmail("");
@@ -199,17 +205,17 @@ const [loginPassword, setLoginPassword] = useState("");
           // Close the login modal
           // You can add any other actions you want here after successful login
         }
-
-
-    }catch (error:any) {
-      console.error(error.response.data); // Output error message or perform any other action
-  
-      // If there is an error response, set the LoginError state
-      if (error.response && error.response.data) {
-          setLoginError(error.response.data);
+    
+    
+      }catch (error:any) {
+        console.error(error.response.data); // Output error message or perform any other action
+    
+        // If there is an error response, set the LoginError state
+        if (error.response && error.response.data) {
+            setLoginError(error.response.data);
+        }
       }
-  }
-};
+    };
     
     ////////////////////////////////////////////////////////
 

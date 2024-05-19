@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import Bookreservation from '../components/Bookreservation';
 import { useAppContext } from '@/contextApi';
+import MainRegistered from "../components/MainRegistered";
+import Cookies from 'js-cookie';
 
 
 function Venue () {
@@ -98,13 +100,32 @@ useEffect(() => {
     }
   }, []);
   /////////////////
- 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
 
   return (
     <div>
      
     
-          <> <NavbarRegistered/></>  
+     <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
 
           
     <meta charSet="utf-8" />
@@ -491,7 +512,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("Lujain Wedding Venue")
-            setprice("1000$")
+            setprice("1000")
           }}
       >
         {" "}
@@ -830,7 +851,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("Nayrouz  Wedding Venue")
-            setprice("2500$")
+            setprice("2500")
           }}
       >
         {" "}
@@ -1161,7 +1182,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("Lotus Wedding Venue")
-            setprice("2000$")
+            setprice("2000")
           }}
       >
         {" "}
@@ -1498,7 +1519,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("Royal Wedding Venue")
-            setprice("3000$")
+            setprice("3000")
           }}
       >
         {" "}
@@ -1844,7 +1865,7 @@ useEffect(() => {
             myFunction()
             handleClick()
             setname("Kebpinski Wedding Venue")
-            setprice("2600$")
+            setprice("2600")
           }}
       >
         {" "}

@@ -3,19 +3,36 @@ import React, { useEffect, useState } from "react";
 import "../../../public/assets/navbarRegistered/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import { useAppContext } from '@/contextApi';
+import Cookies from 'js-cookie';
+// Define an interface for your JWT payload
+
+// Define an interface for your JWT payload
 
 function NavbarRegistered() {
-  //import bootstrap javascript
+   
+  
+  // Get the JWT token from cookies
+   const token = Cookies.get('token');
+    // Extract the user's first and last name from the JWT token
+    const { FirstName = '', LastName = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
+  
+
+   //import bootstrap javascript
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/navbarRegistered/bootstrap/js/bootstrap.min.js");
     }
   }, []);
+  
+  
   const { conterApp, setconterApp } = useAppContext();
+  
   /////////////////
 
   return (
     <>
+          <link rel="stylesheet" href="assets/index/css/Video.css" />
+
       <link
         rel="icon"
         type="image/png"
@@ -38,6 +55,40 @@ function NavbarRegistered() {
         rel="stylesheet"
         href="assets/navbarRegistered/css/navbar-logout.css"
       />
+       <link
+        rel="icon"
+        type="image/png"
+        sizes="202x153"
+        href="assets/index/img/Favicon-1.png"
+      />
+      <link
+        rel="stylesheet"
+        href="assets/index/bootstrap/css/bootstrap.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,600&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      />
+      <link rel="stylesheet" href="assets/index/fonts/font-awesome.min.css" />
+      <link
+        rel="stylesheet"
+        href="assets/index/fonts/simple-line-icons.min.css"
+      />
+      <link rel="stylesheet" href="assets/index/css/aos.min.css" />
+      <link rel="stylesheet" href="assets/index/css/animate.min.css" />
+      <link rel="stylesheet" href="assets/index/css/Black-Navbar.css" />
+      <link rel="stylesheet" href="assets/index/css/Pretty-Footer-.css" />
+      <link rel="stylesheet" href="assets/index/css/style.css" />
+      <link rel="stylesheet" href="assets/index/css/Video.css" />
+      
       <nav
         className="navbar navbar-expand-md bg-body"
         style={{ height: "79px" }}
@@ -258,8 +309,12 @@ function NavbarRegistered() {
               marginRight: "12px",
               fontFamily: '"Abhaya Libre", serif',
               fontWeight: "bold",
+              fontSize: "20px"
+
             }}
-          ></span>
+          >
+            {`${FirstName} ${LastName}`}
+          </span>
 
 
 
@@ -296,7 +351,14 @@ function NavbarRegistered() {
               borderRadius: "7px",
               fontFamily: '"Abhaya Libre", serif',
             }}
+            onClick={() => {
+              Cookies.remove('token'); // Remove the token
+              // Optionally, redirect the user to the login page
+              if (window.location.pathname === '/cart') {
+                window.location.href = '/';}
+            }}
           >
+
             Logout
           </button>
 

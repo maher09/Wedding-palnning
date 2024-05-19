@@ -15,6 +15,12 @@ const Signup = require("./modals/signupSchema");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+//CALL dotenv
+require('dotenv').config();
+
+//cal JWT
+const jwt = require('jsonwebtoken');
+
 
 
 const app = express()
@@ -24,6 +30,25 @@ const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+ 
+//verifyToken function
+function verifyToken(req, res, next) {
+    const bearerHeader = req.headers['authorization'];
+
+    if (!bearerHeader) {
+        return res.status(403).send('A token is required for authentication');
+    }
+    const bearer = bearerHeader.split(' ');
+    const token = bearer[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+    } catch (err) {
+        return res.status(401).send('Invalid Token');
+    }
+    return next();
+}
 
 //connect to database server
 mongoose
@@ -48,7 +73,7 @@ mongoose
 
 
 //cardCompColored form post
-app.post("/cardCompColored", (req, res) => {
+app.post("/cardCompColored",verifyToken, (req, res) => {
 
     const cardColored = new CardColored({
         theBride: req.body.theBride,
@@ -75,9 +100,8 @@ app.post("/cardCompColored", (req, res) => {
 
 })
 
-
 //cardNoColored form post    
-app.post("/cardCompNoColored", (req, res) => {
+app.post("/cardCompNoColored",  verifyToken, (req, res) => {
 
     const cardNoColored = new CardNoColored({
 
@@ -170,6 +194,7 @@ app.post("/login", (req, res) => {
                 return res.status(404).send('Incorrect email or password');
             }
 
+
             // Compare the provided password with the hashed password stored in the database
             bcrypt.compare(Password, user.Password, function(err, result) {
                 if (err || !result) {
@@ -177,8 +202,16 @@ app.post("/login", (req, res) => {
                     return res.status(401).send('Incorrect email or password');
                 }
 
-                // Passwords match, authentication successful
-                res.status(200).send('Login successful');
+                
+                // Generate JWT token
+                const token = jwt.sign({ userId: user._id ,
+                                        FirstName:user.FirstName,
+                                        LastName:user.LastName,
+                                        Email:user.Email
+                                        },process.env.JWT_SECRET,{ expiresIn: process.env.JWT_EXPIRES_IN });
+
+                // Passwords,emails and token generated  match , authentication successful
+                res.status(200).send({ message: 'Login successful',data:user.id, token });
             });
         })
         .catch(() => {
@@ -186,3 +219,5 @@ app.post("/login", (req, res) => {
             res.status(500).send('Incorrect email or password');
         });
 });
+
+

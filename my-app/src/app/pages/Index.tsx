@@ -6,7 +6,8 @@ import Link from "next/link";
 import Modal1 from '../components/modal';
 import Footer from '../components/Footer';
 import MainRegistered from '../components/MainRegistered';
-
+import Cookies from 'js-cookie';
+import NavbarRegistered from "../components/NavbarRegistered";
 
 
 
@@ -41,7 +42,26 @@ function Index() {
   }, []);
 
   ///////////
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
   return (
     <div>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,7 +71,7 @@ function Index() {
           rel="stylesheet"
         />
 
-       <><MainRegistered/></>
+      <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
 
       <div>
         <header className="d-flex masthead">
@@ -484,6 +504,7 @@ function Index() {
                   fontSize: "25px",
                   fontFamily: "Roboto, sans-serif",
                 }}
+                
               >
                 Explore more
               <svg

@@ -8,6 +8,8 @@ import Buycard from "../components/Buycard";
 import Bookreservation from "../components/Bookreservation";
 import NoItemsYet from "../components/noItemsYet";
 import NoReservations from "../components/noReservations";
+import MainRegistered from "../components/MainRegistered";
+import Cookies from 'js-cookie';
 
 
 function Cart() {
@@ -19,10 +21,29 @@ function Cart() {
     }
   }, []);
   /////////////////
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
   return (
     <div>
-               <> <NavbarRegistered/></>  
+      <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
 
      
       <meta charSet="utf-8" />
@@ -402,7 +423,7 @@ function Cart() {
                        
                     <tbody>
         {/*COMPONENT for NoReservations (to replace with cart component)*/}
-                    <><NoReservations/></>
+                    <><Bookreservation/></>
                     
                     
                     
