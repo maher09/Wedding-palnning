@@ -8,7 +8,7 @@ import Buycard from "../components/Buycard";
 import Bookreservation from "../components/Bookreservation";
 import NoItemsYet from "../components/noItemsYet";
 import NoReservations from "../components/noReservations";
-
+import { useAppContext } from '@/contextApi';
 
 function Cart() {
  
@@ -193,7 +193,7 @@ function Cart() {
                     
                     
                     {/*COMPONENT for NoItemsYet (to replace with cart component)*/}
-                    <><NoItemsYet /></>
+                    <><Buycard /></>
                  
                             
                     

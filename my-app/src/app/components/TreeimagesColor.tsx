@@ -4,6 +4,7 @@ import "../../../public/assets/cardCompColored/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/cardCompColored/css/styles.css";
 import Link from "next/link";
 
+
 function ThreeimagesColor({ imageUrlsRed }: { imageUrlsRed: string[] }) {
   //import bootstrap javascript
   useEffect(() => {
@@ -12,8 +13,9 @@ function ThreeimagesColor({ imageUrlsRed }: { imageUrlsRed: string[] }) {
     }
   }, []);
   /////////////////
-  
+ 
 
+ 
   return (
     <>
       <div className="col-md-8">

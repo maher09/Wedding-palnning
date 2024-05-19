@@ -139,6 +139,7 @@ useEffect(() => {
       style={{
         background:
           'url("assets/venue/img/pexels-antony-trivet-13644697.jpg") center / cover no-repeat',
+         
         height: "647.4px",
       }}
     >

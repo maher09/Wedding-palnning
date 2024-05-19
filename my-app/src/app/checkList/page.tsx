@@ -185,6 +185,7 @@ function CheckList() {
               <tr >
                 <td className="checked1"
                   style={{
+                    
                     fontFamily: "Roboto, sans-serif",
                     background: "#f4f0f8",
                    

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,ChangeEvent } from "react";
 import axios from 'axios';
 import "../../../public/assets/cardCompColored/bootstrap/css/bootstrap.min.css";
 import "../../../public/assets/cardCompColored/css/styles.css";
@@ -48,9 +48,16 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
    // Check if all fields are filled
    if (!theBride || !theGroom || !date || !time || !location || !notes) {
     alert("Please fill in all required fields");
+    
+    
   }
-  else 
+
+  else {
   alert("Your CARD has been added ,Explore your choice in the cart");
+  handelClick3();
+  }
+
+
     try {
       const response = await axios.post('http://localhost:3000/cardCompColored', {
         theBride: theBride,
@@ -117,7 +124,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
 
   const [showFirstComponent, setShowFirstComponent] = useState(true);
   const [showSecondComponent, setshowSecondComponent] = useState(false);
-const [font, setfont] = useState('darkgrey');
+  const [font, setfont] = useState('darkgrey');
   const [ Designcolor , setDesigncolor] = useState("white");
   const handelClick = () => {
 
@@ -147,9 +154,44 @@ const [font, setfont] = useState('darkgrey');
   else{
     img = imageUrlsRed3;
   }
-    
-   
 
+    ////////////////////////////////////////////
+  const [selectedPrice, setSelectedPrice] = useState("25 items - 5.99$");
+  const handlePriceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPrice(event.target.value);
+  };
+
+  const {imgCart,setimgCart} = useAppContext(); 
+  const {nameCart,setnameCart} = useAppContext();
+  const {priceCart,setpriceCart} = useAppContext();
+  
+ 
+
+  const handelClick3 = () => {
+      
+
+    if (showFirstComponent)  {
+    setimgCart(imageUrls[1]);
+    setnameCart(imageNames[0]);
+    setpriceCart(selectedPrice);
+  } else {
+    setimgCart(img[1]);
+    setnameCart(imageNames[0]);
+    setpriceCart(selectedPrice);
+  }
+}
+
+
+
+    
+  ////////////////////////////////////////////////
+
+  // const {imgCart,setimgCart} = useAppContext();
+  // const {nameCart,setnameCart} = useAppContext();
+  // const {priceCart,setpriceCart} = useAppContext();
+  
+
+ 
 
 
 
@@ -202,6 +244,8 @@ const [font, setfont] = useState('darkgrey');
 
         {showFirstComponent ? (
           <Threeimages imageUrls={Array.isArray(imageUrls) ? imageUrls : []} />
+          
+          
         ) : (
           <ThreeimagesColor imageUrlsRed={Array.isArray(img) ? img : []} />
         )}
@@ -505,21 +549,21 @@ const [font, setfont] = useState('darkgrey');
                     
                     
                     {/* SELECT QUANTITY and PRICE  input*/}
-                    <select className="form-select form-select form-select" id="floatinginput">
-                      <option value={21}>25 items - 5.99$ </option>
-                      <option value={21}>50 items - 10.99$ </option>
-                      <option value={21}>75 items - 15.99$ </option>
-                      <option value={21}>100 items -20.99$ </option>
-                      <option value={21}>150 items - 25.99$ </option>
-                      <option value={19}>200 items - 29.99$ </option>
-                      <option value={91}>250 items - 34.99$ </option>
-                      <option value={81}>300 items - 38.99$ </option>
-                      <option value={71}>350 items - 42.99$ </option>
-                      <option value={61}>400 items - 47.99$ </option>
-                      <option value={15}>450 items - 52.99$</option>
-                      <option value={14}>500 items - 57.99$</option>
-                      <option value={13}>550 items - 60.99$</option>
-                      <option value={12}>600 items - 62.99$</option>
+                    <select className="form-select form-select form-select" id="floatinginput"value={selectedPrice} onChange={handlePriceChange}>
+                      <option value={"25 items - 5.99"}>25 items - 5.99$ </option>
+                      <option value={"50 items - 10.99"}>50 items - 10.99$ </option>
+                      <option value={"75 items - 15.99"}>75 items - 15.99$ </option>
+                      <option value={"100 items -20.99"}>100 items -20.99$ </option>
+                      <option value={"150 items - 25.99$"}>150 items - 25.99$ </option>
+                      <option value={"200 items - 29.99$"}>200 items - 29.99$ </option>
+                      <option value={"250 items - 34.99$"}>250 items - 34.99$ </option>
+                      <option value={"300 items - 38.99$"}>300 items - 38.99$ </option>
+                      <option value={"350 items - 42.99$"}>350 items - 42.99$ </option>
+                      <option value={"400 items - 47.99$"}>400 items - 47.99$ </option>
+                      <option value={"450 items - 52.99$"}>450 items - 52.99$</option>
+                      <option value={"500 items - 57.99$"}>500 items - 57.99$</option>
+                      <option value={"550 items - 60.99$"}>550 items - 60.99$</option>
+                      <option value={"600 items - 62.99$"}>600 items - 62.99$</option>
                     </select>
                     
                     <label
@@ -548,6 +592,7 @@ const [font, setfont] = useState('darkgrey');
                     <input
                       className="btn btn-primary btn-submit"
                       type="submit"
+                      onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) => handleSubmit}
                       style={{
                         width: "127.0469px",
                         height: "47px",
@@ -556,10 +601,10 @@ const [font, setfont] = useState('darkgrey');
                         fontFamily: '"Abhaya Libre", serif',
                         fontSize: "22px",
                       }}
-                      value="Add to cart"
+                      
+                        value="Add to cart"
 
-
-                    />
+                    /> 
                   </div>
 
                   
