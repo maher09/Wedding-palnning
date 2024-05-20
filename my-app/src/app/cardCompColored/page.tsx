@@ -46,10 +46,16 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
   const [location, setLocation] = useState('');
   const [notes, setNotes] = useState('');
   const [designColor, setDesignColor] = useState('');
-
+  const {showBuyCart,setShowBuyCart} = useAppContext();
+  const { conterApp, setconterApp } = useAppContext();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setShowBuyCart(false);
+    if (showBuyCart === true) {
+      setconterApp(conterApp + 1);
+    }
+    
+   
    // Check if all fields are filled
    if (!theBride || !theGroom || !date || !time || !location || !notes) {
     alert("Please fill in all required fields");
@@ -180,6 +186,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
   const {imgCart,setimgCart} = useAppContext(); 
   const {nameCart,setnameCart} = useAppContext();
   const {priceCart,setpriceCart} = useAppContext();
+ 
   
  
 

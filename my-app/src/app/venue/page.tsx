@@ -23,10 +23,16 @@ function Venue () {
   const {month,setmonth} = useAppContext();
   const {year,setyear} = useAppContext();
   const {timee,settimee} = useAppContext();
+  const {showFirstComponent, setShowFirstComponent} = useAppContext();
 
+
+  
   const[conter,setconter]=useState(1)
   const{conterApp,setconterApp}=useAppContext();
-   
+  
+
+    
+
 
    const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedYear(event.target.value);
@@ -51,8 +57,12 @@ function Venue () {
     setmonth(selectedMonth)
     setyear(selectedYear)
     settimee(time)
-    setconter(conter+1)
-    setconterApp(conter)
+    
+    setShowFirstComponent(false);
+    if(showFirstComponent===true){
+      setconterApp(conterApp+1)
+    }
+    
 
   }
 

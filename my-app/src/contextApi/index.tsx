@@ -11,19 +11,22 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     const [price, setprice] = useState("");
     const [day, setday] = useState("");
     const [month, setmonth] = useState("");
-    const [year, setyear] = useState("");
-    const [timee, settimee] = useState("");
-    const [conterApp, setconterApp] = useState("");
-    const [show, setShow] = useState(false);
+            const [year, setyear] = useState("");
+            const [timee, settimee] = useState("");
+            const [showFirstComponent, setShowFirstComponent] = useState(true);
+            const [showBuyCart, setShowBuyCart] = useState(true);
+            const [conterApp, setconterApp] = useState(null); // Change the initial state value to 0
+            const [show, setShow] = useState(false);
 
-    {/*componanetColor*/}
+            {/*componanetColor*/}
 
-   const [RedImgCounter, setRedImgCounter] = useState(1);
+               const [RedImgCounter, setRedImgCounter] = useState(1);
 
-   {/*CART*/}
-    const [imgCart, setimgCart] = useState([]);
-    const [nameCart, setnameCart] = useState([]);
-    const [priceCart, setpriceCart] = useState([]);
+               {/*CART*/}
+            const [imgCart, setimgCart] = useState([]);
+            const [nameCart, setnameCart] = useState([]);
+            const [priceCart, setpriceCart] = useState([]);
+
 
 
     return (
@@ -38,7 +41,9 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         imgCart,setimgCart,
         nameCart,setnameCart,
         priceCart,setpriceCart,
-        show,setShow
+        show,setShow,
+        showFirstComponent,setShowFirstComponent,
+        showBuyCart,setShowBuyCart
         }}>
             {children}
         </AppContext.Provider>

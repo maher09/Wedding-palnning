@@ -18,6 +18,19 @@ function Buycard() {
   const {imgCart,setimgCart} = useAppContext();
   const {nameCart,setnameCart} = useAppContext();
   const {priceCart,setpriceCart} = useAppContext();
+  const {showBuyCart, setShowBuyCart} = useAppContext();
+  const { conterApp, setconterApp } = useAppContext();
+
+  const handelClick = () => {
+    setShowBuyCart(true);
+    if(showBuyCart==false && conterApp==1){
+     setconterApp(null)
+    }
+  
+    else if(conterApp==2){
+      setconterApp(conterApp-1);
+    }
+  }
  
   return (
     <tfoot>
@@ -99,6 +112,7 @@ function Buycard() {
                           viewBox="0 0 24 24"
                           fill="none"
                           style={{ fontSize: "54px", color: "rgb(146,0,0)" }}
+                          onClick={handelClick}
                         >
 
 
