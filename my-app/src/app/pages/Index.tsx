@@ -6,7 +6,6 @@ import Link from "next/link";
 import { NavigateAction } from "next/dist/client/components/router-reducer/router-reducer-types";
 import Footer from '../components/Footer';
 import MainRegistered from '../components/MainRegistered';
-
 import Cookies from 'js-cookie';
 import NavbarRegistered from "../components/NavbarRegistered";
 
@@ -529,11 +528,10 @@ function Index() {
              
              {/* Explore more for Invitation Card */}
              
-
+             <Link href="/invitationCards">             
               <button
                 className="btn btn-primary"
-                data-bss-hover-animate="pulse"
-               // Replace 'Navigator' with the actual name of the Navigator class
+                data-bss-hover-animate="pulse" 
                 id="but-section-1"
                 type="button"
                 style={{
@@ -561,6 +559,9 @@ function Index() {
                   />
                 </svg>
               </button>
+              </Link>
+
+              
               
 
 
@@ -818,6 +819,7 @@ function Index() {
               
               
               {/* Explore more for Wedding venues  */}
+              <Link href="/venue">
               <button
                 className="btn btn-primary"
                 data-bss-hover-animate="pulse"
@@ -847,6 +849,7 @@ function Index() {
                   />
                 </svg>
               </button>
+              </Link>
 
 
 
@@ -1135,6 +1138,8 @@ function Index() {
 
 
 
+
+
             </div>
           </section>
         </section>
@@ -1382,6 +1387,7 @@ function Index() {
               
               
               {/* Explore more for HAIR&MAKEUP*/}
+              <Link href="/hairMakeup">
               <button
                 className="btn btn-primary"
                 data-bss-hover-animate="pulse"
@@ -1411,6 +1417,7 @@ function Index() {
                   />
                 </svg>
               </button>
+              </Link>
 
 
 

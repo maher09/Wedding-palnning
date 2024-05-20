@@ -49,20 +49,28 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
   const [designColor, setDesignColor] = useState('');
 
 
+
   //date and time and bride and groom  error message  
 const [theBrideError, setTheBrideError] = useState('');
 const [theGroomError, setTheGroomError] = useState('');
 const [DateError, setDateError] = useState('');
 const [TimeError, setTimeError] = useState('');
-
+const {showBuyCart,setShowBuyCart} = useAppContext();
+const { conterApp, setconterApp } = useAppContext();
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+  setShowBuyCart(false);
+  if (showBuyCart === true) {
+    setconterApp(conterApp + 1);
+  }
   const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
   const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  const theBridePattern = /[a-zA-Z]/;
   const theGroomPattern = /[a-zA-Z]/;
 
   // Check if all fields are filled
   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+
+
     alert("Please fill in all required fields");
   } else if (!theBridePattern.test(theBride)) {
     setTheBrideError("Bride's name should only contain letters");
@@ -218,6 +226,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   const {imgCart,setimgCart} = useAppContext(); 
   const {nameCart,setnameCart} = useAppContext();
   const {priceCart,setpriceCart} = useAppContext();
+ 
   
  
 

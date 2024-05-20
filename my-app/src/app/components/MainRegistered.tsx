@@ -51,10 +51,7 @@ function MainRegistered() {
     return (
 <>
 
-    
 
-
-        
       <link
         rel="stylesheet"
         href="assets/index/bootstrap/css/bootstrap.min.css"

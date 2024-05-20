@@ -25,6 +25,8 @@ function Cart() {
   }, []);
   /////////////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {showFirstComponent, setShowFirstComponent} = useAppContext();
+  const {showBuyCart, setShowBuyCart} = useAppContext();
   useEffect(() => {
     // Update isLoggedIn after the component has mounted
     setIsLoggedIn(!!Cookies.get('token'));
@@ -38,6 +40,7 @@ function Cart() {
         setIsLoggedIn(false);
       }
     }, 100);
+
   
     // Clean up the interval when the component unmounts
     return () => {
@@ -221,8 +224,14 @@ function Cart() {
                     
                     
                     {/*COMPONENT for NoItemsYet (to replace with cart component)*/}
-                    <><Buycard /></>
-                 
+                    {showBuyCart ? (
+                   <><NoItemsYet/></>
+          
+          
+                    ) : (
+                        <><Buycard/></>
+                    )}
+                              
                             
                     
                     
@@ -430,7 +439,14 @@ function Cart() {
                        
                     <tbody>
         {/*COMPONENT for NoReservations (to replace with cart component)*/}
-                    <><Bookreservation/></>
+        {showFirstComponent ? (
+          <><NoReservations/></>
+          
+          
+        ) : (
+          <><Bookreservation/></>
+        )}
+
                     
                     
                     
