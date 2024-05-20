@@ -14,6 +14,9 @@ function HoneyMoon() {
       require("../../../public/assets/honeyMoon/bootstrap/js/bootstrap.min.js");
     }
   }, []);
+
+
+
   /////////////////
 
   //import slider

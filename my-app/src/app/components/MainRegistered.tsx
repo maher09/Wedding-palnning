@@ -21,18 +21,7 @@ function MainRegistered() {
     
     return (
 <>
-<meta charSet="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      />
-      <title>Home - Brand</title>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/index/img/Favicon-1.png"
-      />
+
       <link
         rel="stylesheet"
         href="assets/index/bootstrap/css/bootstrap.min.css"
