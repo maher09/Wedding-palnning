@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import "../../../public/assets/footer/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
+import Cookies from 'js-cookie';
+import { useAppContext } from '@/contextApi';
 
 function Footer() {
   //import bootstrap javascript
@@ -11,15 +13,37 @@ function Footer() {
     }
   }, []);
   /////////////////
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
+
+  //showing the model when the user click on the book button without login
+  const {show, setShow} = useAppContext();
+  const handelClickLinkLogin = () => {
+        setShow(!show); // Toggle the show state
+  };
+
 
   return (
     <>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/footer/img/Favicon.png"
-      />
+    
       
       <link
         rel="stylesheet"
@@ -141,70 +165,96 @@ function Footer() {
                   <a href="#">HOME</a>
                 </li>
                 <li style={{ marginTop: "10px" }}>
-                  <a
-                    href="#"
+                  <Link
+                    href="/venue"
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: "21px",
                     }}
                   >
                     VENUES
-                  </a>
+                  </Link>
                 </li>
                 <li style={{ marginTop: "10px" }}>
-                  <a
-                    href="#"
+                  
+                  <Link
+                    href="/honeyMoon"
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: "21px",
                     }}
                   >
                     HONEYMOON
-                  </a>
+                  </Link>
                 </li>
                 <li style={{ marginTop: "10px" }}>
-                  <a
-                    href="#"
+                  <Link
+                    href="/invitationCards"
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: "21px",
                     }}
                   >
                     INVITATION
-                  </a>
+                  </Link>
                 </li>
                 <li style={{ marginTop: "10px" }}>
-                  <a
-                    href="#"
+                  
+                  
+                  
+                {isLoggedIn ? (
+                      // If logged in, show the link to the checklist page
+                      <Link
+                       
+                        href="/checkList"
+                        style={{
+                          fontFamily: "Roboto, sans-serif",
+                          fontSize: "21px",
+                        }}
+                      >
+                        CHECK LIST
+                      </Link>
+                    )
+                    : (
+                      // If not logged in, show a button or a link that opens the Modal
+                      <a
+                      onClick={handelClickLinkLogin}
+                      style={{
+                        textDecoration:"underline",
+                        color: "#1d809f", // Wrap the color value in quotes
+                        fontFamily: "Roboto, sans-serif",
+                        fontSize: "21px",
+                      }}
+                      >
+                        CHECK LIST
+                      </a>
+                    )}
+
+
+
+
+                </li>
+                <li style={{ marginTop: "10px" }}>
+                  <Link
+                    href="/hairMakeup"
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: "21px",
                     }}
                   >
-                    CHECK LIST
-                  </a>
+                    hairMakeup
+                  </Link>
                 </li>
                 <li style={{ marginTop: "10px" }}>
-                  <a
-                    href="#"
-                    style={{
-                      fontFamily: "Roboto, sans-serif",
-                      fontSize: "21px",
-                    }}
-                  >
-                    SALON
-                  </a>
-                </li>
-                <li style={{ marginTop: "10px" }}>
-                  <a
-                    href="#"
+                  <Link
+                    href="/about"
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: "21px",
                     }}
                   >
                     ABOUT US
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -69,7 +69,10 @@ function HairMakeup() {
       />
       <title>HairMakeup</title>
      
-      
+      <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,700&display=swap"

@@ -288,7 +288,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         sizes="202x153"
         href="assets/cardCompColored/img/Favicon.png"
       />
-         
+         <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />  
       <link
         rel="stylesheet"
         href="assets/cardCompColored/bootstrap/css/bootstrap.min.css"

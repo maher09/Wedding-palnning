@@ -75,6 +75,10 @@ function Index() {
   const { TheGroom = '', TheBride = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
   return (
     <div>
+          <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -316,11 +320,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                        <Link href="/invitationCards">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/10%20(1).jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -366,11 +372,14 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/invitationCards">
+
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/6(1).jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -412,11 +421,14 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/invitationCards">
+
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/r%20(1).jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -462,11 +474,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div className="ripple-cont">
+                      <Link href="/invitationCards">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/9%20(1).jpg"
                         />
+                        </Link>
                       </div>
                     </div>
                     <div className="blog-table">
@@ -605,11 +619,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/venue">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/67269560_2352517005063716_445999475714949120_n.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -653,11 +669,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/venue">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/281543944_5390283644326766_8833335931753295431_n.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -700,11 +718,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/venue">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/360138548_693088756178701_2743552918627612162_n.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -747,11 +767,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div className="ripple-cont">
+                      <Link href="/venue">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/reception-gold-oval-table-1_51_301051.webp"
                         />
+                        </Link>
                       </div>
                     </div>
                     <div className="blog-table">
@@ -885,11 +907,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/honeyMoon">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/Giza%20Pyramids.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -931,11 +955,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/honeyMoon">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/kaafu%20atoll.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -977,11 +1003,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/honeyMoon">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/pexels-francesco-ungaro-15997971.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -1022,11 +1050,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div className="ripple-cont">
+                      <Link href="/honeyMoon">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/colosseum.jpg"
                         />
+                        </Link>
                       </div>
                     </div>
                     <div className="blog-table">
@@ -1068,6 +1098,7 @@ function Index() {
               
               
               {/* Explore more for HONEYMOON */}
+              <Link href="/honeyMoon">
               <button
                 className="btn btn-primary"
                 data-bss-hover-animate="pulse"
@@ -1097,7 +1128,7 @@ function Index() {
                   />
                 </svg>
               </button>
-
+              </Link>
 
 
 
@@ -1157,11 +1188,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/hairMakeup">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/saw.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -1202,11 +1235,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/hairMakeup">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/ha.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -1248,11 +1283,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div>
+                      <Link href="/hairMakeup">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/saloon%2010.jpg"
                         />
+                        </Link>
                       </div>
                       <div className="ripple-cont" />
                     </div>
@@ -1293,11 +1330,13 @@ function Index() {
                   <div className="blog-card blog-card-blog">
                     <div className="blog-card-image">
                       <div className="ripple-cont">
+                      <Link href="/hairMakeup">
                         <img
                           className="img-fluid img"
                           style={{ borderRadius: "15px" }}
                           src="assets/index/img/sa.jpg"
                         />
+                        </Link>
                       </div>
                     </div>
                     <div className="blog-table">

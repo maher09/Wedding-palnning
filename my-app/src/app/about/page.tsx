@@ -57,7 +57,10 @@ function AboutUs() {
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       />
       <title>AboutUs</title>
-    
+      <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
       <link
         rel="stylesheet"
         href="assets/aboutUs/bootstrap/css/bootstrap.min.css"

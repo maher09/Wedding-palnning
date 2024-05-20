@@ -121,6 +121,53 @@ useEffect(() => {
     };
   }, [isLoggedIn]);
 
+  //showing the model when the user click on the book button without login
+  const {show, setShow} = useAppContext();
+  const handelClickLinkLogin = () => {
+        setShow(!show); // Toggle the show state
+  };
+
+
+  //BookVenue1
+  const handleBookVenue1 = () => {
+    // Your function logic here
+    myFunction();
+    handleClick();
+    setname("Lujain Wedding Venue");
+    setprice("1000");
+  };
+  //BookVenue2
+  const handleBookVenue2 = () => {
+    // Your function logic here
+    myFunction()
+    handleClick()
+    setname("Nayrouz  Wedding Venue")
+    setprice("2500")
+  };
+  //BookVenue3
+  const handleBookVenue3 = () => {
+    // Your function logic here
+    myFunction()
+    handleClick()
+    setname("Lotus Wedding Venue")
+    setprice("2000")
+  };
+  //BookVenue4
+  const handleBookVenue4 = () => {
+    // Your function logic here
+    myFunction()
+    handleClick()
+    setname("Royal Wedding Venue")
+    setprice("3000")
+  };
+  //BookVenue5
+  const handleBookVenue5 = () => {
+    // Your function logic here
+    myFunction()
+    handleClick()
+    setname("Kebpinski Wedding Venue")
+    setprice("2600")
+  };
   return (
     <div>
      
@@ -140,6 +187,10 @@ useEffect(() => {
       sizes="202x153"
       href="assets/venue/img/Favicon.png"
     />
+        <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
     <link rel="stylesheet" href="assets/venue/bootstrap/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
@@ -510,11 +561,15 @@ useEffect(() => {
               fontSize: "15px",
           }}
           onClick={()=>{
-            myFunction()
-            handleClick()
-            setname("Lujain Wedding Venue")
-            setprice("1000")
-          }}
+            if (isLoggedIn){
+            handleBookVenue1();
+          }
+              else {
+                handelClickLinkLogin();
+              }
+        
+        
+        }}
       >
         {" "}
         Book venue
@@ -849,10 +904,12 @@ useEffect(() => {
               fontSize: "15px",
           }}
           onClick={()=>{
-            myFunction()
-            handleClick()
-            setname("Nayrouz  Wedding Venue")
-            setprice("2500")
+            if (isLoggedIn){
+              handleBookVenue2();
+            }
+                else {
+                  handelClickLinkLogin();
+                }
           }}
       >
         {" "}
@@ -1180,10 +1237,12 @@ useEffect(() => {
               fontSize: "15px",
           }}
           onClick={()=>{
-            myFunction()
-            handleClick()
-            setname("Lotus Wedding Venue")
-            setprice("2000")
+            if (isLoggedIn){
+              handleBookVenue3();
+            }
+                else {
+                  handelClickLinkLogin();
+                }
           }}
       >
         {" "}
@@ -1517,10 +1576,12 @@ useEffect(() => {
               fontSize: "15px",
           }}
           onClick={()=>{
-            myFunction()
-            handleClick()
-            setname("Royal Wedding Venue")
-            setprice("3000")
+            if (isLoggedIn){
+              handleBookVenue4();
+            }
+                else {
+                  handelClickLinkLogin();
+                }
           }}
       >
         {" "}
@@ -1863,10 +1924,12 @@ useEffect(() => {
               fontSize: "15px",
           }}
           onClick={()=>{
-            myFunction()
-            handleClick()
-            setname("Kebpinski Wedding Venue")
-            setprice("2600")
+            if (isLoggedIn){
+              handleBookVenue5();
+            }
+                else {
+                  handelClickLinkLogin();
+                }
           }}
       >
         {" "}

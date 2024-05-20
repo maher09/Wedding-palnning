@@ -63,6 +63,10 @@ function Cart() {
       />
       <link
         rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
+      <link
+        rel="stylesheet"
         href="assets/cart/bootstrap/css/bootstrap.min.css"
       />
       <link

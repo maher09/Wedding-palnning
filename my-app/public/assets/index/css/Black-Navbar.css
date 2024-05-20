@@ -106,8 +106,6 @@
   background-color: #e04c40;
 }
 
-#cart-button {
-}
 
 #login-btn {
   background-color: #313987;
@@ -144,7 +142,9 @@
 #checklist-link:hover {
   background-color: #e5e7ea;
 }
-
+#checklist-link2:hover {
+  background-color: #e5e7ea;
+}
 #salon-link:hover {
   background-color: #e5e7ea;
 }

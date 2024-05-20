@@ -36,7 +36,6 @@ function HoneyMoon() {
       });
     }
   }, []);
-
   //import animation
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -69,8 +68,8 @@ function HoneyMoon() {
 
   return (
     <>
-       
-       <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
+        
+        <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
 
       <meta charSet="utf-8" />
       <meta
@@ -78,7 +77,10 @@ function HoneyMoon() {
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       />
       <title>honeyMoon</title>
-     
+      <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
       <link
         rel="stylesheet"
         href="assets/honeyMoon/bootstrap/css/bootstrap.min.css"

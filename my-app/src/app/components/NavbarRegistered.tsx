@@ -33,12 +33,7 @@ function NavbarRegistered() {
     <>
           <link rel="stylesheet" href="assets/index/css/Video.css" />
 
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/navbarRegistered/img/Favicon.png"
-      />
+      
       <link
         rel="stylesheet"
         href="assets/navbarRegistered/bootstrap/css/bootstrap.min.css"
@@ -342,6 +337,9 @@ function NavbarRegistered() {
 
 
               {/* logout button */}
+          <Link
+          //redirect the user to the Home page
+          href="/" >
           <button
             className="btn btn-primary"
             id="logout-btn"
@@ -353,15 +351,13 @@ function NavbarRegistered() {
             }}
             onClick={() => {
               Cookies.remove('token'); // Remove the token
-              // Optionally, redirect the user to the login page
-              if (window.location.pathname === '/cart') {
-                window.location.href = '/';}
+              
             }}
           >
 
             Logout
           </button>
-
+          </Link>
 
 
         </div>

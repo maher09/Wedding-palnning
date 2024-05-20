@@ -14,33 +14,52 @@ import HoneyMoon from '../honeyMoon/page';
 import Index from '../pages/Index';
 import InvitationCards from '../invitationCards/page';
 import Venue from '../venue/page';
+import Cookies from 'js-cookie';
+import { useAppContext } from '@/contextApi';
+
 
 function MainRegistered() {
-    
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Update isLoggedIn after the component has mounted
+    setIsLoggedIn(!!Cookies.get('token'));
+  
+    // Check for token change every 100ms
+    const intervalId = setInterval(() => {
+      const newToken = Cookies.get('token');
+      if (newToken && !isLoggedIn) {
+        setIsLoggedIn(true);
+      } else if (!newToken && isLoggedIn) {
+        setIsLoggedIn(false);
+      }
+    }, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoggedIn]);
+
+  //showing the model when the user click on the book button without login
+  const {show, setShow} = useAppContext();
+  const handelClickLinkLogin = () => {
+        setShow(!show); // Toggle the show state
+  };
+
     
     
     return (
 <>
-<meta charSet="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      />
-      <title>Home - Brand</title>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="202x153"
-        href="assets/index/img/Favicon-1.png"
-      />
+
+    
+
+
+        
       <link
         rel="stylesheet"
         href="assets/index/bootstrap/css/bootstrap.min.css"
       />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&display=swap"
-      />
+     
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,600&display=swap"
@@ -163,30 +182,43 @@ function MainRegistered() {
 
 
               </li>
-              <li className="nav-item">
-                
-                
-                {/* link to CHECK LIST */}
-
-                <Link
-                  className="nav-link"
-                  id="checklist-link"
-                  href="/checkList"
-                  style={{
-                    color: "#000000",
-                    fontFamily: '"Abhaya Libre", serif',
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                  }}
-                >
-                  CHECK LIST
-                </Link>
 
 
+                              <li className="nav-item">
+                    {isLoggedIn ? (
+                      // If logged in, show the link to the checklist page
+                      <Link
+                        className="nav-link"
+                        id="checklist-link"
+                        href="/checkList"
+                        style={{
+                          color: "#000000",
+                          fontFamily: '"Abhaya Libre", serif',
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                        }}
+                      >
+                        CHECK LIST
+                      </Link>
+                    )
+                    : (
+                      // If not logged in, show a button or a link that opens the Modal
+                      <button
+                      className="nav-link"
+                      id="checklist-link2"
+
+                      onClick={handelClickLinkLogin} style={{
+                          color: "#000000",
+                          fontFamily: '"Abhaya Libre", serif',
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                        }}>
+                        CHECK LIST
+                      </button>
+                    )}
+                  </li>
 
 
-
-              </li>
               <li className="nav-item">
 
                   {/* link to Hair&Makeup */}

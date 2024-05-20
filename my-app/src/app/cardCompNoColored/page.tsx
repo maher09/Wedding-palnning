@@ -165,6 +165,10 @@ useEffect(() => {
       />
       <link
         rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
+      <link
+        rel="stylesheet"
         href="assets/cardCompNoColored/bootstrap/css/bootstrap.min.css"
       />
       <link

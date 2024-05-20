@@ -230,6 +230,11 @@ function InvitationCards() {
       clearInterval(intervalId);
     };
   }, [isLoggedIn]);
+    //showing the model when the user click on the book button without login
+    const {show, setShow} = useAppContext();
+    const handelClickLinkLogin = () => {
+          setShow(!show); // Toggle the show state
+    };
   return (
     <div>
       <>
@@ -249,7 +254,10 @@ function InvitationCards() {
         sizes="202x153"
         href="assets/invitationCards/img/Favicon.png"
       />
-
+      <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&display=swap"
@@ -371,31 +379,49 @@ function InvitationCards() {
               
               
               
+                          {isLoggedIn ? (
+              // If logged in, show the link to the cardCompColored page
               <Link
-        href={{
-          pathname: "/cardCompColored",
-          query: { 
-            imageUrls: imageUrls1.join(","),
-            imageNames: name1.join(","),
-          },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          onClick={handelClick1}
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-            
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+                href={{
+                  pathname: "/cardCompColored",
+                  query: { 
+                    imageUrls: imageUrls1.join(","),
+                    imageNames: name1.join(","),
+                  },
+                }}
+              >
+                <button
+                  className="btn1 btn1-primary"
+                  type="button"
+                  onClick={handelClick1}
+                  style={{
+                    background: "#313987",
+                    width: "145.406px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontFamily: "Roboto, sans-serif",
+                  }}
+                >
+                  <strong>Take a look </strong>
+                </button>
+              </Link>
+            ) : (
+              // If not logged in, show a button that opens the Modal
+              <button
+                onClick={handelClickLinkLogin}
+                className="btn1 btn1-primary"
+                type="button"
+                style={{
+                  background: "#313987",
+                  width: "145.406px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontFamily: "Roboto, sans-serif",
+                }}
+              >
+                <strong>Take a look </strong>
+              </button>
+            )}
 
 
 
@@ -449,31 +475,50 @@ function InvitationCards() {
               </p>
               
               
-              
-              
-              <Link
-        href={{
-          pathname: "/cardCompColored",
-          query: { imageUrls: imageUrls2.join(",") ,
-                    imageNames: name2.join(","),
-          },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          onClick={handelClick2}
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+                                {isLoggedIn ? (
+                    // If logged in, show the link to the cardCompColored page
+                    <Link
+                      href={{
+                        pathname: "/cardCompColored",
+                        query: { 
+                          imageUrls: imageUrls2.join(","),
+                          imageNames: name2.join(","),
+                        },
+                      }}
+                    >
+                      <button
+                        className="btn1 btn1-primary"
+                        type="button"
+                        onClick={handelClick2}
+                        style={{
+                          background: "#313987",
+                          width: "145.406px",
+                          borderRadius: "10px",
+                          fontSize: "13px",
+                          fontFamily: "Roboto, sans-serif",
+                        }}
+                      >
+                        <strong>Take a look </strong>
+                      </button>
+                    </Link>
+                  ) : (
+                    // If not logged in, show a button that opens the Modal
+                    <button
+                      onClick={handelClickLinkLogin}
+                      className="btn1 btn1-primary"
+                      type="button"
+                      style={{
+                        background: "#313987",
+                        width: "145.406px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
+                      <strong>Take a look </strong>
+                    </button>
+                  )}
+                            
            
            
            
@@ -529,27 +574,49 @@ function InvitationCards() {
               </p>
               
               
-              <Link
-        href={{
-          pathname: "/cardCompColored",
-          query: { imageUrls: imageUrls3.join(","),imageNames: name3.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          onClick={handelClick3}
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link> 
+                              {isLoggedIn ? (
+                  // If logged in, show the link to the cardCompColored page
+                  <Link
+                    href={{
+                      pathname: "/cardCompColored",
+                      query: { 
+                        imageUrls: imageUrls3.join(","),
+                        imageNames: name3.join(","),
+                      },
+                    }}
+                  >
+                    <button
+                      className="btn1 btn1-primary"
+                      type="button"
+                      onClick={handelClick3}
+                      style={{
+                        background: "#313987",
+                        width: "145.406px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
+                      <strong>Take a look </strong>
+                    </button>
+                  </Link>
+                ) : (
+                  // If not logged in, show a button that opens the Modal
+                  <button
+                    onClick={handelClickLinkLogin}
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                )}
 
 
 
@@ -602,27 +669,48 @@ function InvitationCards() {
              
              
              
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls4.join(","),imageNames: name4.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
-
+                              {isLoggedIn ? (
+                  // If logged in, show the link to the cardCompNoColored page
+                  <Link
+                    href={{
+                      pathname: "/cardCompNoColored",
+                      query: { 
+                        imageUrls: imageUrls4.join(","),
+                        imageNames: name4.join(","),
+                      },
+                    }}
+                  >
+                    <button
+                      className="btn1 btn1-primary"
+                      type="button"
+                      style={{
+                        background: "#313987",
+                        width: "145.406px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
+                      <strong>Take a look </strong>
+                    </button>
+                  </Link>
+                ) : (
+                  // If not logged in, show a button that opens the Modal
+                  <button
+                    onClick={handelClickLinkLogin}
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                )}
             
             
             
@@ -676,27 +764,48 @@ function InvitationCards() {
                 &nbsp;set the right expectations for the magical day ahead
               </p>
       
-      
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls5.join(","),imageNames: name5.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+                            {isLoggedIn ? (
+                // If logged in, show the link to the cardCompNoColored page
+                <Link
+                  href={{
+                    pathname: "/cardCompNoColored",
+                    query: { 
+                      imageUrls: imageUrls5.join(","),
+                      imageNames: name5.join(","),
+                    },
+                  }}
+                >
+                  <button
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                </Link>
+              ) : (
+                // If not logged in, show a button that opens the Modal
+                <button
+                  onClick={handelClickLinkLogin}
+                  className="btn1 btn1-primary"
+                  type="button"
+                  style={{
+                    background: "#313987",
+                    width: "145.406px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontFamily: "Roboto, sans-serif",
+                  }}
+                >
+                  <strong>Take a look </strong>
+                </button>
+              )}
 
 
 
@@ -743,26 +852,57 @@ function InvitationCards() {
                 These simple yet elegant wedding invitations <br />
                 should be just what you are looking for
               </p>
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls6.join(","),imageNames: name6.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+            
+            
+            
+                            
+                              {isLoggedIn ? (
+                  // If logged in, show the link to the cardCompNoColored page
+                  <Link
+                    href={{
+                      pathname: "/cardCompNoColored",
+                      query: { 
+                        imageUrls: imageUrls6.join(","),
+                        imageNames: name6.join(","),
+                      },
+                    }}
+                  >
+                    <button
+                      className="btn1 btn1-primary"
+                      type="button"
+                      style={{
+                        background: "#313987",
+                        width: "145.406px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
+                      <strong>Take a look </strong>
+                    </button>
+                  </Link>
+                ) : (
+                  // If not logged in, show a button that opens the Modal
+                  <button
+                    onClick={handelClickLinkLogin}
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                )}
+
+
+
+
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -806,26 +946,57 @@ function InvitationCards() {
                 Rustic branches frame your wedding details <br />
                 on this winter-inspired wedding invitation
               </p>
+             
+             
+             
+             
+                          {isLoggedIn ? (
+              // If logged in, show the link to the cardCompNoColored page
               <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls7.join(","),imageNames: name7.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+                href={{
+                  pathname: "/cardCompNoColored",
+                  query: { 
+                    imageUrls: imageUrls7.join(","),
+                    imageNames: name7.join(","),
+                  },
+                }}
+              >
+                <button
+                  className="btn1 btn1-primary"
+                  type="button"
+                  style={{
+                    background: "#313987",
+                    width: "145.406px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontFamily: "Roboto, sans-serif",
+                  }}
+                >
+                  <strong>Take a look </strong>
+                </button>
+              </Link>
+            ) : (
+              // If not logged in, show a button that opens the Modal
+              <button
+                onClick={handelClickLinkLogin}
+                className="btn1 btn1-primary"
+                type="button"
+                style={{
+                  background: "#313987",
+                  width: "145.406px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontFamily: "Roboto, sans-serif",
+                }}
+              >
+                <strong>Take a look </strong>
+              </button>
+            )}
+
+
+
+
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -869,26 +1040,58 @@ function InvitationCards() {
                 This elegant wedding invitation design <br />
                 features painted peonies decorating the card.
               </p>
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls8.join(","),imageNames: name8.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+
+
+
+
+                            {isLoggedIn ? (
+                // If logged in, show the link to the cardCompNoColored page
+                <Link
+                  href={{
+                    pathname: "/cardCompNoColored",
+                    query: { 
+                      imageUrls: imageUrls8.join(","),
+                      imageNames: name8.join(","),
+                    },
+                  }}
+                >
+                  <button
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                </Link>
+              ) : (
+                // If not logged in, show a button that opens the Modal
+                <button
+                  onClick={handelClickLinkLogin}
+                  className="btn1 btn1-primary"
+                  type="button"
+                  style={{
+                    background: "#313987",
+                    width: "145.406px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontFamily: "Roboto, sans-serif",
+                  }}
+                >
+                  <strong>Take a look </strong>
+                </button>
+              )}
+
+
+
+
+
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -932,26 +1135,62 @@ function InvitationCards() {
                 his wedding invitation features the words <br />
                 “we do” in modern calligraphy
               </p>
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls9.join(","),imageNames: name9.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+             
+             
+             
+              
+              
+                              {isLoggedIn ? (
+                  // If logged in, show the link to the cardCompNoColored page
+                  <Link
+                    href={{
+                      pathname: "/cardCompNoColored",
+                      query: { 
+                        imageUrls: imageUrls9.join(","),
+                        imageNames: name9.join(","),
+                      },
+                    }}
+                  >
+                    <button
+                      className="btn1 btn1-primary"
+                      type="button"
+                      style={{
+                        background: "#313987",
+                        width: "145.406px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
+                      <strong>Take a look </strong>
+                    </button>
+                 
+                 
+                 
+                  </Link>
+                ) : (
+                  // If not logged in, show a button that opens the Modal
+                  <button
+                    onClick={handelClickLinkLogin}
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                )}
+
+
+
+
+
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -997,26 +1236,58 @@ function InvitationCards() {
                 &nbsp;this wedding invitation is ideal for those who appreciate
                 classic style.
               </p>
+           
+           
+           
+                      
+                          {isLoggedIn ? (
+              // If logged in, show the link to the cardCompNoColored page
               <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls10.join(","),imageNames: name10.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+                href={{
+                  pathname: "/cardCompNoColored",
+                  query: { 
+                    imageUrls: imageUrls10.join(","),
+                    imageNames: name10.join(","),
+                  },
+                }}
+              >
+                <button
+                  className="btn1 btn1-primary"
+                  type="button"
+                  style={{
+                    background: "#313987",
+                    width: "145.406px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontFamily: "Roboto, sans-serif",
+                  }}
+                >
+                  <strong>Take a look </strong>
+                </button>
+              </Link>
+            ) : (
+              // If not logged in, show a button that opens the Modal
+              <button
+                onClick={handelClickLinkLogin}
+                className="btn1 btn1-primary"
+                type="button"
+                style={{
+                  background: "#313987",
+                  width: "145.406px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontFamily: "Roboto, sans-serif",
+                }}
+              >
+                <strong>Take a look </strong>
+              </button>
+            )}
+
+
+
+
+
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -1060,26 +1331,55 @@ function InvitationCards() {
                 This traditional wedding invitation is decorated with <br />a
                 stylish venue illustration and showcases your details{" "}
               </p>
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls11.join(","),imageNames: name11.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+             
+             
+                            
+                              {isLoggedIn ? (
+                  // If logged in, show the link to the cardCompNoColored page
+                  <Link
+                    href={{
+                      pathname: "/cardCompNoColored",
+                      query: { 
+                        imageUrls: imageUrls11.join(","),
+                        imageNames: name11.join(","),
+                      },
+                    }}
+                  >
+                    <button
+                      className="btn1 btn1-primary"
+                      type="button"
+                      style={{
+                        background: "#313987",
+                        width: "145.406px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
+                      <strong>Take a look </strong>
+                    </button>
+                  </Link>
+                ) : (
+                  // If not logged in, show a button that opens the Modal
+                  <button
+                    onClick={handelClickLinkLogin}
+                    className="btn1 btn1-primary"
+                    type="button"
+                    style={{
+                      background: "#313987",
+                      width: "145.406px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontFamily: "Roboto, sans-serif",
+                    }}
+                  >
+                    <strong>Take a look </strong>
+                  </button>
+                )}
+
+
+
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
@@ -1124,26 +1424,56 @@ function InvitationCards() {
                 Your initials, names, and wedding details are displayed in a
                 classic font{" "}
               </p>
-              <Link
-        href={{
-          pathname: "/cardCompNoColored",
-          query: { imageUrls: imageUrls12.join(","),imageNames: name12.join(","), },
-        }}
-      >
-        <button
-          className="btn1 btn1-primary"
-          type="button"
-          style={{
-            background: "#313987",
-            width: "145.406px",
-            borderRadius: "10px",
-            fontSize: "13px",
-            fontFamily: "Roboto, sans-serif",
-          }}
-        >
-          <strong>Take a look </strong>
-        </button>
-      </Link>
+            
+            
+            
+            
+                                    {isLoggedIn ? (
+                        // If logged in, show the link to the cardCompNoColored page
+                        <Link
+                          href={{
+                            pathname: "/cardCompNoColored",
+                            query: { 
+                              imageUrls: imageUrls12.join(","),
+                              imageNames: name12.join(","),
+                            },
+                          }}
+                        >
+                          <button
+                            className="btn1 btn1-primary"
+                            type="button"
+                            style={{
+                              background: "#313987",
+                              width: "145.406px",
+                              borderRadius: "10px",
+                              fontSize: "13px",
+                              fontFamily: "Roboto, sans-serif",
+                            }}
+                          >
+                            <strong>Take a look </strong>
+                          </button>
+                        </Link>
+                      ) : (
+                        // If not logged in, show a button that opens the Modal
+                        <button
+                          onClick={handelClickLinkLogin}
+                          className="btn1 btn1-primary"
+                          type="button"
+                          style={{
+                            background: "#313987",
+                            width: "145.406px",
+                            borderRadius: "10px",
+                            fontSize: "13px",
+                            fontFamily: "Roboto, sans-serif",
+                          }}
+                        >
+                          <strong>Take a look </strong>
+                        </button>
+                      )}
+
+
+
+
             </div>
           </div>
         </div>

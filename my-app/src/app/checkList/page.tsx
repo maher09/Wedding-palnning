@@ -108,7 +108,10 @@ function CheckList() {
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       />
       <title>checkList</title>
-    
+      <link
+        rel="stylesheet"
+        href="assets/index/css/Black-Navbar.css"
+      />
       <link
         rel="stylesheet"
         href="assets/checkList/bootstrap/css/bootstrap.min.css"
