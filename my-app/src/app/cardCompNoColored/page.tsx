@@ -47,22 +47,48 @@ const [theBrideError, setTheBrideError] = useState('');
 const [theGroomError, setTheGroomError] = useState('');
 const [DateError, setDateError] = useState('');
 const [TimeError, setTimeError] = useState('');
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  
+const [selectedPrice, setSelectedPrice] = useState("25 items - 5.99$");
+  const handlePriceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPrice(event.target.value);
+  };
+
+const {imgCart,setimgCart} = useAppContext(); 
+const {nameCart,setnameCart} = useAppContext();
+const {priceCart,setpriceCart} = useAppContext();
+
+const handelClick3 = () => {
+  setimgCart(imageUrls[1]);
+  setnameCart(imageNames[0]);
+  setpriceCart(selectedPrice);
+
+  }
+
+
+
+
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowBuyCart(false);
-    if (showBuyCart === true) {
-      setconterApp(conterApp + 1);
-    }
+    let hasError = false; // This flag will track if any errors occur during validation
+
+    
+
+  
 
 
     const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
-    const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;    const theBridePattern = /[a-zA-Z]/;
+    const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  
+      const theBridePattern = /[a-zA-Z]/;
     const theGroomPattern = /[a-zA-Z]/;
       // Check if all fields are filled
   if (!theBride || !theGroom || !date || !time || !location || !notes) {
     alert("Please fill in all required fields");
+    hasError = true;
+
   } else if (!theBridePattern.test(theBride)) {
     setTheBrideError("Bride's name should only contain letters");
+    hasError = true;
   } 
   else {
     setTheBrideError(''); 
@@ -70,12 +96,15 @@ const [TimeError, setTimeError] = useState('');
   
   if (!theGroomPattern.test(theGroom)) {
       setTheGroomError("Groom's name should only contain letters");
+      hasError = true;
   }
   else {
     setTheGroomError('');  }
 
     if (!DatePattern.test(date)) {
       setDateError("Date format is wrong");
+      hasError = true; // Set hasError to true if bride's name is invalid
+
   } else {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); // Set time to midnight
@@ -85,15 +114,23 @@ const [TimeError, setTimeError] = useState('');
     const inputDate = new Date(`${year}-${month}-${day}`);
     if (inputDate < currentDate) {
       setDateError("Date is in the past");
+      hasError = true; // Set hasError to true if bride's name is invalid
+
     } 
     else {
       setDateError(""); // Reset date error message
     }
   }
       if (!TimePattern.test(time)) {
-      setTimeError("Time is wrong");
+      setTimeError("Time is wrong must be like this 8:00-10:00");
+      hasError = true; // Set hasError to true if bride's name is invalid
+
     }else {
       setTimeError('');
+    }
+    if (hasError) {
+      return;
+    }
 
 
   try {
@@ -116,6 +153,11 @@ const [TimeError, setTimeError] = useState('');
   console.log('Headers:', response.config.headers); // Log the headers
     console.log(response.data);
     
+    //cart icon badge 
+    setShowBuyCart(false);
+    if (showBuyCart === true) {
+      setconterApp(conterApp + 1);
+    }
     handelClick3();
     alert("Your CARD has been added, Explore your choice in the cart");
 
@@ -130,26 +172,10 @@ const [TimeError, setTimeError] = useState('');
     console.error(error);
     // Handle error here
   }
-}
+
   
 };
 
-
-const [selectedPrice, setSelectedPrice] = useState("25 items - 5.99$");
-  const handlePriceChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPrice(event.target.value);
-  };
-
-const {imgCart,setimgCart} = useAppContext(); 
-const {nameCart,setnameCart} = useAppContext();
-const {priceCart,setpriceCart} = useAppContext();
-
-const handelClick3 = () => {
-  setimgCart(imageUrls[1]);
-  setnameCart(imageNames[0]);
-  setpriceCart(selectedPrice);
-
-  }
 
 
 

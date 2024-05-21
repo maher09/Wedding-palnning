@@ -178,6 +178,7 @@ useEffect(() => {
     setname("Kebpinski Wedding Venue")
     setprice("2600")
   };
+  
   return (
     <div>
      

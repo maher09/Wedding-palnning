@@ -57,36 +57,146 @@ const [DateError, setDateError] = useState('');
 const [TimeError, setTimeError] = useState('');
 const {showBuyCart,setShowBuyCart} = useAppContext();
 const { conterApp, setconterApp } = useAppContext();
+
+
+const [showFirstComponent, setShowFirstComponent] = useState(true);
+const [showSecondComponent, setshowSecondComponent] = useState(false);
+const [font, setfont] = useState('darkgrey');
+const [ Designcolor , setDesigncolor] = useState("white");
+
+const handelClick = () => {
+
+  setDesigncolor("White");
+  setfont("#713737")
+  setShowFirstComponent(true);
+
+}
+
+const handelClick2 = () => {
+  setDesigncolor("Red");
+  setShowFirstComponent(false); 
+}
+
+
+
+////////////////////////////////////////////////
+///////////////////////////imagesNotColor////////////////////////
+
+
+const [imageUrlsRed1, setImageUrlsRed1] = useState<string[]>([]);
+const [imageUrlsRed2, setImageUrlsRed2] = useState<string[]>([]);
+const [imageUrlsRed3, setImageUrlsRed3] = useState<string[]>([]);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/redimages.json");
+      const data = await response.json();
+
+      setImageUrlsRed1([
+        data.imageRed1[0].source,
+        data.imageRed1[1].source,
+        data.imageRed1[2].source,
+      ]);
+
+      setImageUrlsRed2([
+        data.imageRed2[0].source,
+        data.imageRed2[1].source,
+        data.imageRed2[2].source,
+      ]);
+
+      setImageUrlsRed3([
+        data.imageRed3[0].source,
+        data.imageRed3[1].source,
+        data.imageRed3[2].source,
+      ]);
+      
+    } catch (error) {
+      console.error("Error fetching image URLs:", error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+
+
+
+const {RedImgCounter,setRedImgCounter} = useAppContext();
+let img;
+if(RedImgCounter === 1){
+  img = imageUrlsRed1;
+}
+else if(RedImgCounter === 2){
+  img = imageUrlsRed2;
+}
+else{
+  img = imageUrlsRed3;
+}
+
+  ////////////////////////////////////////////
+const [selectedPrice, setSelectedPrice] = useState("25 items - 5.99$");
+const handlePriceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  setSelectedPrice(event.target.value);
+};
+
+const {imgCart,setimgCart} = useAppContext(); 
+const {nameCart,setnameCart} = useAppContext();
+const {priceCart,setpriceCart} = useAppContext();
+
+
+
+
+const handelClick3 = () => {
+    
+
+  if (showFirstComponent)  {
+  setimgCart(imageUrls[1]);
+  setnameCart(imageNames[0]);
+  setpriceCart(selectedPrice);
+} else {
+  setimgCart(img[1]);
+  setnameCart(imageNames[0]);
+  setpriceCart(selectedPrice);
+}
+}
+
+
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setShowBuyCart(false);
-  if (showBuyCart === true) {
-    setconterApp(conterApp + 1);
-  }
+    e.preventDefault();
+    let hasError = false; // This flag will track if any errors occur during validation
+
+  
+  
+  
   const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
-  const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  const theBridePattern = /[a-zA-Z]/;
+  const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  
+  const theBridePattern = /[a-zA-Z]/;
   const theGroomPattern = /[a-zA-Z]/;
 
   // Check if all fields are filled
   if (!theBride || !theGroom || !date || !time || !location || !notes) {
+      alert("Please fill in all required fields");
+      hasError = true; // Set hasError to true if a required field is missing
 
-
-    alert("Please fill in all required fields");
-  } else if (!theBridePattern.test(theBride)) {
+    } else if (!theBridePattern.test(theBride)) {
     setTheBrideError("Bride's name should only contain letters");
-  } 
+    hasError = true; // Set hasError to true if bride's name is invalid
+} 
   else {
     setTheBrideError(''); 
   }
   
   if (!theGroomPattern.test(theGroom)) {
       setTheGroomError("Groom's name should only contain letters");
-  }
+      hasError = true; // Set hasError to true if bride's name is invalid
+    }
   else {
     setTheGroomError('');  }
 
     if (!DatePattern.test(date)) {
       setDateError("Date format is wrong");
+      hasError = true; // Set hasError to true if bride's name is invalid
+
   } else {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); // Set time to midnight
@@ -97,16 +207,23 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   
     if (inputDate < currentDate) {
       setDateError("Date is in the past");
+      hasError = true; // Set hasError to true if bride's name is invalid
+
     } 
     else {
       setDateError(""); // Reset date error message
     }
   }
     if (!TimePattern.test(time)) {
-      setTimeError("Time is wrong");
+      setTimeError("Time is wrong must be like this 8:00-10:00");
+      hasError = true; // Set hasError to true if bride's name is invalid
     }else {
       setTimeError('');
-      
+    }
+      // If there's any error, exit the function
+  if (hasError) {
+    return; // Early exit if any validation failed
+  }
 
       try {
         const response = await axios.post('http://localhost:3000/cardCompColored', {
@@ -126,7 +243,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
         console.log('Headers:', response.config.headers);// Log the headers
         console.log(response.data);
-
+        
+        //cart icon badge 
+        setShowBuyCart(false);
+        if (showBuyCart === true) {
+          setconterApp(conterApp + 1);
+        }
         alert("Your CARD has been added, Explore your choice in the cart");
         handelClick3();
 
@@ -142,123 +264,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         console.error(error);
         // Handle error here
       }
-    }
+    
   
 };
-///////////////////////////imagesNotColor////////////////////////
-
-
-  const [imageUrlsRed1, setImageUrlsRed1] = useState<string[]>([]);
-  const [imageUrlsRed2, setImageUrlsRed2] = useState<string[]>([]);
-  const [imageUrlsRed3, setImageUrlsRed3] = useState<string[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/redimages.json");
-        const data = await response.json();
-
-        setImageUrlsRed1([
-          data.imageRed1[0].source,
-          data.imageRed1[1].source,
-          data.imageRed1[2].source,
-        ]);
-
-        setImageUrlsRed2([
-          data.imageRed2[0].source,
-          data.imageRed2[1].source,
-          data.imageRed2[2].source,
-        ]);
-
-        setImageUrlsRed3([
-          data.imageRed3[0].source,
-          data.imageRed3[1].source,
-          data.imageRed3[2].source,
-        ]);
-        
-      } catch (error) {
-        console.error("Error fetching image URLs:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-  const [showFirstComponent, setShowFirstComponent] = useState(true);
-  const [showSecondComponent, setshowSecondComponent] = useState(false);
-  const [font, setfont] = useState('darkgrey');
-  const [ Designcolor , setDesigncolor] = useState("white");
-  const handelClick = () => {
-
-    setDesigncolor("White");
-    setfont("#713737")
-    setShowFirstComponent(true);
-
-  }
-  
-  const handelClick2 = () => {
-    setDesigncolor("Red");
-    setShowFirstComponent(false); 
-  }
-
-
-  
-  ////////////////////////////////////////////////
-
-  const {RedImgCounter,setRedImgCounter} = useAppContext();
-  let img;
-  if(RedImgCounter === 1){
-    img = imageUrlsRed1;
-  }
-  else if(RedImgCounter === 2){
-    img = imageUrlsRed2;
-  }
-  else{
-    img = imageUrlsRed3;
-  }
-
-    ////////////////////////////////////////////
-  const [selectedPrice, setSelectedPrice] = useState("25 items - 5.99$");
-  const handlePriceChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPrice(event.target.value);
-  };
-
-  const {imgCart,setimgCart} = useAppContext(); 
-  const {nameCart,setnameCart} = useAppContext();
-  const {priceCart,setpriceCart} = useAppContext();
- 
-  
- 
-
-  const handelClick3 = () => {
-      
-
-    if (showFirstComponent)  {
-    setimgCart(imageUrls[1]);
-    setnameCart(imageNames[0]);
-    setpriceCart(selectedPrice);
-  } else {
-    setimgCart(img[1]);
-    setnameCart(imageNames[0]);
-    setpriceCart(selectedPrice);
-  }
-}
+///////////////////////////////////////
 
 
 
-    
-  ////////////////////////////////////////////////
 
-  // const {imgCart,setimgCart} = useAppContext();
-  // const {nameCart,setnameCart} = useAppContext();
-  // const {priceCart,setpriceCart} = useAppContext();
-  
-
- 
-
-
-
-  
 
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
