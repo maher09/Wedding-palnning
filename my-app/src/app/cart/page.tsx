@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import "../../../public/assets/cart/bootstrap/css/bootstrap.min.css";
 import Link from "next/link";
 import Footer from "../components/Footer";
@@ -47,6 +48,139 @@ function Cart() {
       clearInterval(intervalId);
     };
   }, [isLoggedIn]);
+
+
+  /////////////////////////////////////////////////
+  //using axios to fetch api
+
+  //CARD VALUES
+  const {nameCart,setnameCart} = useAppContext();
+  const {priceCart,setpriceCart} = useAppContext();
+  
+const [cardName, setcardName] = useState('');
+  const [cardQuantityAndPrice, setcardQuantityAndPrice] = useState('');
+
+  //BOOKRESERVATION VALUES
+const {name,setname} = useAppContext();
+const {price,setprice} = useAppContext();
+const {day,setday} = useAppContext();
+const {month,setmonth} = useAppContext();
+const {year,setyear} = useAppContext();
+const {timee,settimee} = useAppContext();
+
+  ////////
+  
+ 
+ ////
+  const [venueName, setvenueName] = useState('');
+  const [venuePrice, setvenuePrice] = useState('');
+  const [venueDate, setvenueDate] = useState('');
+  const [venueTime, setvenueTime] = useState('');
+ 
+ 
+  const [userLocation, setuserLocation] = useState('');
+  const [userPhone, setuserPhone] = useState('');
+
+  const { conterApp,setconterApp } = useAppContext();
+
+///////////////////////////////////////////////////
+const handelClickCheckout = () => {
+  setShowBuyCart(true);
+  setShowFirstComponent(true);
+  setconterApp(null);
+  setnameCart('');
+  setpriceCart('');
+  setname('');
+  setprice('');
+  setday('');
+  setmonth('');
+  setyear('');
+  settimee('');
+  setuserLocation('');
+  setuserPhone('');
+}
+
+const [CheckoutError, setCheckoutError] = useState('');
+const [phoneError, setphoneError] = useState('');
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let hasError = false; // This flag will track if any errors occur during validation
+    const phonePattern=/^\+?[0-9]+$/;
+
+    if (showFirstComponent==true && showBuyCart==true) {
+      setCheckoutError('Please add at least one item to your cart');
+      hasError = true; // Set hasError to true if bride's name is invalid
+}
+  if (!phonePattern.test(userPhone)){
+    setphoneError('Please enter a valid phone number');
+    hasError = true; // Set hasError to true if phone is invalid
+    
+  }else{
+    setphoneError(''); // Reset phone error message
+  }
+
+
+    if (hasError) {
+      return; // Early exit if any validation failed
+    }
+  
+
+      try {
+        const response = await axios.post('http://localhost:3000/cart', {
+          cardName: nameCart,
+          cardQuantityAndPrice: priceCart,
+          
+          
+          venueName: name,
+          venuePrice:price,
+          venueDate: `${day}-${month}-${year}`,
+          venueTime: timee,
+          userLocation: userLocation,
+          userPhone: userPhone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('token')}`
+          }
+        });
+
+        console.log('Headers:', response.config.headers);// Log the headers
+        console.log(response.data);
+        handelClickCheckout();
+        alert("CHECKOUT SUCCESSFUL!");
+       
+       
+      
+      
+        // Handle successful submission here
+      } catch (error) {
+        console.error(error);
+        // Handle error here
+      }
+    
+  
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
@@ -114,7 +248,7 @@ function Cart() {
             
             
             {/* cart form */}
-      <form action="/cart" method="post">
+      <form action="/cart" method="post"  onSubmit={handleSubmit}>
         <section className="container" style={{ height: "161px" }}>
           <h1
             style={{
@@ -179,6 +313,14 @@ function Cart() {
                             <label className="form-label" htmlFor="card-name">
                               Name
                             </label>
+                             {/* input hidden card name */}
+                        <input 
+                        name="cardName"
+                        value={nameCart}
+                        onChange={(e) => setcardName(e.target.value)}
+                        type="hidden"
+                        id="card-name" 
+                                  />
                           
                           
                           </th>
@@ -186,7 +328,6 @@ function Cart() {
                             style={{
                               textAlign: "center",
                               fontFamily: "Roboto, sans-serif",
-                             
                               fontWeight: "bold",
                               width: "227.578px",
                             }}
@@ -196,6 +337,14 @@ function Cart() {
                             <label className="form-label" htmlFor="card-price">
                               Price&Quantity
                             </label>
+                            {/* input hidden card Quantity&Price */}     
+                        <input 
+                        name="cardQuantityAndPrice"
+                        value={priceCart}
+                        onChange={(e) => setcardQuantityAndPrice(e.target.value)}
+                        type="hidden"
+                        id="card-price" 
+                                />
 
 
                           </th>
@@ -275,6 +424,9 @@ function Cart() {
                       Location:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
                     <input
+                      name="userLocation"
+                      value={userLocation}
+                      onChange={(e) => setuserLocation(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="location"
@@ -310,7 +462,11 @@ function Cart() {
                     >
                       phone:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
+                    <div>
                     <input
+                      name="userPhone"
+                      value={userPhone}
+                      onChange={(e) => setuserPhone(e.target.value)}
                       className="form-control form-control"
                       type="text"
                       id="phone"
@@ -319,12 +475,17 @@ function Cart() {
                         width: "95%"
                         }}
                     />
-
+                        {phoneError && (
+        <div className="text-danger" style={{ fontSize: "14px",textAlign:"center" }}>
+          {phoneError} 
+          </div>
+                  )}
+                </div>
 
                   
                   
                   </div>
-                 
+                <div>
                   {/* checkout cart (send data to database) */}
                   <input
                     className="btn btn-primary mt-3"
@@ -337,8 +498,14 @@ function Cart() {
                       height: "50px"
                     }}
                     value="Checkout"
-                  />
-
+                  
+                />
+                               {CheckoutError && (
+        <div className="text-danger" style={{ fontSize: "14px",textAlign:"center" }}>
+          {CheckoutError} 
+          </div>
+           )}
+           </div> 
 
                 </div>
               </div>
@@ -380,6 +547,17 @@ function Cart() {
                               <strong>Reservations</strong>
                           </label>
                           
+                           {/* input hidden venue name */}
+                           <input
+                            name="venueName"
+                            value={name}
+                            onChange={(e) => setvenueName(e.target.value)}
+                            type="hidden"
+                            id="reservations-label"
+                            
+                          />
+
+                          
                           
                           </th>
                           <th
@@ -396,6 +574,14 @@ function Cart() {
                               Price
                             </label>
 
+                             {/* input hidden venue price */}
+                              <input 
+                              name="venuePrice"
+                              value={price}
+                              onChange={(e) => setvenuePrice(e.target.value)}
+                              type="hidden"
+                            id="price-res-label"  
+                          />
 
 
 
@@ -411,6 +597,16 @@ function Cart() {
                               date
                             </label>
 
+                               {/* input hidden date of venue */}
+                          <input 
+                          name="venueDate"
+                          value={`${day}-${month}-${year}`}
+                          onChange={(e) => setvenueDate(e.target.value)}
+                          type="hidden"
+                          id="date-label"
+                             
+                          />
+
 
 
                           </th>
@@ -423,6 +619,16 @@ function Cart() {
                             <label className="form-label" htmlFor="time-label">
                               time
                             </label>
+
+                             {/* input hidden time of venue */}
+                          <input 
+                          name="venueTime"
+                          value={timee}
+                          onChange={(e) => setvenueTime(e.target.value)}
+                          type="hidden"
+                          id="time-label"
+                          
+                          />
 
 
 

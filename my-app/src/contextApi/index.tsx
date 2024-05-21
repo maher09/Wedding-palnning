@@ -7,12 +7,17 @@ const AppContext = createContext<any>(undefined);
 export function AppWrapper({ children }: { children: React.ReactNode }) {
     // Ensure useState is used in a client component context
 
-    const [name, setname] = useState("no reservation yet");
+   
+   //BOOKRESERVATION 
+    const [name, setname] = useState("");
     const [price, setprice] = useState("");
     const [day, setday] = useState("");
     const [month, setmonth] = useState("");
-            const [year, setyear] = useState("");
-            const [timee, settimee] = useState("");
+    const [year, setyear] = useState("");
+    const [timee, settimee] = useState("");
+////////////////////////
+
+
             const [showFirstComponent, setShowFirstComponent] = useState(true);
             const [showBuyCart, setShowBuyCart] = useState(true);
             const [conterApp, setconterApp] = useState(null); // Change the initial state value to 0
@@ -23,9 +28,13 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
                const [RedImgCounter, setRedImgCounter] = useState(1);
 
                {/*CART*/}
-            const [imgCart, setimgCart] = useState([]);
-            const [nameCart, setnameCart] = useState([]);
-            const [priceCart, setpriceCart] = useState([]);
+            const [imgCart, setimgCart] = useState('');
+            const [nameCart, setnameCart] = useState('');
+            const [priceCart, setpriceCart] = useState('');
+
+
+            //fetch axios API useState
+
 
 
 

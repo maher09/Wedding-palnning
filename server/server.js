@@ -10,7 +10,8 @@ const CardColored = require("./modals/cardColoredSchema");
 const CardNoColored = require("./modals/cardNoColoredSchema");
 //Signup SCHEMA SET
 const Signup = require("./modals/signupSchema");
-
+//Cart SCHEMA SET
+const Cart = require("./modals/cartSchema");
 //call bcrypt for hashing passwords
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -176,6 +177,37 @@ app.post("/signup", (req, res) => {
 
 //cart form post 
 /////////////////
+app.post("/cart",verifyToken, (req, res) => {
+
+    const cart = new Cart({
+        cardName: req.body.cardName,
+        cardQuantityAndPrice: req.body.cardQuantityAndPrice,
+        venueName: req.body.venueName,
+        venuePrice: req.body.venuePrice,
+        venueDate: req.body.venueDate,
+        venueTime: req.body.venueTime,
+        userLocation: req.body.userLocation,
+        userPhone: req.body.userPhone,
+        
+    });
+    cart
+        .save()
+
+        .then(() => {
+            res.status(200).send('Data saved successfully'); // Send a response
+
+
+        })
+        .catch(() => {
+
+            res.status(500).send('Error saving data'); // Send a response in case of error
+
+        })
+
+})
+
+
+
 /////////////////
 
 
@@ -221,3 +253,4 @@ app.post("/login", (req, res) => {
 });
 
 
+// Check for reservation route

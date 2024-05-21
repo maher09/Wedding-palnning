@@ -723,7 +723,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     <input
                       className="btn btn-primary btn-submit"
                       type="submit"
-                      onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) => handleSubmit}
                       style={{
                         width: "127.0469px",
                         height: "47px",

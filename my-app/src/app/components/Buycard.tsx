@@ -15,6 +15,7 @@ function Buycard() {
     }
   }, []);
 
+
   const {imgCart,setimgCart} = useAppContext();
   const {nameCart,setnameCart} = useAppContext();
   const {priceCart,setpriceCart} = useAppContext();
@@ -31,7 +32,11 @@ function Buycard() {
       setconterApp(conterApp-1);
     }
   }
- 
+
+  const handelClickCheckout = () => {
+    setnameCart('');
+    setpriceCart('');
+  }
   return (
     <tfoot>
                 <tr>
@@ -68,9 +73,9 @@ function Buycard() {
                           {nameCart}
                         </span>
                         
-                        {/* input hidden card name */}
-                        <input type="hidden" id="card-name" required 
-                        value=""/>
+                       
+                       
+                       
                       
                       
                       
@@ -88,9 +93,7 @@ function Buycard() {
                         
                      
                         
-                         {/* input hidden card Quantity&Price */}     
-                        <input type="hidden" id="card-price" required 
-                        value=""/>
+                         
                         
                         
                       </td>
@@ -111,8 +114,12 @@ function Buycard() {
                           height="1em"
                           viewBox="0 0 24 24"
                           fill="none"
-                          style={{ fontSize: "54px", color: "rgb(146,0,0)" }}
-                          onClick={handelClick}
+                          style={{ fontSize: "54px", color: "rgb(146,0,0)", cursor: "pointer"}}
+                          onClick={() => {
+                            handelClick();
+                            handelClickCheckout();
+                        
+                          }}
                         >
 
 
