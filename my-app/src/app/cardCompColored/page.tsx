@@ -40,6 +40,7 @@ const imageUrls = searchParams.get("imageUrls")?.split(",") || [];
 
 
   //using axios to fetch api
+
   const [theBride, setTheBride] = useState('');
   const [theGroom, setTheGroom] = useState('');
   const [date, setDate] = useState('');
@@ -168,8 +169,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   
   
   
-  const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
-  const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  
+    const DatePattern = /^\s*(0?[1-9]|[12][0-9]|3[01])\s*[- /.]\s*(0?[1-9]|1[012])\s*[- /.]\s*(19|20)\d\d\s*$/;
+const TimePattern = /^\s*(0?[1-9]|1[0-2])\s*:\s*([0-5]\d)\s*[-/]\s*(0?[1-9]|1[0-2])\s*:\s*([0-5]\d)\s*$/i;
   const theBridePattern = /[a-zA-Z]/;
   const theGroomPattern = /[a-zA-Z]/;
 
@@ -227,6 +228,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
       try {
         const response = await axios.post('http://localhost:3000/cardCompColored', {
+          Email:Email,
           theBride: theBride,
           theGroom: theGroom,
           date: date,
@@ -294,6 +296,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       clearInterval(intervalId);
     };
   }, [isLoggedIn]);
+  // Get the JWT token from cookies
+  const token = Cookies.get('token');
+  // Extract the user's TheGroom and TheBride name from the JWT token
+  const { Email = ''} = token? JSON.parse(atob(token.split('.')[1])) : {};
+
+
+
   return (
     <div>
       <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
@@ -381,6 +390,11 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 <form action="/cardCompColored" method="post" onSubmit={handleSubmit}>
                   <div className="input-group" style={{ marginBottom: "5px" }}>
                     
+                    {/* INPUT HIDDEN FOR USER EMAIL  */}
+
+
+
+
                     
                     {/* The bride input*/}
                     <label
@@ -755,5 +769,5 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       <><Footer/></>
     </div>
   );
-}
+  }
 export default CardCompColored;

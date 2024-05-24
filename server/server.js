@@ -77,6 +77,7 @@ mongoose
 app.post("/cardCompColored",verifyToken, (req, res) => {
 
     const cardColored = new CardColored({
+        userEmail: req.body.userEmail,
         theBride: req.body.theBride,
         theGroom: req.body.theGroom,
         date: req.body.date,
@@ -254,3 +255,16 @@ app.post("/login", (req, res) => {
 
 
 // Check for reservation route
+app.post("/checkReservation", verifyToken, async (req, res) => {
+    try {
+        const { venueDate, venueTime,venueName } = req.body;
+        const reservation = await Cart.findOne({ venueDate, venueTime,venueName });
+        if (reservation) {
+            return res.status(200).json({ reserved: true, message: 'This Date and Time is already reserved' });
+        } else {
+            return res.status(200).json({ reserved: false, message: 'This Date and Time is available.' });
+        }
+    } catch (error) {
+        return res.status(500).json({ reserved: false, message: 'Error checking reservation status.' });
+    }
+});

@@ -77,9 +77,9 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   
 
 
-    const DatePattern = /^(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)\d\d$/;
-    const TimePattern = /^(0?[1-9]|1[0-2]):([0-5]\d)([-/])(0?[1-9]|1[0-2]):([0-5]\d)$/i;  
-      const theBridePattern = /[a-zA-Z]/;
+    const DatePattern = /^\s*(0?[1-9]|[12][0-9]|3[01])\s*[- /.]\s*(0?[1-9]|1[012])\s*[- /.]\s*(19|20)\d\d\s*$/;
+    const TimePattern = /^\s*(0?[1-9]|1[0-2])\s*:\s*([0-5]\d)\s*[-/]\s*(0?[1-9]|1[0-2])\s*:\s*([0-5]\d)\s*$/i;
+    const theBridePattern = /[a-zA-Z]/;
     const theGroomPattern = /[a-zA-Z]/;
       // Check if all fields are filled
   if (!theBride || !theGroom || !date || !time || !location || !notes) {

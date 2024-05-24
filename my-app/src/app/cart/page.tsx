@@ -131,8 +131,6 @@ const [phoneError, setphoneError] = useState('');
         const response = await axios.post('http://localhost:3000/cart', {
           cardName: nameCart,
           cardQuantityAndPrice: priceCart,
-          
-          
           venueName: name,
           venuePrice:price,
           venueDate: `${day}-${month}-${year}`,

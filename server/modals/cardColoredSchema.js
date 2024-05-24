@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
  
 // define the Schema (the structure of the article)
 const cardColoredSchema = new Schema({
+    userEmail: String,
     theBride: String,
     theGroom: String,
     date: String,

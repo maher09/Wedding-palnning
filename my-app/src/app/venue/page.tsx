@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState ,ChangeEvent } from 'react';
+import axios from 'axios';
 import '../../../public/assets/venue/bootstrap/css/bootstrap.min.css';
 import Link from "next/link";
 import Footer from "../components/Footer";
@@ -15,7 +16,6 @@ function Venue () {
   const [selectedYear, setSelectedYear] = useState('2025');
   const [selectedMonth, setSelectedMonth] = useState('1');
   const [selectedDay, setSelectedDay] = useState('1');
-  const [time, setTime] = useState("5:00-8:00");
 
   const {name,setname} = useAppContext();
   const {price,setprice} = useAppContext();
@@ -27,7 +27,6 @@ function Venue () {
 
 
   
-  const[conter,setconter]=useState(1)
   const{conterApp,setconterApp}=useAppContext();
   
 
@@ -45,9 +44,10 @@ function Venue () {
   const handleDayChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedDay(event.target.value);
   };
+  const [time, setTime] = useState<Record<string, string>>({});
 
-  const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTime(event.target.value);
+  const handleTimeChange = (venueName: string) => (event: ChangeEvent<HTMLInputElement>) => {
+    setTime(prevTimes => ({ ...prevTimes, [venueName]: event.target.value }));
   };
    
   
@@ -56,7 +56,6 @@ function Venue () {
     setday(selectedDay)
     setmonth(selectedMonth)
     setyear(selectedYear)
-    settimee(time)
     
     setShowFirstComponent(false);
     if(showFirstComponent===true){
@@ -138,46 +137,59 @@ useEffect(() => {
   };
 
 
+
   //BookVenue1
-  const handleBookVenue1 = () => {
-    // Your function logic here
-    myFunction();
-    handleClick();
-    setname("Lujain Wedding Venue");
-    setprice("1000");
-  };
-  //BookVenue2
-  const handleBookVenue2 = () => {
-    // Your function logic here
-    myFunction()
-    handleClick()
-    setname("Nayrouz  Wedding Venue")
-    setprice("2500")
-  };
-  //BookVenue3
-  const handleBookVenue3 = () => {
-    // Your function logic here
-    myFunction()
-    handleClick()
-    setname("Lotus Wedding Venue")
-    setprice("2000")
-  };
-  //BookVenue4
-  const handleBookVenue4 = () => {
-    // Your function logic here
-    myFunction()
-    handleClick()
-    setname("Royal Wedding Venue")
-    setprice("3000")
-  };
-  //BookVenue5
-  const handleBookVenue5 = () => {
-    // Your function logic here
-    myFunction()
-    handleClick()
-    setname("Kebpinski Wedding Venue")
-    setprice("2600")
-  };
+  const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
+const handleBookVenue = async (venueName:string, venuePrice:string) => {
+  let hasError = false;
+  let newErrorMessages = {...errorMessages}; // Copy the current error messages
+
+  if (!time[venueName]) {
+    newErrorMessages[venueName] = 'Please select a time for your reservation.';
+    hasError = true;
+  } else {
+    setErrorMessages({});
+  }
+
+  if (hasError) {
+    setErrorMessages(newErrorMessages); // Update the error messages
+    return;
+  }
+
+  try {
+    const response = await axios.post('http://localhost:3000/checkReservation', {
+      venueName:venueName,
+      venueDate: `${selectedDay}-${selectedMonth}-${selectedYear}`, // replace with actual date
+      venueTime:time[venueName]  // replace with actual time
+    }, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('token')}` // replace with actual token
+      }
+    });
+
+    if (response.data.reserved) {
+      newErrorMessages[venueName] = response.data.message; // This Date and Time is already reserved
+      setErrorMessages(newErrorMessages); // Update the error messages
+    } else {
+          setErrorMessages({});
+
+      // Proceed with booking
+      myFunction();
+      handleClick();
+      setname(venueName);
+      setprice(venuePrice);
+      settimee(time[venueName])
+
+    }
+  } catch (error) {
+    console.error('Error checking reservation status:', error);
+  }
+};
+
+
+
+
+
   
   return (
     <div>
@@ -511,8 +523,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-1"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Lujain Wedding Venue")}
           />
           <label
             className="form-label"
@@ -535,7 +546,7 @@ useEffect(() => {
             name="radio-1"
             value="9:00-12:00"
            
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Lujain Wedding Venue")}
           />
           <label
             className="form-label"
@@ -557,7 +568,7 @@ useEffect(() => {
       
       
       
-
+              <div>
       {/* book venue reserviration  button */}
       <button
           className="btn btn-primary"
@@ -573,7 +584,7 @@ useEffect(() => {
           }}
           onClick={()=>{
             if (isLoggedIn){
-            handleBookVenue1();
+            handleBookVenue("Lujain Wedding Venue","1000");
           }
               else {
                 handelClickLinkLogin();
@@ -585,7 +596,12 @@ useEffect(() => {
         {" "}
         Book venue
       </button>
-      
+      {errorMessages["Lujain Wedding Venue"] && (
+  <div className="text-danger" style={{ fontSize: "24px",textAlign:"center",marginLeft:"23px"}}>
+    {errorMessages["Lujain Wedding Venue"]} 
+  </div>
+)}
+      </div>
 
 
 
@@ -853,8 +869,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-2"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Nayrouz  Wedding Venue")}
           />
         
           <label
@@ -878,7 +893,7 @@ useEffect(() => {
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-2"
             value="9:00-12:00"
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Nayrouz  Wedding Venue")}
           />
           <label
             className="form-label"
@@ -900,7 +915,7 @@ useEffect(() => {
       
 
        
-       
+      <div>
        {/* book venue reserviration  button */}
       <button
           className="btn btn-primary"
@@ -916,7 +931,7 @@ useEffect(() => {
           }}
           onClick={()=>{
             if (isLoggedIn){
-              handleBookVenue2();
+              handleBookVenue("Nayrouz  Wedding Venue","2500"); 
             }
                 else {
                   handelClickLinkLogin();
@@ -926,8 +941,12 @@ useEffect(() => {
         {" "}
         Book venue
       </button>
-
-
+      {errorMessages["Nayrouz  Wedding Venue"] && (
+  <div className="text-danger" style={{ fontSize: "24px",textAlign:"center",marginLeft:"23px"}}>
+    {errorMessages["Nayrouz  Wedding Venue"]} 
+  </div>
+)}
+            </div>
 
 
 
@@ -1187,8 +1206,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-3"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Lotus Wedding Venue")}
           />
           <label
             className="form-label"
@@ -1211,7 +1229,7 @@ useEffect(() => {
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-3"
             value="9:00-12:00" 
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Lotus Wedding Venue")}
           />
           <label
             className="form-label"
@@ -1233,7 +1251,7 @@ useEffect(() => {
         </div>
       </div>
      
-     
+      <div>
       {/* book venue reserviration  button */}
       <button
           className="btn btn-primary"
@@ -1249,7 +1267,7 @@ useEffect(() => {
           }}
           onClick={()=>{
             if (isLoggedIn){
-              handleBookVenue3();
+              handleBookVenue("Lotus Wedding Venue","2000");
             }
                 else {
                   handelClickLinkLogin();
@@ -1259,8 +1277,12 @@ useEffect(() => {
         {" "}
         Book venue
       </button>
-
-
+      {errorMessages["Lotus Wedding Venue"] && (
+  <div className="text-danger" style={{ fontSize: "24px",textAlign:"center",marginLeft:"23px"}}>
+    {errorMessages["Lotus Wedding Venue"]} 
+  </div>
+)}
+            </div>
 
 
 
@@ -1524,8 +1546,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-4"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Royal Wedding Venue")}
           />
           <label
             className="form-label"
@@ -1547,7 +1568,7 @@ useEffect(() => {
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-4"
             value="9:00-12:00"
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Royal Wedding Venue")}
           />
           <label
             className="form-label"
@@ -1572,7 +1593,7 @@ useEffect(() => {
       </div>
       
       
-      
+      <div>
        {/* book venue reserviration  button */}
       <button
           className="btn btn-primary"
@@ -1588,7 +1609,7 @@ useEffect(() => {
           }}
           onClick={()=>{
             if (isLoggedIn){
-              handleBookVenue4();
+              handleBookVenue("Royal Wedding Venue","3000");
             }
                 else {
                   handelClickLinkLogin();
@@ -1598,8 +1619,13 @@ useEffect(() => {
         {" "}
         Book venue
       </button>
+      {errorMessages["Royal Wedding Venue"] && (
+  <div className="text-danger" style={{ fontSize: "24px",textAlign:"center",marginLeft:"23px"}}>
+    {errorMessages["Royal Wedding Venue"]} 
+  </div>
+)}
 
-
+            </div>
 
 
 
@@ -1871,8 +1897,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-5"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Kebpinski Wedding Venue")}
           />
           <label
             className="form-label"
@@ -1894,7 +1919,7 @@ useEffect(() => {
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-5"
             value="9:00-12:00"
-            onChange={handleTimeChange}
+            onChange={handleTimeChange("Kebpinski Wedding Venue")}
           />
           <label
             className="form-label"
@@ -1920,7 +1945,7 @@ useEffect(() => {
       
       
       
-      
+      <div>
        {/* book venue reserviration  button */}
       <button
           className="btn btn-primary"
@@ -1936,7 +1961,7 @@ useEffect(() => {
           }}
           onClick={()=>{
             if (isLoggedIn){
-              handleBookVenue5();
+              handleBookVenue("Kebpinski Wedding Venue","2600");
             }
                 else {
                   handelClickLinkLogin();
@@ -1946,8 +1971,12 @@ useEffect(() => {
         {" "}
         Book venue
       </button>
-
-
+      {errorMessages["Kebpinski Wedding Venue"] && (
+  <div className="text-danger" style={{ fontSize: "24px",textAlign:"center",marginLeft:"23px"}}>
+    {errorMessages["Kebpinski Wedding Venue"]} 
+  </div>
+)}
+          </div>
 
 
 
