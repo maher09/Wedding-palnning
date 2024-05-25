@@ -106,7 +106,7 @@ app.post("/cardCompColored",verifyToken, (req, res) => {
 app.post("/cardCompNoColored",  verifyToken, (req, res) => {
 
     const cardNoColored = new CardNoColored({
-
+        userEmail: req.body.userEmail,
         theBride: req.body.theBride,
         theGroom: req.body.theGroom,
         date: req.body.date,
@@ -181,6 +181,7 @@ app.post("/signup", (req, res) => {
 app.post("/cart",verifyToken, (req, res) => {
 
     const cart = new Cart({
+        userEmail: req.body.userEmail,
         cardName: req.body.cardName,
         cardQuantityAndPrice: req.body.cardQuantityAndPrice,
         venueName: req.body.venueName,

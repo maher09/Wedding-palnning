@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
  
 // define the Schema (the structure of the article)
 const cartSchema = new Schema({
+    userEmail: String,
     cardName: String,
     cardQuantityAndPrice: String,
     venueName: String,

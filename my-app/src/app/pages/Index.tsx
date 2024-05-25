@@ -74,6 +74,7 @@ function Index() {
   const { TheGroom = '', TheBride = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
   return (
     <div>
+      <title>Home</title>
           <link
         rel="stylesheet"
         href="assets/index/css/Black-Navbar.css"

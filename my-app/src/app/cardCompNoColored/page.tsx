@@ -66,7 +66,9 @@ const handelClick3 = () => {
 
 
 
-
+  const token = Cookies.get("token");
+  // Extract the user's TheGroom and TheBride name from the JWT token
+  const { Email = "" } = token ? JSON.parse(atob(token.split(".")[1])) : {};
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -135,6 +137,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
   try {
     const response = await axios.post('http://localhost:3000/cardCompNoColored', {
+      userEmail: Email,
       theBride: theBride,
       theGroom: theGroom,
       date: date,
@@ -270,8 +273,15 @@ useEffect(() => {
                 {/*  card form 2 */}
                 <form action="/cardCompNoColored" method="post"  onSubmit={handleSubmit}>
                   <div className="input-group" style={{ marginBottom: "5px" }}>
-                    
-                    
+                
+                
+                {/* INPUT HIDDEN FOR USER EMAIL  */}
+                    <input
+                      name="userEmail"
+                      defaultValue={Email}
+                      type="hidden"
+                      id="user-email"
+                    />
                     
                     {/* The bride INPUT*/}
                     <label
