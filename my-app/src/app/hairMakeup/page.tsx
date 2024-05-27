@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import MainRegistered from "../components/MainRegistered";
 import Cookies from 'js-cookie';
-
+import { useAppContext } from '@/contextApi';
 function HairMakeup() {
   //import bootstrap javascript
   useEffect(() => {
@@ -17,7 +17,7 @@ function HairMakeup() {
   /////////////////
 
   //using carsoul
-
+  const { darkMode, setDarkMode } = useAppContext();
   useEffect(() => {
     // Check if document is defined (ensuring we're on the client-side)
     if (typeof document !== "undefined") {
@@ -59,7 +59,7 @@ function HairMakeup() {
 
   return (
    
-    <div>
+    <div className={`App ${darkMode ? 'theme-dark' : 'theme-light'}`}>
        
        <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
       <meta charSet="utf-8" />

@@ -474,7 +474,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                       id="date"
                       required
                       style={{ height: "36.6px" }}
-                      / >
+                      />
                       
                
                   </div>

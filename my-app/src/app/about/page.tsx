@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import NavbarRegistered from "../components/NavbarRegistered";
 import MainRegistered from "../components/MainRegistered";
 import Cookies from 'js-cookie';
+import { useAppContext } from '@/contextApi';
+
 
 function AboutUs() {
   //import bootstrap javascript
@@ -26,6 +28,7 @@ function AboutUs() {
     }
   }, []);
   ////////////
+  const { darkMode, setDarkMode } = useAppContext();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     // Update isLoggedIn after the component has mounted
@@ -48,7 +51,7 @@ function AboutUs() {
   }, [isLoggedIn]);
 
   return (
-    <div>
+    <div className={`App ${darkMode ? 'theme-dark' : 'theme-light'}`} >
       <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
       
       <meta charSet="utf-8" />

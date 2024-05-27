@@ -12,6 +12,10 @@ import NavbarRegistered from "../components/NavbarRegistered";
 import Modal1 from "../components/modal";
 import { useAppContext } from '@/contextApi';
 
+import { Container, Button } from 'react-bootstrap';
+
+
+  
 
 
 
@@ -45,7 +49,8 @@ function Index() {
     }
   }, []);
  
-
+  //////////dark mode///////////
+  const { darkMode, setDarkMode } = useAppContext();
   ///////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
@@ -72,12 +77,16 @@ function Index() {
   const token = Cookies.get('token');
   // Extract the user's TheGroom and TheBride name from the JWT token
   const { TheGroom = '', TheBride = '' } = token? JSON.parse(atob(token.split('.')[1])) : {};
+
   return (
-    <div>
+    <div className={`App ${darkMode ? 'theme-dark' : 'theme-light'}`}>
+    <div > 
+
           <link
         rel="stylesheet"
         href="assets/index/css/Black-Navbar.css"
       />
+     
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -96,6 +105,7 @@ function Index() {
     </video>
           </div>
           <div
+         
             className="container text-center"
             style={{   backgroundColor: "rgba(0, 0, 0, 0.5)", alignContent: "center" , height: "100%",width: "100%",borderRadius:'20px'}}
           >
@@ -170,6 +180,7 @@ function Index() {
                 </h4>
               </div>
               <div
+              
                 className="col-md-6 col-lg-3 mb-5 mb-lg-0"
                 data-aos="fade-up"
                 data-aos-duration={750}
@@ -1622,8 +1633,11 @@ function Index() {
        
       </div>
       <><Footer/></>
-      
+     
     </div>
+    </div>
+    
+   
   );
 }
 export default Index;

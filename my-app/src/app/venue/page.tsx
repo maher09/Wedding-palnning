@@ -511,7 +511,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-1"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
+            
             onChange={handleTimeChange}
           />
           <label
@@ -522,6 +522,7 @@ useEffect(() => {
               fontSize: "37px",
               fontWeight: "bold",
               marginRight: "20px",
+              
             }}
           >
             5:00-8:00
@@ -534,7 +535,7 @@ useEffect(() => {
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-1"
             value="9:00-12:00"
-           
+            
             onChange={handleTimeChange}
           />
           <label
@@ -579,8 +580,9 @@ useEffect(() => {
                 handelClickLinkLogin();
               }
         
-        
+             
         }}
+        disabled={!handleTimeChange}
       >
         {" "}
         Book venue
@@ -853,7 +855,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-2"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
+            
             onChange={handleTimeChange}
           />
         
@@ -878,6 +880,7 @@ useEffect(() => {
             style={{ width: "25px", height: "25px", marginRight: "7px" }}
             name="radio-2"
             value="9:00-12:00"
+            
             onChange={handleTimeChange}
           />
           <label
@@ -922,6 +925,8 @@ useEffect(() => {
                   handelClickLinkLogin();
                 }
           }}
+          
+          disabled={!handleTimeChange} // Disable button if no radio button is selected
       >
         {" "}
         Book venue
@@ -1187,7 +1192,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-3"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
+          
             onChange={handleTimeChange}
           />
           <label
@@ -1524,7 +1529,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-4"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
+      
             onChange={handleTimeChange}
           />
           <label
@@ -1871,7 +1876,7 @@ useEffect(() => {
             style={{ width: "25px", height: "24px", marginRight: "7px" }}
             name="radio-5"
             value="5:00-8:00"
-            checked={time === "5:00-8:00"}
+      
             onChange={handleTimeChange}
           />
           <label
