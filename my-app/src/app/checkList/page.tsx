@@ -6,17 +6,35 @@ import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
 import Checked from "../components/Checked";
 import MainRegistered from "../components/MainRegistered";
+import Addtasks from "../components/addtasks";
 import Cookies from 'js-cookie';
 
 function CheckList() {
   const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // One counter for each SVG
   const [isChecked, setIsChecked] = useState<boolean[]>([]);
+  const [tasks, setTasks] = useState<string[]>([]);
+ 
+
+  
   
   // Load checked state from localStorage on mount
   useEffect(() => {
     const savedCheckedState = JSON.parse(localStorage.getItem('checkedState') || '[]');
     setIsChecked(savedCheckedState);
   }, []);
+
+  const addTask = (task: string) => {
+    setTasks([...tasks, task]);
+    setIsChecked([...isChecked, false]); // Add a new false entry for the new task
+  };
+
+  const removeTask = (index: number) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    const updatedChecked = isChecked.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+    setIsChecked(updatedChecked);
+  };
+
 
   const handleToggle = (index: number) => {
     const newChecked = [...isChecked];
@@ -265,40 +283,31 @@ function CheckList() {
               Order outfits for your wedding party.
             </li>
            
+             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+              <Checked index={19} isChecked={isChecked[19]} onChange={handleToggle} />
+              Order outfits for your wedding party.
+            </li>
+           
      
           </ul>
         </div>
       </div>
+ 
 
-      <div className="container">
-        <div id="myDIV" className="header">
-          <h2 style={{ margin: "5px" }}>Wedding To Do List</h2>
-          <input
-            type="text"
-            id="myInput"
-            placeholder="Title..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <span onClick={newElement} className="addBtn">
-            Add
-          </span>
-        </div>
-        <ul id="myUL">
-          {items.map((item, index) => (
-            <li key={index}>
-              {item}
-              <span
-                className="close"
-                onClick={() => removeItem(index)}
+            <div
+                className="container"
+                style={{ marginTop: "65px", width: "1100px" }}
               >
-                ×
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
+           
+          <Addtasks
+        tasks={tasks}
+        isChecked={isChecked}
+        onToggle={handleToggle}
+        onAddTask={addTask}
+        onRemoveTask={removeTask}
+      />
+             
+            </div>
       <>{isLoggedIn ? <Footer /> : <Footer />}</>
     </div>
   );

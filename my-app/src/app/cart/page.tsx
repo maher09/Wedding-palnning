@@ -41,6 +41,9 @@ function Cart() {
       }
     }, 100);
 
+
+
+    
   
     // Clean up the interval when the component unmounts
     return () => {
