@@ -10,7 +10,7 @@ function Buycard() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/Buycard/bootstrap/js/bootstrap.min.js");
-     
+    
 
     }
   }, []);
@@ -24,14 +24,14 @@ function Buycard() {
   const handelClick = () => {
     setShowBuyCart(true);
     if(showBuyCart==false && conterApp==1){
-     setconterApp(null)
+    setconterApp(null)
     }
   
     else if(conterApp==2){
       setconterApp(conterApp-1);
     }
   }
- 
+
   return (
     <tfoot>
                 <tr>
@@ -79,14 +79,14 @@ function Buycard() {
                           textAlign: "center",
                           fontWeight: "bold",
                           fontSize: "22px",
-                           width: "126.344px",
+                          width: "126.344px",
                         }}>
                         
                          {/* span for price of card  */}
                         <span id="price-span" >{priceCart}</span>
                         
                         
-                     
+                    
                         
                          {/* input hidden card Quantity&Price */}     
                         <input type="hidden" id="card-price" required 
