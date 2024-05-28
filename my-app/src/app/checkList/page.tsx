@@ -241,30 +241,32 @@ function CheckList() {
               <Checked index={11} isChecked={isChecked[11]} onChange={handleToggle} />
               Book wedding night accommodations.
             </li>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+              <Checked index={12} isChecked={isChecked[12]} onChange={handleToggle} />
+             Book your wedding venue.
+            </li>   
             <li className="checked1 pd "  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987",background: "white" }}>
               <strong>&nbsp;1 month to go</strong>
             </li>
             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
-              <Checked index={12} isChecked={isChecked[12]} onChange={handleToggle} />
+              <Checked index={13} isChecked={isChecked[13]} onChange={handleToggle} />
               Start planning your honeymoon.
             </li>
             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
-              <Checked index={13} isChecked={isChecked[13]} onChange={handleToggle} />
+              <Checked index={14} isChecked={isChecked[14]} onChange={handleToggle} />
               Hire your videographer.
             </li>
             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
-              <Checked index={14} isChecked={isChecked[14]} onChange={handleToggle} />
+              <Checked index={15} isChecked={isChecked[15]} onChange={handleToggle} />
               Hiar a hair and makeup stylist.
             </li>
             <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
-              <Checked index={15} isChecked={isChecked[15]} onChange={handleToggle} />
+              <Checked index={16} isChecked={isChecked[16]} onChange={handleToggle} />
               Get your marriage license.
             </li>
 
             <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
-              <Checked index={16} isChecked={isChecked[16]} onChange={handleToggle} />
-
-
+              <Checked index={17} isChecked={isChecked[17]} onChange={handleToggle} />
               Book your wedding cake.
             </li>
             <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" , background: "white" }}>
@@ -272,26 +274,23 @@ function CheckList() {
             </li>
 
             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
-              <Checked index={17} isChecked={isChecked[17]} onChange={handleToggle} />
+              <Checked index={18} isChecked={isChecked[18]} onChange={handleToggle} />
               Book your wedding flowers.
             </li>
             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
-              <Checked index={18} isChecked={isChecked[18]} onChange={handleToggle} />
+              <Checked index={19} isChecked={isChecked[19]} onChange={handleToggle} />
               Confirm final details with your vendors.
             </li>
             <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
-              <Checked index={19} isChecked={isChecked[19]} onChange={handleToggle} />
+              <Checked index={20} isChecked={isChecked[20]} onChange={handleToggle} />
               Purchase gifts for your wedding party.
             </li>
             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
-              <Checked index={20} isChecked={isChecked[20]} onChange={handleToggle} />
+              <Checked index={21} isChecked={isChecked[21]} onChange={handleToggle} />
               Order outfits for your wedding party.
             </li>
            
-             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
-              <Checked index={21} isChecked={isChecked[21]} onChange={handleToggle} />
-              Order outfits for your wedding party.
-            </li>   
+            
           </ul>
         </div>
       </div>
