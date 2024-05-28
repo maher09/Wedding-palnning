@@ -139,6 +139,7 @@ function CheckList() {
           fontSize: "38px",
           fontFamily: '"Abhaya Libre", serif',
           fontWeight: "bold",
+          color: "black"
         }}
       >
         &nbsp;You have completed &nbsp;
@@ -183,104 +184,104 @@ function CheckList() {
           style={{ marginBottom: "93px" }}
         >
           <ul className="list-unstyled">
-          <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "#f4f0f8" , fontWeight:"bold" }}>
+          <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "white" , fontWeight:"bold",  }}>
               &nbsp;12 months to go
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)", borderBottom: "1px solid #c0cbcf" }}>
               <Checked index={0} isChecked={isChecked[0]} onChange={handleToggle} />
               Announce your wedding.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={1} isChecked={isChecked[1]} onChange={handleToggle} />
               Set a wedding budget.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={2} isChecked={isChecked[2]} onChange={handleToggle} />
               Find and hire your wedding planner.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={3} isChecked={isChecked[3]} onChange={handleToggle} />
               Choose your wedding date.
             </li>
-            <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "white" }}>
               <strong>&nbsp;6 months to go</strong>
             </li>
-            <li className="checked1 pd"style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd"style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={4} isChecked={isChecked[4]} onChange={handleToggle} />
               Start creating your guest list.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={5} isChecked={isChecked[5]} onChange={handleToggle} />
               Decide on your color scheme.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={6} isChecked={isChecked[6]} onChange={handleToggle} />
               Choose wedding rings.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8"  }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8"  , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={7} isChecked={isChecked[7]} onChange={handleToggle} />
               Order free invitation card samples.
             </li>
-            <li className="checked1 pd"  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "#f4f0f8" }}>
+            <li className="checked1 pd"  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "white" }}>
               <strong>&nbsp;3 months to go</strong>
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={8} isChecked={isChecked[8]} onChange={handleToggle} />
               Find and order wedding favors.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={9} isChecked={isChecked[9]} onChange={handleToggle} />
               Finalize the reception menu.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={10} isChecked={isChecked[10]} onChange={handleToggle} />
               Book the rehearsal and rehearsal dinner venue.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={11} isChecked={isChecked[11]} onChange={handleToggle} />
               Book wedding night accommodations.
             </li>
-            <li className="checked1 pd "  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987",background: "#f4f0f8" }}>
+            <li className="checked1 pd "  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987",background: "white" }}>
               <strong>&nbsp;1 month to go</strong>
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={12} isChecked={isChecked[12]} onChange={handleToggle} />
               Start planning your honeymoon.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={13} isChecked={isChecked[13]} onChange={handleToggle} />
               Hire your videographer.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={14} isChecked={isChecked[14]} onChange={handleToggle} />
               Hiar a hair and makeup stylist.
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={15} isChecked={isChecked[15]} onChange={handleToggle} />
               Get your marriage license.
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={15} isChecked={isChecked[15]} onChange={handleToggle} />
               Book your wedding cake.
             </li>
-            <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" , background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" , background: "white" }}>
               <strong>&nbsp;1 week to go</strong>
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={16} isChecked={isChecked[16]} onChange={handleToggle} />
               Book your wedding flowers.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={17} isChecked={isChecked[17]} onChange={handleToggle} />
               Confirm final details with your vendors.
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={18} isChecked={isChecked[18]} onChange={handleToggle} />
               Purchase gifts for your wedding party.
             </li>
             
            
-             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+             <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
               <Checked index={19} isChecked={isChecked[19]} onChange={handleToggle} />
               Order outfits for your wedding party.
             </li>
