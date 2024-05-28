@@ -16,6 +16,7 @@
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
+    "instal": "^0.0.1-security",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
