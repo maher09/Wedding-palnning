@@ -125,7 +125,12 @@ function Index() {
           <h1
             style={{
               fontSize: "73.295px",
-              fontFamily: '"Abhaya Libre", serif',
+              fontFamily:"Cinzel Decorative",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "60px",
+              boxShadow: "0px 0px 10px 0px chocolate",
             }}
           >
             WELCOME {`${TheGroom} & ${TheBride}`}
