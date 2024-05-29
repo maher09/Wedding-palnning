@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useAppContext } from '@/contextApi';
 
 function Bookreservation() {
-  //import bootstrap javascript
   const {name,setname} = useAppContext();
   const {price,setprice} = useAppContext();
   const {day,setday} = useAppContext();
@@ -13,30 +12,50 @@ function Bookreservation() {
   const {year,setyear} = useAppContext();
   const {timee,settimee} = useAppContext();
   const {showFirstComponent, setShowFirstComponent} = useAppContext();
-  
   const { conterApp, setconterApp } = useAppContext();
- 
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/Bookreservation/bootstrap/js/bootstrap.min.js");
-     
 
+      // Load initial state from local storage
+      const savedName = localStorage.getItem('name');
+      const savedPrice = localStorage.getItem('price');
+      const savedDay = localStorage.getItem('day');
+      const savedMonth = localStorage.getItem('month');
+      const savedYear = localStorage.getItem('year');
+      const savedTimee = localStorage.getItem('timee');
+
+      if (savedName) setname(savedName);
+      if (savedPrice) setprice(savedPrice);
+      if (savedDay) setday(savedDay);
+      if (savedMonth) setmonth(savedMonth);
+      if (savedYear) setyear(savedYear);
+      if (savedTimee) settimee(savedTimee);
     }
   }, []);
- 
- const handelClick = () => {
+
+  
+  useEffect(() => {
+    // Save state to local storage whenever it changes
+    localStorage.setItem('name', name);
+    localStorage.setItem('price', price);
+    localStorage.setItem('day', day);
+    localStorage.setItem('month', month);
+    localStorage.setItem('year', year);
+    localStorage.setItem('timee', timee);
+  }, [name, price, day, month, year, timee]);
+
+  const handelClick = () => {
     setShowFirstComponent(true);
     if(showFirstComponent==false && conterApp==1){
-     setconterApp(null)
+      setconterApp(null)
     }
   
     else if(conterApp==2){
     setconterApp(conterApp-1);
- }
+  }
 }
-
- ////
 
 const handelClickCheckout = () => {
   setname('');
@@ -46,6 +65,19 @@ const handelClickCheckout = () => {
   setyear('');
   settimee('');
 }
+
+const handleRemove = () => {
+
+  // Remove items from local storage
+  localStorage.removeItem('name');
+  localStorage.removeItem('price');
+  localStorage.removeItem('day');
+  localStorage.removeItem('month');
+  localStorage.removeItem('year');
+  localStorage.removeItem('timee');
+}
+
+
   return (
 
 
@@ -144,6 +176,7 @@ const handelClickCheckout = () => {
                             onClick={() => {
                               handelClick();
                               handelClickCheckout();
+                              handleRemove ();
                           
                             }}
                           >

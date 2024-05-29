@@ -10,11 +10,17 @@ function Buycard() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/Buycard/bootstrap/js/bootstrap.min.js");
-     
 
+      // Load initial state from local storage
+      const savedImgCart = localStorage.getItem('imgCart');
+      const savedNameCart = localStorage.getItem('nameCart');
+      const savedPriceCart = localStorage.getItem('priceCart');
+
+      if (savedImgCart) setimgCart(savedImgCart);
+      if (savedNameCart) setnameCart(savedNameCart);
+      if (savedPriceCart) setpriceCart(savedPriceCart);
     }
   }, []);
-
 
   const {imgCart,setimgCart} = useAppContext();
   const {nameCart,setnameCart} = useAppContext();
@@ -22,20 +28,35 @@ function Buycard() {
   const {showBuyCart, setShowBuyCart} = useAppContext();
   const { conterApp, setconterApp } = useAppContext();
 
+  useEffect(() => {
+    // Save state to local storage whenever it changes
+    localStorage.setItem('imgCart', imgCart);
+    localStorage.setItem('nameCart', nameCart);
+    localStorage.setItem('priceCart', priceCart);
+  }, [imgCart, nameCart, priceCart]);
+
   const handelClick = () => {
     setShowBuyCart(true);
     if(showBuyCart==false && conterApp==1){
      setconterApp(null)
     }
-  
     else if(conterApp==2){
       setconterApp(conterApp-1);
     }
   }
-
   const handelClickCheckout = () => {
     setnameCart('');
     setpriceCart('');
+
+  }
+
+  const handleRemove = () => {
+
+    // Remove items from local storage
+    localStorage.removeItem('imgCart');
+    localStorage.removeItem('nameCart');
+    localStorage.removeItem('priceCart');
+  
   }
   return (
     <tfoot>
@@ -43,7 +64,7 @@ function Buycard() {
                       
                       <td style={{ fontSize: "15px", width: "141.438px" }}>
                         
-                        <Image
+                        <img
                           src={imgCart}
                           width={141}
                           height={220}
@@ -118,7 +139,7 @@ function Buycard() {
                           onClick={() => {
                             handelClick();
                             handelClickCheckout();
-                        
+                            handleRemove();
                           }}
                         >
 

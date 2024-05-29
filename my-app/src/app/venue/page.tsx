@@ -132,6 +132,9 @@ useEffect(() => {
 
   //showing the model when the user click on the book button without login
   const {show, setShow} = useAppContext();
+  
+  
+  
   const handelClickLinkLogin = () => {
         setShow(!show); // Toggle the show state
   };
@@ -140,7 +143,12 @@ useEffect(() => {
 
   //BookVenue1
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
-const handleBookVenue = async (venueName:string, venuePrice:string) => {
+
+  const token = Cookies.get("token");
+  // Extract the user's TheGroom and TheBride name from the JWT token
+  const { Email = "" } = token ? JSON.parse(atob(token.split(".")[1])) : {};
+
+  const handleBookVenue = async (venueName:string, venuePrice:string) => {
   let hasError = false;
   let newErrorMessages = {...errorMessages}; // Copy the current error messages
 
@@ -178,7 +186,7 @@ const handleBookVenue = async (venueName:string, venuePrice:string) => {
       handleClick();
       setname(venueName);
       setprice(venuePrice);
-      settimee(time[venueName])
+      settimee(time[venueName]);
 
     }
   } catch (error) {

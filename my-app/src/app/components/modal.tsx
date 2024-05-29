@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -250,7 +250,25 @@ const [loginPassword, setLoginPassword] = useState("");
     };
     
     ////////////////////////////////////////////////////////
-
+    const handleEmailVerification = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+  
+      if (token) {
+          try {
+              const response = await axios.get(`http://localhost:3000/verify?token=${token}`);
+              console.log(response.data); // Output success message
+          } catch (error) {
+              console.error(error);
+              // Handle error here
+          }
+      }
+  };
+  
+  // Call the function when the component mounts
+  useEffect(() => {
+      handleEmailVerification();
+  }, []);
 
   return (
     <>
@@ -541,8 +559,8 @@ const [loginPassword, setLoginPassword] = useState("");
                         style={{ display: "none" }}
                       />
                       <input
-                       type={showPassword? "text" : "password"}
-                       name="Password"
+                        type={showPassword? "text" : "password"}
+                        name="Password"
                         value={Password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="form-control form-control form-control form-control-user"
@@ -556,7 +574,7 @@ const [loginPassword, setLoginPassword] = useState("");
     <div className="text-danger" style={{ fontSize: "12px" }}>
       {passwordError}
     </div>
-     )}
+    )}
                     </div>
                     <div className="mb-3">
                           <div className="custom-control custom-checkbox small">
@@ -607,7 +625,7 @@ const [loginPassword, setLoginPassword] = useState("");
           </div>
         </div>
       </Modal>
-     
+    
       <Modal show={showModal} onHide={() => { handleCloseAllOtherModals(); setShowModal(false); handleShow(); }} centered size="sm">
   <Modal.Header closeButton style={{ borderBottom: 'none' }}/>
   <div style={{ display: 'flex', justifyContent:"center"}}>

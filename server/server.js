@@ -16,6 +16,13 @@ const Cart = require("./modals/cartSchema");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+
+//Import express-session
+const session = require('express-session');
+
+
+
+
 //CALL dotenv
 require('dotenv').config();
 
@@ -31,7 +38,17 @@ const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
- 
+
+//session middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false, // add this line,
+    cookie: { secure: false }}
+        ));
+
+
+
 //verifyToken function
 function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];
@@ -209,7 +226,6 @@ app.post("/cart",verifyToken, (req, res) => {
 })
 
 
-
 /////////////////
 
 
@@ -218,6 +234,7 @@ app.post("/cart",verifyToken, (req, res) => {
 
 //first lets check if user exist in database
 app.post("/login", (req, res) => {
+    console.log(req.sessionID);
     const { Email, Password } = req.body;
 
     // Find the user by email
@@ -228,7 +245,6 @@ app.post("/login", (req, res) => {
                 return res.status(404).send('Incorrect email or password');
             }
 
-
             // Compare the provided password with the hashed password stored in the database
             bcrypt.compare(Password, user.Password, function(err, result) {
                 if (err || !result) {
@@ -236,7 +252,6 @@ app.post("/login", (req, res) => {
                     return res.status(401).send('Incorrect email or password');
                 }
 
-                
                 // Generate JWT token
                 const token = jwt.sign({ userId: user._id ,
                                         TheGroom:user.TheGroom,
@@ -245,6 +260,18 @@ app.post("/login", (req, res) => {
                                         },process.env.JWT_SECRET,{ expiresIn: process.env.JWT_EXPIRES_IN });
 
                 // Passwords,emails and token generated  match , authentication successful
+                // Store user data in session
+                req.session.user = {
+                    id: user._id,
+                    email: user.Email,
+                    theGroom: user.TheGroom,
+                    theBride: user.TheBride,
+                    token: token
+                };
+
+                // Set authenticated flag in session
+                req.session.authenticated = true;
+
                 res.status(200).send({ message: 'Login successful',data:user.id, token });
             });
         })
@@ -253,6 +280,7 @@ app.post("/login", (req, res) => {
             res.status(500).send('Incorrect email or password');
         });
 });
+
 
 
 // Check for reservation route

@@ -26,8 +26,15 @@ function NavbarRegistered() {
   
   
   const { conterApp, setconterApp } = useAppContext();
-  
+  const {showBuyCart, setShowBuyCart} = useAppContext();
+  const {showFirstComponent, setShowFirstComponent} = useAppContext();
   /////////////////
+  const handelClick = () => {
+    setShowFirstComponent(true);
+    setShowBuyCart(true);
+    
+    }
+
 
   return (
     <>
@@ -350,7 +357,8 @@ function NavbarRegistered() {
               fontFamily: '"Abhaya Libre", serif',
             }}
             onClick={() => {
-              Cookies.remove('token'); // Remove the token
+              Cookies.remove('token'); // Remove the tokenz
+              handelClick();
               
             }}
           >
