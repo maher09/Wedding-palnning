@@ -139,11 +139,13 @@ function Buycard() {
                           viewBox="0 0 24 24"
                           fill="none"
                           style={{ fontSize: "54px", color: "rgb(146,0,0)", cursor: "pointer"}}
+
                           onClick={() => {
                             handelClick();
                             handelClickCheckout();
                             handleRemove();
                           }}
+
                         >
 
 
