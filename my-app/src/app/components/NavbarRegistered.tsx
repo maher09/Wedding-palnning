@@ -4,6 +4,7 @@ import "../../../public/assets/navbarRegistered/bootstrap/css/bootstrap.min.css"
 import Link from "next/link";
 import { useAppContext } from '@/contextApi';
 import Cookies from 'js-cookie';
+import ProfileModal from './ProfileModal';
 // Define an interface for your JWT payload
 
 // Define an interface for your JWT payload
@@ -26,8 +27,14 @@ function NavbarRegistered() {
   
   
   const { conterApp, setconterApp } = useAppContext();
+
   const {showBuyCart, setShowBuyCart} = useAppContext();
   const {showFirstComponent, setShowFirstComponent} = useAppContext();
+
+  const [shhowProfileModal, setshhowProfileModal] = useState(false);
+  
+  
+
   /////////////////
   const handelClick = () => {
     setShowFirstComponent(true);
@@ -95,6 +102,7 @@ function NavbarRegistered() {
         className="navbar navbar-expand-md bg-body"
         style={{ height: "79px" }}
       >
+          <ProfileModal show={shhowProfileModal} onHide={() => setshhowProfileModal(false)} />
         <div className="container">
           
           {/* juar link */}
@@ -296,6 +304,7 @@ function NavbarRegistered() {
             width="1em"
             height="1em"
             fill="currentColor"
+            onClick={() => setshhowProfileModal(true)}
             style={{ fontSize: "27px", marginRight: "9px" }}
           >
             {/*! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. */}

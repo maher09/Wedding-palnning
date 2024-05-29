@@ -37,12 +37,13 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 
             {/*componanetColor*/}
 
-               const [RedImgCounter, setRedImgCounter] = useState(1);
+            const [RedImgCounter, setRedImgCounter] = useState(1);
 
                {/*CART*/}
             const [imgCart, setimgCart] = useState('');
             const [nameCart, setnameCart] = useState('');
             const [priceCart, setpriceCart] = useState('');
+
 
 
             //fetch axios API useState
@@ -74,6 +75,10 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         }
     }, [showBuyCart]);
 
+                {/*Dark mode*/}
+ const [darkMode, setDarkMode] = useState(false);
+
+
     return (
         <AppContext.Provider value={{name,setname,
         timee,settimee,
@@ -88,7 +93,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         priceCart,setpriceCart,
         show,setShow,
         showFirstComponent,setShowFirstComponent,
-        showBuyCart,setShowBuyCart
+        showBuyCart,setShowBuyCart,
+        darkMode,setDarkMode
         }}>
             {children}
         </AppContext.Provider>

@@ -11,6 +11,7 @@ function Buycard() {
     if (typeof window !== "undefined") {
       require("../../../public/assets/Buycard/bootstrap/js/bootstrap.min.js");
 
+
       // Load initial state from local storage
       const savedImgCart = localStorage.getItem('imgCart');
       const savedNameCart = localStorage.getItem('nameCart');
@@ -38,12 +39,13 @@ function Buycard() {
   const handelClick = () => {
     setShowBuyCart(true);
     if(showBuyCart==false && conterApp==1){
-     setconterApp(null)
+    setconterApp(null)
     }
     else if(conterApp==2){
       setconterApp(conterApp-1);
     }
   }
+
   const handelClickCheckout = () => {
     setnameCart('');
     setpriceCart('');
@@ -58,6 +60,7 @@ function Buycard() {
     localStorage.removeItem('priceCart');
   
   }
+
   return (
     <tfoot>
                 <tr>
@@ -105,14 +108,14 @@ function Buycard() {
                           textAlign: "center",
                           fontWeight: "bold",
                           fontSize: "22px",
-                           width: "126.344px",
+                          width: "126.344px",
                         }}>
                         
                          {/* span for price of card  */}
                         <span id="price-span" >{priceCart}</span>
                         
                         
-                     
+                    
                         
                          
                         

@@ -418,7 +418,9 @@ function CardCompColored() {
                       id="date"
                       required
                       style={{ height: "36.6px" }}
+
                     />
+
                   </div>
                   {DateError && (
                     <div className="text-danger" style={{ fontSize: "12px" }}>

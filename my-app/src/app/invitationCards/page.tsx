@@ -18,6 +18,7 @@ import { Console } from "console";
 
 function InvitationCards() {
   //import bootstrap javascript
+  const { darkMode, setDarkMode } = useAppContext();
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("../../../public/assets/invitationCards/bootstrap/js/bootstrap.min.js");
@@ -237,7 +238,7 @@ function InvitationCards() {
           setShow(!show); // Toggle the show state
     };
   return (
-    <div>
+    <div className={`App ${darkMode ? 'theme-dark' : 'theme-light'}`}>
       <>
         {" "}
         <>{isLoggedIn ? <NavbarRegistered/> : <MainRegistered/>}</>
