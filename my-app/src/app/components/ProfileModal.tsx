@@ -102,11 +102,11 @@ function ProfileModal(props: any) {
             </Modal.Header>
             <Modal.Body className="grid-example">
                 <Container>
-                    <Row>
-                        <Col xs={6} md={6}>
-                            <img src={selectedImage?.toString() || "https://www.w3schools.com/w3images/avatar2.png"} alt="Avatar" className="avatar rounded" width={150} height={150} />
-                        </Col>
-                        <Col xs={6} md={6}>
+                    
+                         <Row>
+                            <img src={selectedImage?.toString() || "https://www.w3schools.com/w3images/avatar2.png"} alt="Avatar" className="avatar rounded-circle" width={100} height={350} />
+                        </Row>
+                        <Row  >
                             <b>Profile Photo</b>
                             <p>Accepted file type .png. Less than 1MB</p>
                             <input
@@ -116,14 +116,18 @@ function ProfileModal(props: any) {
                                 style={{ display: 'none' }}
                                 id="imageUpload"
                             />
-                            <label htmlFor="imageUpload" className="btn btn-primary" style={{
-                                width: "75.8906px",
-                                borderRadius: "7px",
-                                fontFamily: '"Abhaya Libre", serif',
-                            }}>
-                                <b>Upload</b>
+                            <label htmlFor="imageUpload" className="btn btn-primary"
+                                id="logout-btn"
+                            
+                                style={{
+                                    width: "75.8906px",
+                                    borderRadius: "7px",
+                                    fontFamily: '"Abhaya Libre", serif',
+                                    marginLeft: "10px"
+                    }}>
+                                Upload
                             </label>
-                        </Col>
+                     
                     </Row>
                     <br />
                     <Row>

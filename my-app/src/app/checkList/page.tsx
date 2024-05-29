@@ -10,37 +10,61 @@ import Addtasks from "../components/addtasks";
 import Cookies from 'js-cookie';
 
 function CheckList() {
-  const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // One counter for each SVG
-  const [isChecked, setIsChecked] = useState<boolean[]>([]);
-  const [tasks, setTasks] = useState<string[]>([]);
- 
+  const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [tasks, setTasks] = useState<string[]>(() => {
+    if (typeof window !== 'undefined') {
+      const savedTasks = localStorage.getItem('tasks');
+      return savedTasks ? JSON.parse(savedTasks) : [];
+    }
+    return [];
+  });
 
-  
-  
-  // Load checked state from localStorage on mount
+  const [isChecked, setIsChecked] = useState<boolean[]>(() => {
+    if (typeof window !== 'undefined') {
+      const savedChecked = localStorage.getItem('isChecked');
+      return savedChecked ? JSON.parse(savedChecked) : [];
+    }
+    return [];
+  });
+
   useEffect(() => {
-    const savedCheckedState = JSON.parse(localStorage.getItem('checkedState') || '[]');
-    setIsChecked(savedCheckedState);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }, [tasks]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('isChecked', JSON.stringify(isChecked));
+    }
+  }, [isChecked]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedCheckedState = JSON.parse(localStorage.getItem('checkedState') || '[]');
+      setIsChecked(savedCheckedState);
+    }
   }, []);
 
   const addTask = (task: string) => {
     setTasks([...tasks, task]);
-    setIsChecked([...isChecked, false]); // Add a new false entry for the new task
+    setIsChecked([...isChecked, false]);
   };
 
   const removeTask = (index: number) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    const updatedChecked = isChecked.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
-    setIsChecked(updatedChecked);
+    const newTasks = tasks.filter((_, i) => i !== index);
+    const newChecked = isChecked.filter((_, i) => i !== index);
+    setTasks(newTasks);
+    setIsChecked(newChecked);
   };
-
 
   const handleToggle = (index: number) => {
     const newChecked = [...isChecked];
     newChecked[index] = !newChecked[index];
     setIsChecked(newChecked);
-    localStorage.setItem('checkedState', JSON.stringify(newChecked));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('checkedState', JSON.stringify(newChecked));
+    }
 
     setCounters((prevCounters) => {
       const newCounters = [...prevCounters];
@@ -53,15 +77,14 @@ function CheckList() {
 
   // Import bootstrap javascript
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      require("../../../public/assets/checkList/bootstrap/js/bootstrap.min.js");
+    if (typeof window !== 'undefined') {
+      require('../../../public/assets/checkList/bootstrap/js/bootstrap.min.js');
     }
   }, []);
 
   const [items, setItems] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
-  // Function to create a new list item
   const newElement = () => {
     if (inputValue === '') {
       alert("You must write something!");
@@ -71,7 +94,6 @@ function CheckList() {
     setInputValue('');
   };
 
-  // Function to remove a list item
   const removeItem = (index: number) => {
     const updatedItems = [...items];
     updatedItems.splice(index, 1);
@@ -80,24 +102,19 @@ function CheckList() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    // Update isLoggedIn after the component has mounted
-    setIsLoggedIn(!!Cookies.get('token'));
+    const checkLoginStatus = () => {
+      const token = Cookies.get('token');
+      setIsLoggedIn(!!token);
+    };
 
-    // Check for token change every 100ms
-    const intervalId = setInterval(() => {
-      const newToken = Cookies.get('token');
-      if (newToken && !isLoggedIn) {
-        setIsLoggedIn(true);
-      } else if (!newToken && isLoggedIn) {
-        setIsLoggedIn(false);
-      }
-    }, 100);
+    checkLoginStatus();
 
-    // Clean up the interval when the component unmounts
+    const intervalId = setInterval(checkLoginStatus, 100);
+
     return () => {
       clearInterval(intervalId);
     };
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div>
@@ -187,57 +204,57 @@ function CheckList() {
           <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "white" , fontWeight:"bold",  }}>
               &nbsp;12 months to go
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)", borderBottom: "1px solid #c0cbcf" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)", borderBottom: "1px solid rgba(192, 203, 207,0.4)" }}>
               <Checked index={0} isChecked={isChecked[0]} onChange={handleToggle} />
               Announce your wedding.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid rgba(192, 203, 207,0.4)" }}>
               <Checked index={1} isChecked={isChecked[1]} onChange={handleToggle} />
               Set a wedding budget.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid rgba(192, 203, 207,0.4)" }}>
               <Checked index={2} isChecked={isChecked[2]} onChange={handleToggle} />
               Find and hire your wedding planner.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background:"rgb(244, 240, 248)" , borderBottom: "1px solid rgba(192, 203, 207,0.4)" }}>
               <Checked index={3} isChecked={isChecked[3]} onChange={handleToggle} />
               Choose your wedding date.
             </li>
             <li className="checked1 pd" style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "white" }}>
               <strong>&nbsp;6 months to go</strong>
             </li>
-            <li className="checked1 pd"style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd"style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={4} isChecked={isChecked[4]} onChange={handleToggle} />
               Start creating your guest list.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={5} isChecked={isChecked[5]} onChange={handleToggle} />
               Decide on your color scheme.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={6} isChecked={isChecked[6]} onChange={handleToggle} />
               Choose wedding rings.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8"  , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8"  , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={7} isChecked={isChecked[7]} onChange={handleToggle} />
               Order free invitation card samples.
             </li>
             <li className="checked1 pd"  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987" ,background: "white" }}>
               <strong>&nbsp;3 months to go</strong>
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={8} isChecked={isChecked[8]} onChange={handleToggle} />
               Find and order wedding favors.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={9} isChecked={isChecked[9]} onChange={handleToggle} />
               Finalize the reception menu.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={10} isChecked={isChecked[10]} onChange={handleToggle} />
               Book the rehearsal and rehearsal dinner venue.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={11} isChecked={isChecked[11]} onChange={handleToggle} />
               Book wedding night accommodations.
             </li>
@@ -248,19 +265,19 @@ function CheckList() {
             <li className="checked1 pd "  style={{ textAlign: "center", fontFamily: '"Abhaya Libre", serif', fontSize: "42px", color: "#313987",background: "white" }}>
               <strong>&nbsp;1 month to go</strong>
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={13} isChecked={isChecked[13]} onChange={handleToggle} />
               Start planning your honeymoon.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={14} isChecked={isChecked[14]} onChange={handleToggle} />
               Hire your videographer.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={15} isChecked={isChecked[15]} onChange={handleToggle} />
               Hiar a hair and makeup stylist.
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid #c0cbcf"}}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={16} isChecked={isChecked[16]} onChange={handleToggle} />
               Get your marriage license.
             </li>
@@ -273,19 +290,19 @@ function CheckList() {
               <strong>&nbsp;1 week to go</strong>
             </li>
 
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8", borderBottom: "1px solid rgba(192, 203, 207,0.4)" }}>
               <Checked index={18} isChecked={isChecked[18]} onChange={handleToggle} />
               Book your wedding flowers.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={19} isChecked={isChecked[19]} onChange={handleToggle} />
               Confirm final details with your vendors.
             </li>
-            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li  className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" , borderBottom: "1px solid rgba(192, 203, 207,0.4)"}}>
               <Checked index={20} isChecked={isChecked[20]} onChange={handleToggle} />
               Purchase gifts for your wedding party.
             </li>
-            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8" }}>
+            <li className="checked1 pd" style={{ fontFamily: "Roboto, sans-serif", background: "#f4f0f8", borderBottom: "1px solid rgba(192, 203, 207,0.4)" }}>
               <Checked index={21} isChecked={isChecked[21]} onChange={handleToggle} />
               Order outfits for your wedding party.
             </li>
@@ -301,7 +318,7 @@ function CheckList() {
                 style={{ marginTop: "65px", width: "1100px" }}
               >
            
-          <Addtasks
+           <Addtasks
         tasks={tasks}
         isChecked={isChecked}
         onToggle={handleToggle}

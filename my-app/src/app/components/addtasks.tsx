@@ -11,18 +11,16 @@ interface AddtasksProps {
 }
 
 function Addtasks({ tasks, isChecked, onToggle, onAddTask, onRemoveTask }: AddtasksProps) {
-  // Initialize inputValue with local storage value or default to an empty string
+  
   const [inputValue, setInputValue] = useState<string>(() => {
     const savedInputValue = localStorage.getItem("inputValue");
     return savedInputValue || "";
   });
 
-  // Update local storage whenever inputValue changes
   useEffect(() => {
     localStorage.setItem("inputValue", inputValue);
   }, [inputValue]);
 
-  // Handle adding a new task
   const handleAddTask = () => {
     if (inputValue === "") {
       alert("You must write something!");
@@ -30,21 +28,14 @@ function Addtasks({ tasks, isChecked, onToggle, onAddTask, onRemoveTask }: Addta
     }
     onAddTask(inputValue);
     setInputValue("");
-    localStorage.removeItem("inputValue"); // Clear input value from local storage after adding task
+    localStorage.removeItem("inputValue");
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setInputValue(newValue);
     localStorage.setItem("inputValue", newValue);
   };
-
-  useEffect(() => {
-    console.log("Addtasks component mounted");
-    // You can also check the initial input value here
-    console.log("Initial input value:", inputValue);
-  }, []);
-
-  // Remove the duplicate declaration of handleChange function
 
 
 
