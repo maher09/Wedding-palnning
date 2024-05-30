@@ -14,6 +14,8 @@ import MainRegistered from "../components/MainRegistered";
 import Cookies from "js-cookie";
 
 import { useAppContext } from "@/contextApi";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
 
 function Cart() {
   //import bootstrap javascript
@@ -39,7 +41,6 @@ function Cart() {
         setIsLoggedIn(false);
       }
     }, 100);
-
 
     // Clean up the interval when the component unmounts
     return () => {
@@ -106,6 +107,9 @@ function Cart() {
     e.preventDefault();
     let hasError = false; // This flag will track if any errors occur during validation
     const phonePattern = /^\+?[0-9]+$/;
+
+    
+
 
     if (showFirstComponent == true && showBuyCart == true) {
       setCheckoutError("Please add at least one item to your cart");
@@ -391,7 +395,7 @@ function Cart() {
                     {/* input+label for phone   */}
 
                     <label
-                      className="form-label  form-label"
+                      className="form-label  form-label "
                       htmlFor="phone"
                       style={{
                         fontSize: "20px",
@@ -403,21 +407,19 @@ function Cart() {
                     >
                       phone:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     </label>
-                    <div>
-                      <input
-                        name="userPhone"
+                    <div className="input-group">
+                      <PhoneInput
+                        country={"jo"}
                         value={userPhone}
-                        onChange={(e) => setuserPhone(e.target.value)}
-                        className="form-control form-control"
-                        type="text"
-                        id="phone"
-                        required
-                        style={{
+                        onChange={(phone) => setuserPhone(phone)}
+                        inputStyle={{
                           height: "36.6px",
                           marginTop: "-16px",
                           border: "1px solid #000000",
                           width: "95%",
                         }}
+                        containerStyle={{ width: "100%" }}
+                        inputClass="form-control"
                       />
                       {phoneError && (
                         <div

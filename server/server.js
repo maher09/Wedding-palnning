@@ -32,13 +32,16 @@ const jwt = require('jsonwebtoken');
 
 
 const app = express()
+
 app.use(cors())
+
 const port = 3000
+
 const mongoose = require("mongoose");
+
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
-
-
 //session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -46,9 +49,6 @@ app.use(session({
     resave: false, // add this line,
     cookie: { secure: false }}
         ));
-
-
-
 //verifyToken function
 function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];

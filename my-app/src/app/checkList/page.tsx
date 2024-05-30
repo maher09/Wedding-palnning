@@ -6,46 +6,30 @@ import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
 import Checked from "../components/Checked";
 import MainRegistered from "../components/MainRegistered";
-import Addtasks from "../components/addtasks";
 import Cookies from 'js-cookie';
 
 function CheckList() {
-  const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-  const [tasks, setTasks] = useState<string[]>(() => {
-    if (typeof window !== 'undefined') {
-      const savedTasks = localStorage.getItem('tasks');
-      return savedTasks ? JSON.parse(savedTasks) : [];
-    }
-    return [];
-  });
+  const [counters, setCounters] = useState<number[]>([]);
+  const [tasks, setTasks] = useState<string[]>([]);
 
-  const [isChecked, setIsChecked] = useState<boolean[]>(() => {
-    if (typeof window !== 'undefined') {
-      const savedChecked = localStorage.getItem('isChecked');
-      return savedChecked ? JSON.parse(savedChecked) : [];
-    }
-    return [];
-  });
 
+  const [isChecked, setIsChecked] = useState<boolean[]>([]);  
+ 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-  }, [tasks]);
+    const savedTasks = localStorage.getItem('tasks');
+    const savedChecked = localStorage.getItem('isChecked');
+    const savedCounters = localStorage.getItem('counters');
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('isChecked', JSON.stringify(isChecked));
-    }
-  }, [isChecked]);
-
+    setTasks(savedTasks ? JSON.parse(savedTasks) : []);
+    setIsChecked(savedChecked ? JSON.parse(savedChecked) : []);
+    setCounters(savedCounters ? JSON.parse(savedCounters) : []);
+  }, []);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedCheckedState = JSON.parse(localStorage.getItem('checkedState') || '[]');
       setIsChecked(savedCheckedState);
     }
   }, []);
-
   const addTask = (task: string) => {
     setTasks([...tasks, task]);
     setIsChecked([...isChecked, false]);
@@ -85,12 +69,20 @@ function CheckList() {
   const [items, setItems] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
+  useEffect(() => {
+    const storedItems = localStorage.getItem('items');
+    if (storedItems) {
+      setItems(JSON.parse(storedItems));
+    }
+  }, []);
+
   const newElement = () => {
     if (inputValue === '') {
       alert("You must write something!");
       return;
     }
     setItems([...items, inputValue]);
+    localStorage.setItem('items', JSON.stringify([...items, inputValue]));
     setInputValue('');
   };
 
@@ -98,7 +90,10 @@ function CheckList() {
     const updatedItems = [...items];
     updatedItems.splice(index, 1);
     setItems(updatedItems);
+    localStorage.setItem('items', JSON.stringify(updatedItems));
   };
+
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
@@ -311,22 +306,29 @@ function CheckList() {
           </ul>
         </div>
       </div>
- 
 
-            <div
-                className="container"
-                style={{ marginTop: "65px", width: "1100px" }}
-              >
-           
-           <Addtasks
-        tasks={tasks}
-        isChecked={isChecked}
-        onToggle={handleToggle}
-        onAddTask={addTask}
-        onRemoveTask={removeTask}
+      <div id="myDIV" className="header ">
+      <h2 style={{ margin: '5px' }}>My To Do List</h2>
+      <input
+        className="input"
+        type="text"
+        id="myInput"
+        placeholder="Title..."
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
-             
-            </div>
+      <span onClick={newElement} className="addBtn">Add</span>
+
+      <ul id="myUL" className="style-1 style-2 style-3 style-4 style-5 style-6">
+        {items.map((item, index) => (
+          <li key={index}>
+            {item}
+            <span onClick={() => removeItem(index)} className="close">&times;</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
       <>{isLoggedIn ? <Footer /> : <Footer />}</>
     </div>
   );

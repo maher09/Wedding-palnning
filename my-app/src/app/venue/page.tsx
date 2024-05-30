@@ -159,6 +159,19 @@ useEffect(() => {
     setErrorMessages({});
   }
 
+  // Date validation
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0); // Set time to midnight
+  const inputDate = new Date(`${selectedYear}-${selectedMonth.padStart(2, '0')}-${selectedDay.padStart(2, '0')}`);
+
+  if (inputDate < currentDate) {
+    newErrorMessages[venueName] = "Date is in the past";
+    hasError = true;
+  } else {
+    setErrorMessages({});
+  }
+
+
   if (hasError) {
     setErrorMessages(newErrorMessages); // Update the error messages
     return;
