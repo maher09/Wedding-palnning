@@ -6,7 +6,7 @@ import NavbarRegistered from "../components/NavbarRegistered";
 import Footer from "../components/Footer";
 import Checked from "../components/Checked";
 import MainRegistered from "../components/MainRegistered";
-import Addtasks from "../components/addtasks";
+
 import Cookies from 'js-cookie';
 
 function CheckList() {
@@ -318,13 +318,7 @@ function CheckList() {
                 style={{ marginTop: "65px", width: "1100px" }}
               >
            
-           <Addtasks
-        tasks={tasks}
-        isChecked={isChecked}
-        onToggle={handleToggle}
-        onAddTask={addTask}
-        onRemoveTask={removeTask}
-      />
+     
              
             </div>
       <>{isLoggedIn ? <Footer /> : <Footer />}</>

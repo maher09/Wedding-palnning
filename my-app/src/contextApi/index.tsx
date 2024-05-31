@@ -32,7 +32,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     
     
     const [showBuyCart, setShowBuyCart] = useState<boolean | null>(null);
-            const [conterApp, setconterApp] = useState(null); // Change the initial state value to 0
+            // Change the initial state value to 0
             const [show, setShow] = useState(false);
 
             {/*componanetColor*/}
@@ -48,6 +48,32 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 
             //fetch axios API useState
 
+
+
+            ////////////////////
+
+            const [conterApp, setconterApp] = useState(() => {
+
+                if (typeof window !== 'undefined') {
+              
+                  const saved = localStorage.getItem('conterApp');
+              
+                  return saved !== null ? JSON.parse(saved) : null;
+              
+                }
+              
+                return null;
+              
+              });
+              // Update local storage whenever the state changes
+              useEffect(() => {
+                localStorage.setItem('conterApp', JSON.stringify(conterApp));
+              }, [conterApp]);
+            
+              // Example function to update the state
+            const updateConterApp = (newValue: any) => {
+                setconterApp(newValue);
+            };
 
             // Retrieve and set the initial states from local storage
     useEffect(() => {

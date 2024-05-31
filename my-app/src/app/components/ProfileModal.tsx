@@ -6,50 +6,51 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { useAppContext } from '@/contextApi';
 import Row from 'react-bootstrap/Row';
+import Cookies from 'js-cookie';
 
+
+
+
+    
 function ProfileModal(props: any) {
     const { darkMode, setDarkMode } = useAppContext();
+    const token = Cookies.get('token'); 
+    const { TheGroom = '', TheBride = '' , Email=''} = token? JSON.parse(atob(token.split('.')[1])) : {};
     const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(localStorage.getItem('selectedImage') || null);
-    const [firstName, setFirstName] = useState(localStorage.getItem('firstName') || '');
-    const [lastName, setLastName] = useState(localStorage.getItem('lastName') || '');
-    const [phone, setPhone] = useState(localStorage.getItem('phone') || '');
-    const [email, setEmail] = useState(localStorage.getItem('email') || '');
-    const [password, setPassword] = useState('');
+ 
+
     const [errors, setErrors] = useState({
-        firstName: '',
-        lastName: '',
+        TheGroom: '',
+        TheBride: '',
         phone: '',
-        email: '',
+        Email: '',
         password: ''
     });
+    const imgs="https://www.w3schools.com/w3images/avatar2.png"
 
     useEffect(() => {
         localStorage.setItem('selectedImage', selectedImage as string);
     }, [selectedImage]);
 
     useEffect(() => {
-        localStorage.setItem('firstName', firstName);
-    }, [firstName]);
+        localStorage.setItem('TheGroom', TheGroom);
+    }, [TheGroom]);
 
     useEffect(() => {
-        localStorage.setItem('lastName', lastName);
-    }, [lastName]);
+        localStorage.setItem('TheBride', TheBride);
+    }, [TheBride]);
 
     useEffect(() => {
-        localStorage.setItem('phone', phone);
-    }, [phone]);
+        localStorage.setItem('Email', Email);
+    }, [Email]);
 
-    useEffect(() => {
-        localStorage.setItem('email', email);
-    }, [email]);
-
-    const toggleTheme = () => {
-        setDarkMode(!darkMode);
-        const htmlElement = document.querySelector('html');
-        if (htmlElement) {
-            htmlElement.setAttribute('data-bs-theme', darkMode ? 'dark' : 'light');
-        }
-    };
+    // const toggleTheme = () => {
+    //     setDarkMode(!darkMode);
+    //     const htmlElement = document.querySelector('html');
+    //     if (htmlElement) {
+    //         htmlElement.setAttribute('data-bs-theme', darkMode ? 'dark' : 'light');
+    //     }
+    // };
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -62,37 +63,25 @@ function ProfileModal(props: any) {
         }
     };
 
-    const validateInputs = () => {
-        const newErrors = {
-            firstName: '',
-            lastName: '',
-            phone: '',
-            email: '',
-            password: ''
-        };
+    const onSave = (image: string | ArrayBuffer | null) => {
+        // Add your logic here
+    };
 
-        const nameRegex = /^[A-Za-z]+$/;
-        const phoneRegex = /^\d+$/;
-        const emailRegex = /\S+@\S+\.\S+/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        if (!firstName.trim() || !nameRegex.test(firstName)) newErrors.firstName = 'First Name must contain only alphabetic characters';
-        if (!lastName.trim() || !nameRegex.test(lastName)) newErrors.lastName = 'Last Name must contain only alphabetic characters';
-        if (!phone.trim() || !phoneRegex.test(phone)) newErrors.phone = 'Phone Number must contain only numeric characters';
-        if (!email.trim() || !emailRegex.test(email)) newErrors.email = 'Email Address is invalid';
-        if (!password.trim() || !passwordRegex.test(password)) newErrors.password = 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
-
-        setErrors(newErrors);
-
-        return Object.values(newErrors).every(error => error === '');
+    const handleImageRemove = () => {
+        setSelectedImage(imgs);
     };
 
     const handleSave = () => {
-        if (validateInputs()) {
-            props.onHide();
-        }
-    };
+        if(imgs==selectedImage){
+        alert("Please upload a profile photo")
+    }
+    else{
+        onSave(selectedImage);
+        props.onHide();
+    }
+}
 
+   
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
             <Modal.Header closeButton>
@@ -103,12 +92,20 @@ function ProfileModal(props: any) {
             <Modal.Body className="grid-example">
                 <Container>
                     
-                         <Row>
-                            <img src={selectedImage?.toString() || "https://www.w3schools.com/w3images/avatar2.png"} alt="Avatar" className="avatar rounded-circle" width={100} height={350} />
+                         <Row className="avatar rounded-circle  d-flex justify-content-center">
+                            <div className="avatar rounded-circle" style={{ width: "250px", height: "250px", borderRadius: "50%",padding:"0px",marginRight:"5px"}}>
+                            <img 
+                                src={selectedImage?.toString() || "https://www.w3schools.com/w3images/avatar2.png"} 
+                                alt="Avatar" 
+                                className="avatar rounded-circle" 
+                                width={250} 
+                                height={250} 
+                                style={{padding:"0px", marginTop: "10px"}} 
+                            />
+                                </div>
                         </Row>
-                        <Row  >
-                            <b>Profile Photo</b>
-                            <p>Accepted file type .png. Less than 1MB</p>
+                        <Row  className="d-flex justify-content-center">
+                            <b style={{fontSize:"30px" ,textAlign:"center" ,fontFamily:'"Abhaya Libre", serif',marginTop:"5px"}}>Profile Photo</b>
                             <input
                                 type="file"
                                 accept="image/png"
@@ -127,86 +124,62 @@ function ProfileModal(props: any) {
                     }}>
                                 Upload
                             </label>
+
+                            <button className="btn btn-primary"
+                                onClick={handleImageRemove}
+                                style={{
+                                width: "75.8906px",
+                                borderRadius: "7px",
+                                fontFamily: '"Abhaya Libre", serif',
+                                marginLeft: "10px"
+                                }}>
+                                Remove
+                            </button>
                      
                     </Row>
                     <br />
+
+
                     <Row>
                         <Col xs={6} md={6}>
-                            <label htmlFor="firstname">First Name</label>
+                            <label htmlFor="TheGroom">TheGroom Name</label>
                             <input
                                 type="text"
                                 className="bg-light form-control"
                                 placeholder=""
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                value={TheGroom}
+                                readOnly
+                              
                             />
-                            {errors.firstName && <span className="text-danger">{errors.firstName}</span>}
+                            {errors.TheGroom && <span className="text-danger">{errors.TheGroom}</span>}
                         </Col>
                         <Col xs={6} md={6}>
-                            <label htmlFor="lastname">Last Name</label>
+                            <label htmlFor="TheBride">TheBride Name</label>
                             <input
                                 type="text"
                                 className="bg-light form-control"
                                 placeholder=""
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                value={TheBride}
+                               readOnly
                             />
-                            {errors.lastName && <span className="text-danger">{errors.lastName}</span>}
+                            {errors.TheBride && <span className="text-danger">{errors.TheBride}</span>}
                         </Col>
                     </Row>
                     <Row>
+                
                         <Col xs={6} md={6}>
-                            <label htmlFor="phone">Phone Number</label>
+                            <label htmlFor="Email">Email Address</label>
                             <input
-                                type="text"
+                                type="Email"
                                 className="bg-light form-control"
                                 placeholder=""
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
+                                value={Email}
+                                readOnly
                             />
-                            {errors.phone && <span className="text-danger">{errors.phone}</span>}
-                        </Col>
-                        <Col xs={6} md={6}>
-                            <label htmlFor="email">Email Address</label>
-                            <input
-                                type="email"
-                                className="bg-light form-control"
-                                placeholder=""
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            {errors.email && <span className="text-danger">{errors.email}</span>}
+                            {errors.Email && <span className="text-danger">{errors.Email}</span>}
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={6} md={6}>
-                            <div className="arrow">
-                                <label htmlFor="password">Change Password</label>
-                                <input
-                                    type="password"
-                                    className="bg-light form-control"
-                                    placeholder=""
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                                {errors.password && <span className="text-danger">{errors.password}</span>}
-                            </div>
-                        </Col>
-                        <Col xs={6} md={6}>
-                            <div className="form-check form-switch mt-4">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    role="switch"
-                                    id="flexSwitchCheckDefault"
-                                    onClick={toggleTheme}
-                                />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-                                    switch to dark mode
-                                </label>
-                            </div>
-                        </Col>
-                    </Row>
+                   
                 </Container>
             </Modal.Body>
             <Modal.Footer>
